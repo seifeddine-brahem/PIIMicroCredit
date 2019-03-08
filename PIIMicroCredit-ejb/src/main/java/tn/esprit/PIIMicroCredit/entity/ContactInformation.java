@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,7 +37,10 @@ public class ContactInformation implements Serializable {
     private String state;
     @Column(name = "contry")
     private String contry;
-
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user_id;
+    
     public ContactInformation() {
     }
 
@@ -78,5 +83,15 @@ public class ContactInformation implements Serializable {
     public void setContry(String contry) {
         this.contry = contry;
     }
+
+    public User getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(User user_id) {
+        this.user_id = user_id;
+    }
+    
+    
 
 }

@@ -29,9 +29,13 @@ public class User implements Serializable {
     private String grade;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @ManyToOne
+    @JoinColumn(name = "departement")
+    Department departement;
 
     //Constructor
     public User() {
+        this.departement = new Department();
     }
 
     // Getters and Setters
@@ -97,6 +101,14 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Department getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Department departement) {
+        this.departement = departement;
     }
 
 }

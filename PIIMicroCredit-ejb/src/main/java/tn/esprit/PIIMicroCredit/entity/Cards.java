@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -39,8 +41,12 @@ public class Cards implements Serializable {
     private String state;
     @Column(name = "type")
     private String type;
+    @OneToOne
+    @JoinColumn(name = "owner")
+    private User owner;
 
     public Cards() {
+        this.owner = new User();
     }
 
     public int getId() {
@@ -98,5 +104,15 @@ public class Cards implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+    
+    
 
 }

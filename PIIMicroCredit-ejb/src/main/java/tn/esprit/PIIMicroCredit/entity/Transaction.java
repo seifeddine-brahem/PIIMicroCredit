@@ -14,6 +14,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -38,8 +40,16 @@ public class Transaction implements Serializable {
     private TransactionType transaction_type;
     @Column(name = "check_number")
     private int check_number;
+    @ManyToOne
+    @JoinColumn(name = "sender")
+    private User sender;
+    @ManyToOne
+    @JoinColumn(name = "receiver")
+    private User receiver;
 
     public Transaction() {
+        this.sender = new User();
+        this.receiver = new User();
     }
 
     
@@ -82,5 +92,23 @@ public class Transaction implements Serializable {
     public void setAmount(String amount) {
         this.amount = amount;
     }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+    }
+    
+    
 
 }
