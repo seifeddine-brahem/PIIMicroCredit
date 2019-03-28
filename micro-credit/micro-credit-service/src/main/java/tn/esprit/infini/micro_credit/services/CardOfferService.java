@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import tn.esprit.infini.micro_credit.entities.Account;
 import tn.esprit.infini.micro_credit.entities.CardOffer;
 
 /**
@@ -21,43 +22,40 @@ public class CardOfferService implements CardOfferServiceRemote, CardOfferServic
 	 * Default constructor.
 	 */
 	public CardOfferService() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void addCardOffer(CardOffer cardOffer) {
-		// TODO Auto-generated method stub
+		em.persist(cardOffer);
 
 	}
 
 	@Override
 	public void updateCardOffer(CardOffer cardOffer) {
-		// TODO Auto-generated method stub
+		em.merge(cardOffer);
 
 	}
 
 	@Override
 	public void deleteCardOffer(CardOffer cardOffer) {
-		// TODO Auto-generated method stub
+		em.remove(em.merge(cardOffer));
 
 	}
 
 	@Override
 	public CardOffer findCardOfferById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(CardOffer.class, id);
 	}
 
 	@Override
 	public List<CardOffer> findAllCardOffers() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<CardOffer>) em.createQuery("SELECT c FROM CardOffer c ").getResultList();
 	}
 
 	@Override
 	public CardOffer findCardOfferAccount(Integer idAccount) {
-		// TODO Auto-generated method stub
-		return null;
+		Account account = em.find(Account.class, idAccount);
+		return account.getCardOffer();
 	}
 
 }

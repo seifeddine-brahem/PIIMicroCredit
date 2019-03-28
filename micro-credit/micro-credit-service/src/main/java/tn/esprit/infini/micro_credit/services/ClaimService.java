@@ -4,6 +4,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import tn.esprit.infini.micro_credit.entities.Account;
+
 /**
  * Session Bean implementation class ClaimService
  */
@@ -20,7 +22,10 @@ public class ClaimService implements ClaimServiceRemote, ClaimServiceLocal {
 
 	@Override
 	public void unboundCard(Integer idAccount) {
-		// TODO Auto-generated method stub
+		Account account = em.find(Account.class, idAccount);
+		account.setCardOffer(null);
+
+		em.merge(account);
 
 	}
 
