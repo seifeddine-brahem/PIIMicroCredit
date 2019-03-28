@@ -20,5 +20,9 @@ public interface CardRequestServiceRemote {
 	void processCardRequest(CardRequest cardRequest, Boolean status, Date dateOfProcess);
 
 	List<CardRequest> findAllRequestsByCustomer(int idCustomer);
+	
+	List<Account> findAllAccountsByCustomer(int idCustomer);
+	
+	List<CardRequest> findAllRequests();
 
 }

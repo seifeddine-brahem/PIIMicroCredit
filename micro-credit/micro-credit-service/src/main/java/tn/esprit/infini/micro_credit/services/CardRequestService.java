@@ -67,4 +67,15 @@ public class CardRequestService implements CardRequestServiceRemote, CardRequest
 		return em.find(CardRequest.class, id);
 	}
 
+	@Override
+	public List<Account> findAllAccountsByCustomer(int idCustomer) {
+		User user = em.find(User.class, idCustomer);
+		return em.createQuery("SELECT a FROM Account a WHERE a.owner=:p").setParameter("p", user).getResultList();
+	}
+
+	@Override
+	public List<CardRequest> findAllRequests() {
+		return em.createQuery("SELECT a FROM CardRequest a ").getResultList();
+	}
+
 }
