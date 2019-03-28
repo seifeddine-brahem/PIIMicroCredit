@@ -1,0 +1,18 @@
+package tn.esprit.infini.micro_credit.services;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.ejb.Remote;
+
+import tn.esprit.infini.micro_credit.entities.CardRequest;
+
+@Remote
+public interface CardRequestServiceRemote {
+	void addCardRequest(CardRequest cardRequest);
+
+	void processCardRequest(CardRequest cardRequest, Boolean status, Date dateOfProcess);
+
+	List<CardRequest> findAllRequestsByCustomer(int idCustomer);
+
+}
