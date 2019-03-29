@@ -6,6 +6,7 @@
 package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -36,11 +39,15 @@ public class News implements Serializable {
     @Column(name = "photo")
     private String photo;
     @Column(name = "date_creation")
-    private LocalDateTime date_creation;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date_creation;
     @Column(name = "approved")
     private int approved;
+    @Column(name = "score")
+    private int score;
     @Column(name = "date_approved")
-    private LocalDateTime date_approved;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date_approved;
 
     public News() {
     }
@@ -79,11 +86,11 @@ public class News implements Serializable {
         this.photo = photo;
     }
 
-    public LocalDateTime getDate_creation() {
+    public Date getDate_creation() {
         return date_creation;
     }
 
-    public void setDate_creation(LocalDateTime date_creation) {
+    public void setDate_creation(Date date_creation) {
         this.date_creation = date_creation;
     }
 
@@ -95,13 +102,25 @@ public class News implements Serializable {
         this.approved = approved;
     }
 
-    public LocalDateTime getDate_approved() {
+    public Date getDate_approved() {
         return date_approved;
     }
 
-    public void setDate_approved(LocalDateTime date_approved) {
+    public void setDate_approved(Date date_approved) {
         this.date_approved = date_approved;
     }
+
+
+
+	public int getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(int score) {
+		this.score = score;
+	}
     
     
     
