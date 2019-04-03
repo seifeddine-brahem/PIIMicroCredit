@@ -34,7 +34,7 @@ public class Account implements Serializable {
     private User owner;
 
     public Account() {
-        this.owner = new User();
+        //this.owner = new User();
 
     }
 
@@ -85,6 +85,16 @@ public class Account implements Serializable {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
+	public Account(String rib, String solde, LocalDateTime openning_date, AccountType account_type, User owner) {
+		super();
+		this.rib = rib;
+		this.solde = solde;
+		this.openning_date = LocalDateTime.now();
+		this.account_type = account_type;
+		this.owner = owner;
+	}
+	
     
     
 

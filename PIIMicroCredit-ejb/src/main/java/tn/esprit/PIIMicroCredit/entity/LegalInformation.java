@@ -106,6 +106,16 @@ public class LegalInformation implements Serializable {
         this.user_id = user_id;
     }
 
+	public LegalInformation(String cin, LocalDate birthday, String birth_place, String status, int kids, User user_id) {
+		super();
+		this.cin = cin;
+		this.birthday = birthday;
+		this.birth_place = birth_place;
+		this.status = status;
+		this.kids = kids;
+		this.user_id = user_id;
+	}
+
     
     
 

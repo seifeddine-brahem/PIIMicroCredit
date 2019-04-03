@@ -32,10 +32,15 @@ public class User implements Serializable {
     @ManyToOne
     @JoinColumn(name = "departement")
     Department departement;
-
+    
+    
+   
+  
     //Constructor
     public User() {
         this.departement = new Department();
+      
+        
     }
 
     // Getters and Setters
@@ -110,5 +115,22 @@ public class User implements Serializable {
     public void setDepartement(Department departement) {
         this.departement = departement;
     }
+
+	public User(String first_name, String last_name, String email, String password, String adress, String grade,
+			Role role) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.adress = adress;
+		this.grade = grade;
+		this.role = role;
+		
+	}
+    
+
+	
+    
 
 }

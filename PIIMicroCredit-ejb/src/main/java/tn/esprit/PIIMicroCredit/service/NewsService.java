@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 
 import tn.esprit.PIIMicroCredit.Interface.INews;
 import tn.esprit.PIIMicroCredit.entity.News;
-
 @Stateless
 @Remote
 public class NewsService implements INews {
