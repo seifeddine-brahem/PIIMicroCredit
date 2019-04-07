@@ -24,17 +24,20 @@ public class Account implements Serializable {
     @Column(name = "rib")
     private String rib;
     @Column(name = "solde")
-    private String solde;
+    private Float solde;
     @Column(name = "openning_date")
     private LocalDateTime openning_date;
     @Column(name = "account_type")
     private AccountType account_type;
+    @Column(name = "state")
+    private Boolean state;
     @ManyToOne
     @JoinColumn(name = "owner")
     private User owner;
 
     public Account() {
         //this.owner = new User();
+    	this.state=true;
 
     }
 
@@ -54,11 +57,20 @@ public class Account implements Serializable {
         this.rib = rib;
     }
 
-    public String getSolde() {
+    public Float getSolde() {
         return solde;
     }
+    
 
-    public void setSolde(String solde) {
+    public Boolean getState() {
+		return state;
+	}
+
+	public void setState(Boolean state) {
+		this.state = state;
+	}
+
+	public void setSolde(Float solde) {
         this.solde = solde;
     }
 
@@ -86,13 +98,16 @@ public class Account implements Serializable {
         this.owner = owner;
     }
 
-	public Account(String rib, String solde, LocalDateTime openning_date, AccountType account_type, User owner) {
+	public Account(String rib, Float solde, LocalDateTime openning_date, AccountType account_type, User owner) {
 		super();
 		this.rib = rib;
 		this.solde = solde;
 		this.openning_date = LocalDateTime.now();
 		this.account_type = account_type;
 		this.owner = owner;
+		this.state=true;
+		
+		
 	}
 	
     

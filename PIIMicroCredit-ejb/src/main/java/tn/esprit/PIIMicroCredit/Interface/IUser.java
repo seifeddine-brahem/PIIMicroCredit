@@ -21,6 +21,7 @@ public interface IUser {
 	public void removeUser(int id);
 	public User FindUserById(int id);
 	public boolean login(String emailAddress, String pwd);
+	String crypte(String password);
 	
   // public ContactInformation findContactInfoId(int id);
 	

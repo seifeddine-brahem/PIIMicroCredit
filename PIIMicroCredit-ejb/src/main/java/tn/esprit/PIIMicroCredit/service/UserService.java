@@ -1,5 +1,8 @@
 package tn.esprit.PIIMicroCredit.service;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -78,6 +81,20 @@ public class UserService implements IUser{
 	        return true;
 
 	    }
+	@Override
+	public String crypte(String password) {
+		// TODO Auto-generated method stub
+		String hashedpassword = null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes(), 0, password.length());
+			hashedpassword = new BigInteger(1, md.digest()).toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return hashedpassword;
+		
+	}
 	
 	
 	
