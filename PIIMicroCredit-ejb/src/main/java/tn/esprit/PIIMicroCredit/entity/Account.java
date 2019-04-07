@@ -24,7 +24,7 @@ public class Account implements Serializable {
     @Column(name = "rib")
     private String rib;
     @Column(name = "solde")
-    private Float solde;
+    private double solde;
     @Column(name = "openning_date")
     private LocalDateTime openning_date;
     @Column(name = "account_type")
@@ -57,7 +57,7 @@ public class Account implements Serializable {
         this.rib = rib;
     }
 
-    public Float getSolde() {
+    public double getSolde() {
         return solde;
     }
     
@@ -70,7 +70,7 @@ public class Account implements Serializable {
 		this.state = state;
 	}
 
-	public void setSolde(Float solde) {
+	public void setSolde(double solde) {
         this.solde = solde;
     }
 
@@ -98,7 +98,7 @@ public class Account implements Serializable {
         this.owner = owner;
     }
 
-	public Account(String rib, Float solde, LocalDateTime openning_date, AccountType account_type, User owner) {
+	public Account(String rib, double solde, LocalDateTime openning_date, AccountType account_type, User owner) {
 		super();
 		this.rib = rib;
 		this.solde = solde;
