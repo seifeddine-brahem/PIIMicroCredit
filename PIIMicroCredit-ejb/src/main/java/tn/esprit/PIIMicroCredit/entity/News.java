@@ -7,12 +7,16 @@ package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -36,18 +40,33 @@ public class News implements Serializable {
     @Column(name = "photo")
     private String photo;
     @Column(name = "date_creation")
-    private LocalDateTime date_creation;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date_creation;
     @Column(name = "approved")
     private int approved;
     @Column(name = "date_approved")
-    private LocalDateTime date_approved;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date_approved;
+    @Column(name = "score")
+    private int score;
     public News() {
     }
     
     
 
-    public int getId() {
+    public int getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+
+
+	public int getId() {
         return id;
     }
 
@@ -79,13 +98,7 @@ public class News implements Serializable {
         this.photo = photo;
     }
 
-    public LocalDateTime getDate_creation() {
-        return date_creation;
-    }
 
-    public void setDate_creation(LocalDateTime date_creation) {
-        this.date_creation = date_creation;
-    }
 
     public int getApproved() {
         return approved;
@@ -95,13 +108,54 @@ public class News implements Serializable {
         this.approved = approved;
     }
 
-    public LocalDateTime getDate_approved() {
-        return date_approved;
-    }
 
-    public void setDate_approved(LocalDateTime date_approved) {
-        this.date_approved = date_approved;
-    }
+
+	public Date getDate_creation() {
+		return date_creation;
+	}
+
+
+
+	public void setDate_creation(Date date_creation) {
+		this.date_creation = date_creation;
+	}
+
+
+
+	public Date getDate_approved() {
+		return date_approved;
+	}
+
+
+
+	public void setDate_approved(Date date_approved) {
+		this.date_approved = date_approved;
+	}
+
+
+
+	public News(String description, String title, String photo, Date date_creation ,int approved) {
+		super();
+		this.description = description;
+		this.title = title;
+		this.photo = photo;
+		this.date_creation = date_creation;
+		this.approved = approved;
+	}
+
+
+
+	public News(String description, String title,  Date date_creation, int approved, int score) {
+		super();
+		this.description = description;
+		this.title = title;
+		//this.photo = photo;
+		this.date_creation = date_creation;
+		this.approved = approved;
+		this.score = score;
+	}
+
+   
     
     
     
