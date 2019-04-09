@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import tn.esprit.PIIMicroCredit.Interface.INewsRemote;
+import tn.esprit.PIIMicroCredit.entity.Loan;
 import tn.esprit.PIIMicroCredit.entity.News;
 
 @Stateless
@@ -88,6 +89,26 @@ public class NewsService implements INewsRemote {
 		 
 		  System.out.println("Out of findAllNews: ");
 		return news;
+	}
+	@Override
+	public List<Loan> findLoansRequests() {
+		System.out.println("In findAllNews: ");
+		List<Loan> loans = em.createQuery("from Loan where enabled=0", Loan.class).getResultList();
+		
+		System.out.println("Out of findAllNews: ");
+		return loans;
+	}
+	@Override
+	public double expirydate(Loan l){ 
+	 double years=0;
+	 double monthlyIR=l.getInterest()/12;
+	 double PMT=10;
+	 double numerator=1-(l.getValue()*monthlyIR)/PMT;
+	System.out.print("Monthly Interest Rate:"+monthlyIR);
+	 System.out.println("Numerator:"+numerator);
+	System.out.println("Denominator:"+ Math.log (1 + monthlyIR));
+	 years= - (Math.log (numerator) ) / Math.log (1 + monthlyIR);
+	return years;	
 	}
 
 }

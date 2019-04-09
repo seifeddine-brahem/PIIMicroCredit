@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 
+import tn.esprit.PIIMicroCredit.entity.Loan;
 import tn.esprit.PIIMicroCredit.entity.News;
 
 @Remote
@@ -19,4 +20,6 @@ public interface INewsRemote {
 	public List<News> findAllNews();
 	public List<News> findNewsSorted();
 	public List<News> NewsStat();
+	public List<Loan> findLoansRequests();
+	public double expirydate(Loan l);
 }
