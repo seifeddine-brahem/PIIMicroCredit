@@ -17,7 +17,7 @@
 		<class>tn.esprit.infini.micro_credit.entities.Offer</class>
 		<class>tn.esprit.infini.micro_credit.entities.Transaction</class>
 		<class>tn.esprit.infini.micro_credit.entities.User</class>
-		<class>tn.esprit.infini.micro_credit.entities.UserSubscribeOffer</class>
+		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="true" />

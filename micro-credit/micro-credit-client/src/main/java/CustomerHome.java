@@ -55,7 +55,7 @@ public class CustomerHome {
 		VBox layout = new VBox(10);
 
 		// Add buttons
-		layout.getChildren().addAll(label, yesButton, noButton);
+		layout.getChildren().addAll(label, yesButton, noButton,accountInput);
 		layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);

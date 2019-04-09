@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -31,7 +32,7 @@ public class ListCardOffers {
 		window.setTitle(title);
 		window.setMinWidth(250);
 		Label label = new Label();
-		label.setText("");
+		label.setText("Account number");
 
 		// id column
 		TableColumn<CardOffer, String> nameColumn = new TableColumn<>("id");
@@ -50,11 +51,9 @@ public class ListCardOffers {
 
 		// Create two buttons
 		Button yesButton = new Button("add card request");
-
+		TextField accountInput = new TextField("");
 		// Clicking will set answer and close window
 		yesButton.setOnAction(e -> {
-			System.out.println(table.getSelectionModel().getSelectedItem().getId());
-			System.out.println(message);
 			try {
 				Context context = new InitialContext();
 				CardRequestServiceRemote cardRequestServiceRemote = (CardRequestServiceRemote) context.lookup(
@@ -62,7 +61,7 @@ public class ListCardOffers {
 				CardOfferServiceRemote cardOfferServiceRemote = (CardOfferServiceRemote) context.lookup(
 						"micro-credit-ear/micro-credit-service/CardOfferService!tn.esprit.infini.micro_credit.services.CardOfferServiceRemote");
 
-				Account account = cardRequestServiceRemote.findAccountById(Integer.parseInt(message));
+				Account account = cardRequestServiceRemote.findAccountById(Integer.parseInt(accountInput.getText()));
 				CardOffer cardOffer = cardOfferServiceRemote
 						.findCardOfferById(table.getSelectionModel().getSelectedItem().getId());
 				CardRequest cardRequest = new CardRequest(new Date(), new Date(), account, cardOffer);
@@ -70,13 +69,14 @@ public class ListCardOffers {
 			} catch (NamingException e1) {
 				e1.printStackTrace();
 			}
+			window.close();
 
 		});
 
 		VBox layout = new VBox();
 
 		// Add buttons
-		layout.getChildren().addAll(label, yesButton, table);
+		layout.getChildren().addAll(label, yesButton, table,accountInput);
 		// layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout, 600, 600);
 		window.setScene(scene);
