@@ -12,6 +12,9 @@ import javax.persistence.Query;
 
 import tn.esprit.PIIMicroCredit.Interface.INewsRemote;
 import tn.esprit.PIIMicroCredit.entity.Loan;
+import tn.esprit.PIIMicroCredit.entity.LoanPayment;
+import tn.esprit.PIIMicroCredit.entity.LoanStatu;
+import tn.esprit.PIIMicroCredit.entity.LoanType;
 import tn.esprit.PIIMicroCredit.entity.News;
 
 @Stateless
@@ -55,7 +58,13 @@ public class NewsService implements INewsRemote {
 		System.out.println("Out of findNewsById: ");
 		return news;
 	}
-
+	@Override
+	public boolean findIfExist(String title){
+		
+		List<News> news = em.createQuery("from News where approved =0 and title=:t", News.class).setParameter( "t", title ) .getResultList();
+		
+		return news.isEmpty();
+	}
 	@Override
 	public List<News> findAllNews() {
 		System.out.println("In findAllNews: ");
@@ -76,7 +85,7 @@ public class NewsService implements INewsRemote {
 
 	@Override
 	public List<News> findNewsByDate(String date) {
-		List<News> news = em.createQuery("from News where approved =1 and DATE_FORMAT(date_creation, '%Y-%m-%d')=:t", News.class).setParameter( "t",date ) .getResultList();
+		List<News> news = em.createQuery("from News where approved =1 and DATE_FORMAT(date_creation,'%Y-%m-%d')=:t", News.class).setParameter( "t",date ) .getResultList();
 
 		System.out.println("Out of findNewsById: ");
 		return news;
@@ -92,23 +101,48 @@ public class NewsService implements INewsRemote {
 	}
 	@Override
 	public List<Loan> findLoansRequests() {
-		System.out.println("In findAllNews: ");
-		List<Loan> loans = em.createQuery("from Loan where enabled=0", Loan.class).getResultList();
 		
-		System.out.println("Out of findAllNews: ");
+		String string2="processing";
+		List<Loan> loans = em.createQuery("select l from Loan l where l.statu=:t or l.statu=:t2", Loan.class).setParameter("t",LoanStatu.valueOf("demand")).setParameter("t2",LoanStatu.valueOf("processing")).getResultList();
+		
 		return loans;
 	}
 	@Override
-	public double expirydate(Loan l){ 
-	 double years=0;
-	 double monthlyIR=l.getInterest()/12;
-	 double PMT=10;
-	 double numerator=1-(l.getValue()*monthlyIR)/PMT;
-	System.out.print("Monthly Interest Rate:"+monthlyIR);
-	 System.out.println("Numerator:"+numerator);
-	System.out.println("Denominator:"+ Math.log (1 + monthlyIR));
-	 years= - (Math.log (numerator) ) / Math.log (1 + monthlyIR);
-	return years;	
+	public List<LoanType> findLoanTypes() {
+		System.out.println("In findAllNews: ");
+		List<LoanType> loans = em.createQuery("from LoanType", LoanType.class).getResultList();
+		
+		return loans;
+	}
+	@Override
+	public LoanPayment FindAmountPaymentByLoan(Loan l){
+		LoanPayment LP= em.createQuery("from LoanPayment where loan=:t",LoanPayment.class).setParameter("t", l).getSingleResult();
+		return LP;
+	}
+	@Override
+	public Date expirydate(Loan l){ 
+	 double months=0;
+	 double NYears=0;
+	 Date expiryDate = l.getStart_date();
+	 float Min=l.getLoanType().getMinValue();
+	 float Max=l.getLoanType().getMaxValue();
+	 double monthlyIR=l.getLoanType().getInterest()/12;
+	 LoanPayment LP= FindAmountPaymentByLoan(l);
+	 if(Min<l.getAmount()  && l.getAmount()<Max){
+		 double PMT= LP.getAmount();
+		 double numerator=1-(l.getAmount()*monthlyIR)/PMT;
+		 months= - (Math.log (numerator) ) / Math.log (1 + monthlyIR);
+		 NYears=(int) ((Math.ceil(months))/12);
+		 System.out.println("NYears"+NYears);
+		 l.getLoanType().setDuree((int) NYears);
+		 int NBRYears=(int)(NYears);
+		 expiryDate.setYear(expiryDate.getYear()+NBRYears);
+		
+	 }
+	 else{
+		 System.out.println("Not valid Ammount");
+	 }
+	 return expiryDate;
 	}
 
 }

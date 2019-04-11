@@ -8,6 +8,8 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import tn.esprit.PIIMicroCredit.entity.Loan;
+import tn.esprit.PIIMicroCredit.entity.LoanPayment;
+import tn.esprit.PIIMicroCredit.entity.LoanType;
 import tn.esprit.PIIMicroCredit.entity.News;
 
 @Remote
@@ -20,6 +22,10 @@ public interface INewsRemote {
 	public List<News> findAllNews();
 	public List<News> findNewsSorted();
 	public List<News> NewsStat();
+	public boolean findIfExist(String title);
 	public List<Loan> findLoansRequests();
-	public double expirydate(Loan l);
+	public Date expirydate(Loan l);
+	public LoanPayment FindAmountPaymentByLoan(Loan l);
+	public List<LoanType> findLoanTypes();
+
 }
