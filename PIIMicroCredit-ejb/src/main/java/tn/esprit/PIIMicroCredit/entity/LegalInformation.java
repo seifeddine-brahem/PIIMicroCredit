@@ -123,8 +123,6 @@ public class LegalInformation implements Serializable {
     public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
-
-<<<<<<< HEAD
 	public LegalInformation(String cin, LocalDate birthday, String birth_place, String status, int kids, User user_id) {
 		super();
 		this.cin = cin;
@@ -149,8 +147,6 @@ public class LegalInformation implements Serializable {
 		this.user_id = user_id;
 	}
 
-=======
->>>>>>> 13edb0de80daeec4b4d55408335750a1904e4ac2
     
     
 

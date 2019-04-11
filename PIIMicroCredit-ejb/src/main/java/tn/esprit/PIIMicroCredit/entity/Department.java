@@ -28,7 +28,6 @@ public class Department implements Serializable {
     private int id;
     @Column(name = "name")
     private String name;
-<<<<<<< HEAD
 	public int getId() {
 		return id;
 	}
@@ -54,9 +53,5 @@ public class Department implements Serializable {
 		return name;
 	}
 	
-	
 
-    
-=======
->>>>>>> 13edb0de80daeec4b4d55408335750a1904e4ac2
 }
