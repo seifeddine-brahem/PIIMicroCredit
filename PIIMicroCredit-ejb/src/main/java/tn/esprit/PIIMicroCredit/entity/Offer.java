@@ -6,17 +6,15 @@
 package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Set;
-import javax.persistence.CascadeType;
+import java.sql.Date;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 
 /**
@@ -37,15 +35,24 @@ public class Offer implements Serializable {
     @Column(name = "description")
     private String description;
     @Column(name = "start_date")
-    private LocalDateTime start_date;
+    private Date start_date;
     @Column(name = "expiry_date")
-    private LocalDateTime expiry_date;
-
+    private Date expiry_date;
+    @Column(name = "path")
+    private String path;
     public Offer() {
         
     }
 
-    public int getId() {
+    public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public int getId() {
         return id;
     }
 
@@ -69,20 +76,20 @@ public class Offer implements Serializable {
         this.description = description;
     }
 
-    public LocalDateTime getStart_date() {
+    public Date getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(LocalDateTime start_date) {
-        this.start_date = start_date;
+    public void setStart_date(Date localDate) {
+        this.start_date = localDate;
     }
 
-    public LocalDateTime getExpiry_date() {
+    public Date getExpiry_date() {
         return expiry_date;
     }
 
-    public void setExpiry_date(LocalDateTime expiry_date) {
-        this.expiry_date = expiry_date;
+    public void setExpiry_date(Date localDate1) {
+        this.expiry_date = localDate1;
     }
 
     

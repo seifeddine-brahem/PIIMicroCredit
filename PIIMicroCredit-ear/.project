@@ -3,7 +3,6 @@
 	<name>PIIMicroCredit-ear</name>
 	<comment></comment>
 	<projects>
-		<project>PIIMicroCredit-ejb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
