@@ -1,3 +1,5 @@
+package fxgui;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,7 +26,6 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		GridPane grid = new GridPane();
 		scene = new Scene(grid, 300, 200);
@@ -73,21 +74,21 @@ public class Main extends Application {
 			try {
 				IdentityServiceRemote identityServiceRemote = (IdentityServiceRemote) context.lookup(
 						"micro-credit-ear/micro-credit-service/IdentityService!tn.esprit.infini.micro_credit.services.IdentityServiceRemote");
-				//userLoggedIn = identityServiceRemote.login("u2@esprit.tn", "u2");
-				userLoggedIn = identityServiceRemote.login(nameInput.getText(), passInput.getText());
+				//userLoggedIn = identityServiceRemote.login("u@esprit.tn", "u");
+				 userLoggedIn = identityServiceRemote.login(nameInput.getText(),
+				 passInput.getText());
 			} catch (NamingException e1) {
 				e1.printStackTrace();
 			}
 			try {
 				if (userLoggedIn.getRole().equals(Role.agent)) {
-					ConfirmBox.display("Bank Operations", "Are you sure ");
+					AgentHome.display("", userLoggedIn.getFirst_name());
 				} else if (userLoggedIn.getRole().equals(Role.client)) {
-					CustomerHome.display("Bank Operations", ""+userLoggedIn.getId());
-				} 
+					CustomerHome.display("Bank Operations", "" + userLoggedIn.getId());
+				}
 			} catch (Exception e2) {
 				AlertBox.display("Bad Credentials", "Bad Credentials");
 			}
-			
 
 		});
 

@@ -17,6 +17,13 @@ import javax.persistence.ManyToOne;
 
 public class CardRequest implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -29,7 +36,6 @@ public class CardRequest implements Serializable {
 
 	@ManyToOne
 	private CardOffer cardOffer;
-	private static final long serialVersionUID = 1L;
 
 	public CardRequest() {
 		super();

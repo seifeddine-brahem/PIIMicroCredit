@@ -1,3 +1,4 @@
+package fxgui;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -34,7 +35,11 @@ public class CustomerHome {
 		yesButton.setOnAction(e -> {
 			answer = true;
 			window.close();
-			ListCardOffers.display("", message);
+			try {
+				ListCardOffers.display("", message);
+			} catch (NamingException e1) {
+				e1.printStackTrace();
+			}
 		});
 		noButton.setOnAction(e -> {
 			try {
@@ -57,7 +62,7 @@ public class CustomerHome {
 		// Add buttons
 		layout.getChildren().addAll(label, yesButton, noButton,accountInput);
 		layout.setAlignment(Pos.CENTER);
-		Scene scene = new Scene(layout);
+		Scene scene = new Scene(layout, 600, 600);
 		window.setScene(scene);
 		window.show();
 		scene.getStylesheets().add("Viper.css");

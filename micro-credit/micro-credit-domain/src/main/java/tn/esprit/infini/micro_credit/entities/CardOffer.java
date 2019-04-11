@@ -18,6 +18,10 @@ import javax.persistence.OneToMany;
 
 public class CardOffer implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8166263809649454653L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -27,7 +31,6 @@ public class CardOffer implements Serializable {
 
 	@OneToMany(mappedBy = "cardOffer")
 	private List<CardRequest> cardRequests;
-	private static final long serialVersionUID = 1L;
 
 	public CardOffer() {
 		super();

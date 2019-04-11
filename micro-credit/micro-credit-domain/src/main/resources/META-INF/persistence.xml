@@ -3,7 +3,8 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="sample-project-ejb">
-		<jta-data-source>java:/PIIMicroCreditDS</jta-data-source>
+	<!-- java:/PostgresDS   java:/PIIMicroCreditDS  java:/MySqlDS-->
+		<jta-data-source>java:/MySqlDS</jta-data-source>
 		<class>tn.esprit.infini.micro_credit.entities.Account</class>
 		<class>tn.esprit.infini.micro_credit.entities.CardOffer</class>
 		<class>tn.esprit.infini.micro_credit.entities.CardRequest</class>
