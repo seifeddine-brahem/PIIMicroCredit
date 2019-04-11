@@ -36,10 +36,14 @@ public class CardRequestService implements CardRequestServiceRemote, CardRequest
 		if (status == true) {
 			Account account = cardRequest.getAccount();
 			account.setCardOffer(cardRequest.getCardOffer());
+			cardRequest.setStatus(status);
+			em.merge(cardRequest);
 			em.merge(account);
 		} else {
 			Account account = cardRequest.getAccount();
 			account.setCardOffer(null);
+			cardRequest.setStatus(status);
+			em.merge(cardRequest);
 			em.merge(account);
 		}
 

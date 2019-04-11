@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -26,6 +27,9 @@ public class AgentHome {
 		// Create two buttons
 		Button yesButton = new Button("Proceed card requests");
 		Button noButton = new Button("list of Accounts by Customer");
+		Label label2 = new Label();
+		label2.setText("account id");
+		TextField accountInput = new TextField("");
 		Button addOfferButton = new Button("add Card Offer");
 
 		// Clicking will set answer and close window
@@ -57,7 +61,7 @@ public class AgentHome {
 		VBox layout = new VBox(10);
 
 		// Add buttons
-		layout.getChildren().addAll(label, yesButton, noButton, addOfferButton);
+		layout.getChildren().addAll(label, yesButton, noButton,label2,accountInput, addOfferButton);
 		layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout, 300, 300);
 		window.setScene(scene);

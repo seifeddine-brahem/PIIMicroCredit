@@ -1,4 +1,5 @@
 package fxgui;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,18 +11,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import tn.esprit.infini.micro_credit.entities.Account;
-import tn.esprit.infini.micro_credit.entities.CardOffer;
 import tn.esprit.infini.micro_credit.entities.CardRequest;
 import tn.esprit.infini.micro_credit.services.CardOfferServiceRemote;
 import tn.esprit.infini.micro_credit.services.CardRequestServiceRemote;
@@ -29,53 +24,63 @@ import tn.esprit.infini.micro_credit.services.CardRequestServiceRemote;
 public class ProceedCardRequest {
 	static TableView<CardRequest> table;
 
+	@SuppressWarnings("unchecked")
 	public static boolean display(String title, String message) throws NamingException {
-		
+
 		Context context = new InitialContext();
 		CardRequestServiceRemote cardRequestServiceRemote = (CardRequestServiceRemote) context.lookup(
 				"micro-credit-ear/micro-credit-service/CardRequestService!tn.esprit.infini.micro_credit.services.CardRequestServiceRemote");
 		CardOfferServiceRemote cardOfferServiceRemote = (CardOfferServiceRemote) context.lookup(
 				"micro-credit-ear/micro-credit-service/CardOfferService!tn.esprit.infini.micro_credit.services.CardOfferServiceRemote");
-		
 
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(title);
 		window.setMinWidth(250);
-		
-
 
 		// id column
-		TableColumn<CardRequest, String> nameColumn = new TableColumn<>("cardoffer_id");
-		nameColumn.setMinWidth(200);
-		nameColumn.setCellValueFactory(new PropertyValueFactory<>("cardoffer_id"));
+		TableColumn<CardRequest, String> nameColumn = new TableColumn<>("cardOffer");
+		nameColumn.setMinWidth(100);
+		nameColumn.setCellValueFactory(new PropertyValueFactory<>("cardOffer"));
 
 		// cripto column
-		TableColumn<CardRequest, Double> priceColumn = new TableColumn<>("account_id");
+		TableColumn<CardRequest, String> priceColumn = new TableColumn<>("account");
 		priceColumn.setMinWidth(100);
-		priceColumn.setCellValueFactory(new PropertyValueFactory<>("account_id"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<>("account"));
+
+		TableColumn<CardRequest, Boolean> status = new TableColumn<>("status");
+		status.setMinWidth(100);
+		status.setMinWidth(100);
+		status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
 		// table
 		table = new TableView<>();
 		table.setItems(getCardOffers());
-		table.getColumns().addAll(nameColumn, priceColumn);
+		table.getColumns().addAll(status, nameColumn, priceColumn);
 
 		// Create two buttons
-		Button yesButton = new Button("add card request");
-		
-		
+		Button yesButton = new Button("accept");
+		Button noButton = new Button("refuse");
+
 		// Clicking will set answer and close window
 		yesButton.setOnAction(e -> {
 
-			
-			window.close();
+			cardRequestServiceRemote.processCardRequest(table.getSelectionModel().getSelectedItem(), true, new Date());
+
+			table.setItems(getCardOffers());
+
+		});
+		noButton.setOnAction(e -> {
+
+			cardRequestServiceRemote.processCardRequest(table.getSelectionModel().getSelectedItem(), false, new Date());
+			table.setItems(getCardOffers());
 
 		});
 
 		VBox layout = new VBox();
 
 		// Add buttons
-		layout.getChildren().addAll( yesButton, table);
+		layout.getChildren().addAll(noButton, yesButton, table);
 		// layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout, 600, 600);
 		window.setScene(scene);
