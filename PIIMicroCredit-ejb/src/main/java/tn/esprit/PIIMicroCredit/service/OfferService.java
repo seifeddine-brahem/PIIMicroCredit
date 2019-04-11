@@ -1,4 +1,4 @@
-package tn.esprit.PIMicroCredit.service;
+package tn.esprit.PIIMicroCredit.service;
 
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import tn.esprit.PIIMicroCredit.entity.Offer;
-import tn.esprit.PIMicroCredit.interfacee.IOfferRemote;
+import tn.esprit.PIIMicroCredit.Interface.IOfferRemote;
 
 /**
  * Entity implementation class for Entity: OfferService

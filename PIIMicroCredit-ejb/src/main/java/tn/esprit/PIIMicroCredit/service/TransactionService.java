@@ -1,4 +1,4 @@
-package tn.esprit.PIMicroCredit.service;
+package tn.esprit.PIIMicroCredit.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +16,10 @@ import tn.esprit.PIIMicroCredit.entity.AccountType;
 import tn.esprit.PIIMicroCredit.entity.Offer;
 import tn.esprit.PIIMicroCredit.entity.Transaction;
 import tn.esprit.PIIMicroCredit.entity.TransactionType;
-import tn.esprit.PIMicroCredit.interfacee.ITransactionRemote;
+import tn.esprit.PIIMicroCredit.Interface.ITransactionRemote;
 
 @Remote
 @Stateless
-
 public class TransactionService implements ITransactionRemote {
 
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")

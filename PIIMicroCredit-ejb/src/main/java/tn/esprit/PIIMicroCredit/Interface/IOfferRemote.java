@@ -1,4 +1,4 @@
-package tn.esprit.PIMicroCredit.interfacee;
+package tn.esprit.PIIMicroCredit.Interface;
 
 import java.util.ArrayList;
 import java.util.List;
