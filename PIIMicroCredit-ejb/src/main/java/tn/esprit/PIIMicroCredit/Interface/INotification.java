@@ -9,5 +9,6 @@ import tn.esprit.PIIMicroCredit.entity.Notification;
 @Remote
 public interface INotification {
 	public List<Notification> findUnopenedNotifications();
+	public int addNotification(Notification n);
 
 }
