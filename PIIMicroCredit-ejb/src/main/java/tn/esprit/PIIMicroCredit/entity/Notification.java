@@ -23,8 +23,8 @@ public class Notification implements Serializable{
     @Column(name = "opened")
     private Boolean opened;
     @ManyToOne
-    @JoinColumn(name = "depositorComplaint")
-    private User depositorComplaint;
+    @JoinColumn(name = "ComplaintDepositor")
+    private User ComplaintDepositor;
     public Integer getId() {
 		return id;
 	}
@@ -41,12 +41,12 @@ public class Notification implements Serializable{
 		this.opened = opened;
 	}
 
-	public User getDepositorComplaint() {
-		return depositorComplaint;
+	public User getComplaintDepositor() {
+		return ComplaintDepositor;
 	}
 
-	public void setDepositorComplaint(User depositorComplaint) {
-		this.depositorComplaint = depositorComplaint;
+	public void setComplaintDepositor(User ComplaintDepositor) {
+		this.ComplaintDepositor = ComplaintDepositor;
 	}
 
 	public Complaint getComplaint() {
@@ -62,14 +62,14 @@ public class Notification implements Serializable{
     private Complaint complaint;
     
 	public Notification() {
-		depositorComplaint=new User();
+		ComplaintDepositor=new User();
 		complaint= new Complaint();
 	}
 
-	public Notification(Integer id, Boolean opened, User depositorComplaint, Complaint complaint) {
+	public Notification(Integer id, Boolean opened, User ComplaintDepositor, Complaint complaint) {
 		this.id = id;
 		this.opened = opened;
-		this.depositorComplaint = depositorComplaint;
+		this.ComplaintDepositor = ComplaintDepositor;
 		this.complaint = complaint;
 	}
     
