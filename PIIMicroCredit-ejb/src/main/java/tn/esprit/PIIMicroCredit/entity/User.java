@@ -1,6 +1,9 @@
 package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 import javax.persistence.Enumerated;
 
@@ -35,6 +38,10 @@ public class User implements Serializable {
     @ManyToOne
     @JoinColumn(name = "departement")
     Department departement;
+    @OneToMany(mappedBy="sender",fetch=FetchType.EAGER)
+    private List<Transaction> transactionSender = new ArrayList<>();
+    @OneToMany(mappedBy="receiver",fetch=FetchType.EAGER)
+    private List<Transaction> transactionReceiver = new ArrayList<>();
     
     
    
@@ -155,6 +162,22 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return first_name +" "+ last_name ;
+	}
+	
+	public List<Transaction> getTransactionSender() {
+		return transactionSender;
+	}
+
+	public void setTransactionSender(List<Transaction> transactionSender) {
+		this.transactionSender = transactionSender;
+	}
+
+	public List<Transaction> getTransactionReceiver() {
+		return transactionReceiver;
+	}
+
+	public void setTransactionReceiver(List<Transaction> transactionReceiver) {
+		this.transactionReceiver = transactionReceiver;
 	}
 	
 }
