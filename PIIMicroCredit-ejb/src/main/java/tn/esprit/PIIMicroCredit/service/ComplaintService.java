@@ -7,9 +7,11 @@ import javax.persistence.PersistenceContext;
 
 import tn.esprit.PIIMicroCredit.Interface.IComplaint;
 import tn.esprit.PIIMicroCredit.entity.Complaint;
-import tn.esprit.PIIMicroCredit.entity.News;
 import tn.esprit.PIIMicroCredit.entity.User;
-
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+@Stateless
+@Remote
 public class ComplaintService implements IComplaint {
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;
@@ -43,7 +45,7 @@ public class ComplaintService implements IComplaint {
 	@Override
 	public List<Complaint> findComplaintByOwner(User u) {
 		System.out.println("In findComplaintByOwner(User): ");
-		List<Complaint> c = em.createQuery("select c from Complaint c where c.owner:= u", Complaint.class).getResultList();
+		List<Complaint> c = em.createQuery("select c from Complaint c where c.owner:= "+u, Complaint.class).getResultList();
 		System.out.println("Out of findComplaintByOwner: ");
 		return c;	}
 
@@ -53,6 +55,24 @@ public class ComplaintService implements IComplaint {
 		List<Complaint> complaints = em.createQuery("select c from Complaint c", Complaint.class).getResultList();
 		System.out.println("Out of findAllComplaints : ");
 		return complaints;
+	}
+
+	@Override
+	public List<Complaint> advancedSearch(String key) {
+		System.out.println("In advancedSearch : ");
+		List<Complaint> complaints= em.createQuery("select c from Complaint c where c.title LIKE '%"+key+"%' OR c.description LIKE '%"+key+"%'",Complaint.class).getResultList();
+		//List<Complaint> complaints = em.createQuery("select c from Complaint c", Complaint.class).getResultList();
+		System.out.println("Out advancedSearch : ");
+		
+		return complaints;
+	}
+
+	@Override
+	public List<Complaint> findComplaintsByType(int type) {
+		System.out.println("In findComplaintByType: ");
+		List<Complaint> c = em.createQuery("select c from Complaint c where c.complaint_type= "+type, Complaint.class).getResultList();
+		System.out.println("Out of findComplaintByType: ");
+		return c;	
 	}
 
 }

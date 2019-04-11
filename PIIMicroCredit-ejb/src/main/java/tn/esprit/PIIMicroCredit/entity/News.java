@@ -6,8 +6,9 @@
 package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,18 +44,29 @@ public class News implements Serializable {
     private Date date_creation;
     @Column(name = "approved")
     private int approved;
-    @Column(name = "score")
-    private int score;
     @Column(name = "date_approved")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date_approved;
-
+    @Column(name = "score")
+    private int score;
     public News() {
     }
     
     
 
-    public int getId() {
+    public int getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+
+
+	public int getId() {
         return id;
     }
 
@@ -86,13 +98,7 @@ public class News implements Serializable {
         this.photo = photo;
     }
 
-    public Date getDate_creation() {
-        return date_creation;
-    }
 
-    public void setDate_creation(Date date_creation) {
-        this.date_creation = date_creation;
-    }
 
     public int getApproved() {
         return approved;
@@ -102,25 +108,54 @@ public class News implements Serializable {
         this.approved = approved;
     }
 
-    public Date getDate_approved() {
-        return date_approved;
-    }
-
-    public void setDate_approved(Date date_approved) {
-        this.date_approved = date_approved;
-    }
 
 
-
-	public int getScore() {
-		return score;
+	public Date getDate_creation() {
+		return date_creation;
 	}
 
 
 
-	public void setScore(int score) {
+	public void setDate_creation(Date date_creation) {
+		this.date_creation = date_creation;
+	}
+
+
+
+	public Date getDate_approved() {
+		return date_approved;
+	}
+
+
+
+	public void setDate_approved(Date date_approved) {
+		this.date_approved = date_approved;
+	}
+
+
+
+	public News(String description, String title, String photo, Date date_creation ,int approved) {
+		super();
+		this.description = description;
+		this.title = title;
+		this.photo = photo;
+		this.date_creation = date_creation;
+		this.approved = approved;
+	}
+
+
+
+	public News(String description, String title,  Date date_creation, int approved, int score) {
+		super();
+		this.description = description;
+		this.title = title;
+		//this.photo = photo;
+		this.date_creation = date_creation;
+		this.approved = approved;
 		this.score = score;
 	}
+
+   
     
     
     
