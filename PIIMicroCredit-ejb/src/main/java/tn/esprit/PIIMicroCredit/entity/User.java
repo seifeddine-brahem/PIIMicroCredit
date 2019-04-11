@@ -147,7 +147,41 @@ public class User implements Serializable {
 		this.login = login;
 		this.departement = department;
 	}
+	public User( String first_name, String last_name, String email, String login, String password, Boolean state,
+			String adress, String grade, Role role, Department departement) {
+		super();
+		
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.login = login;
+		this.password = password;
+		this.state = state;
+		this.adress = adress;
+		this.grade = grade;
+		this.role = role;
+		this.departement = departement;
+	}
 
+	public User(String first_name, String last_name, String email, String password, String adress, String grade,
+			Role role,String login,Department department,String image) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.adress = adress;
+		this.grade = grade;
+		this.role = role;
+		this.state=true;
+		this.login=login;
+		this.departement=department;
+		this.image=image;
+		
+		
+		
+	}
+	
 	public String getLogin() {
 		return login;
 	}
