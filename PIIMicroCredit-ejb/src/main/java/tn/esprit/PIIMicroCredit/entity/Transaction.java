@@ -7,10 +7,13 @@ package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,23 +36,22 @@ public class Transaction implements Serializable {
     @Column(name = "id")
     private int id;
     @Column(name = "date_transaction")
-    private LocalDateTime date_transaction;
+    private Date date_transaction;
     @Column(name = "amount")
-    private String amount;
+    private double amount;
     @Enumerated(EnumType.STRING)
     private TransactionType transaction_type;
     @Column(name = "check_number")
     private int check_number;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "sender")
     private User sender;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "receiver")
     private User receiver;
 
     public Transaction() {
-        this.sender = new User();
-        this.receiver = new User();
+
     }
 
     
@@ -77,19 +79,19 @@ public class Transaction implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getDate_transaction() {
+    public Date getDate_transaction() {
         return date_transaction;
     }
 
-    public void setDate_transaction(LocalDateTime date_transaction) {
-        this.date_transaction = date_transaction;
+    public void setDate_transaction(Date date) {
+        this.date_transaction = date;
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
