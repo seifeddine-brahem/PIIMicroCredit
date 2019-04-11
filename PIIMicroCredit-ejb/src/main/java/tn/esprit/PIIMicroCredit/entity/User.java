@@ -21,8 +21,12 @@ public class User implements Serializable {
     private String last_name;
     @Column(name = "email")
     private String email;
+    @Column(name = "login")
+    private String login;
     @Column(name = "password")
     private String password;
+    @Column(name = "state")
+    private Boolean state;
     @Column(name = "adress")
     private String adress;
     @Column(name = "grade")
@@ -32,10 +36,16 @@ public class User implements Serializable {
     @ManyToOne
     @JoinColumn(name = "departement")
     Department departement;
-
+    
+    
+   
+  
     //Constructor
     public User() {
         this.departement = new Department();
+        this.state=true;
+      
+        
     }
 
     // Getters and Setters
@@ -62,8 +72,17 @@ public class User implements Serializable {
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
+    
 
-    public String getEmail() {
+    public Boolean getState() {
+		return state;
+	}
+
+	public void setState(Boolean state) {
+		this.state = state;
+	}
+
+	public String getEmail() {
         return email;
     }
 
@@ -110,5 +129,39 @@ public class User implements Serializable {
     public void setDepartement(Department departement) {
         this.departement = departement;
     }
+
+	public User(String first_name, String last_name, String email, String password, String adress, String grade,
+			Role role,String login,Department department) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.adress = adress;
+		this.grade = grade;
+		this.role = role;
+		this.state=true;
+		this.login=login;
+		this.departement=department;	
+	}
+	
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	@Override
+	public String toString() {
+		return first_name +" "+ last_name ;
+	}
+	
+    
+
+	
+    
 
 }
