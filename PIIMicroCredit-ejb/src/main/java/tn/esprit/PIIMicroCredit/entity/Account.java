@@ -1,22 +1,28 @@
 package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDateTime;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Account")
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,7 +32,10 @@ public class Account implements Serializable {
     @Column(name = "solde")
     private double solde;
     @Column(name = "openning_date")
-    private LocalDateTime openning_date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date openning_date;
+    
+    @Enumerated(EnumType.STRING)
     @Column(name = "account_type")
     private AccountType account_type;
     @Column(name = "state")
@@ -74,11 +83,11 @@ public class Account implements Serializable {
         this.solde = solde;
     }
 
-    public LocalDateTime getOpenning_date() {
+    public Date getOpenning_date() {
         return openning_date;
     }
 
-    public void setOpenning_date(LocalDateTime openning_date) {
+    public void setOpenning_date(Date openning_date) {
         this.openning_date = openning_date;
     }
 
@@ -102,7 +111,7 @@ public class Account implements Serializable {
 		super();
 		this.rib = rib;
 		this.solde = solde;
-		this.openning_date = LocalDateTime.now();
+		this.openning_date = Date.from(Instant.now());
 		this.account_type = account_type;
 		this.owner = owner;
 		this.state=true;
