@@ -61,6 +61,7 @@ public class ProceedCardRequest {
 		// Create two buttons
 		Button yesButton = new Button("accept");
 		Button noButton = new Button("refuse");
+		Button home = new Button("Home");
 
 		// Clicking will set answer and close window
 		yesButton.setOnAction(e -> {
@@ -76,11 +77,16 @@ public class ProceedCardRequest {
 			table.setItems(getCardOffers());
 
 		});
+		home.setOnAction(e -> {
+			window.close();
+			AgentHome.display(title, message);
+
+		});
 
 		VBox layout = new VBox();
 
 		// Add buttons
-		layout.getChildren().addAll(noButton, yesButton, table);
+		layout.getChildren().addAll(noButton, yesButton, table, home);
 		// layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout, 600, 600);
 		window.setScene(scene);

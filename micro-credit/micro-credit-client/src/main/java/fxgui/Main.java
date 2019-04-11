@@ -74,9 +74,9 @@ public class Main extends Application {
 			try {
 				IdentityServiceRemote identityServiceRemote = (IdentityServiceRemote) context.lookup(
 						"micro-credit-ear/micro-credit-service/IdentityService!tn.esprit.infini.micro_credit.services.IdentityServiceRemote");
-				userLoggedIn = identityServiceRemote.login("u@esprit.tn", "u");
-				// userLoggedIn = identityServiceRemote.login(nameInput.getText(),
-				// passInput.getText());
+				//userLoggedIn = identityServiceRemote.login("u@esprit.tn", "u");
+				 userLoggedIn = identityServiceRemote.login(nameInput.getText(),
+				 passInput.getText());
 			} catch (NamingException e1) {
 				e1.printStackTrace();
 			}

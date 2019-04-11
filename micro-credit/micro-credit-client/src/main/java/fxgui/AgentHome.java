@@ -26,7 +26,7 @@ public class AgentHome {
 
 		// Create two buttons
 		Button yesButton = new Button("Proceed card requests");
-		Button noButton = new Button("list of Accounts by Customer");
+		Button noButton = new Button("Offer by Account");
 		Label label2 = new Label();
 		label2.setText("account id");
 		TextField accountInput = new TextField("");
@@ -43,7 +43,7 @@ public class AgentHome {
 		});
 		noButton.setOnAction(e -> {
 			try {
-				ListCardOfferByCustomer.display("", "");
+				ListCardOfferByCustomer.display("", accountInput.getText());
 			} catch (NamingException e1) {
 				e1.printStackTrace();
 			}
@@ -59,11 +59,16 @@ public class AgentHome {
 		});
 
 		VBox layout = new VBox(10);
-
-		// Add buttons
-		layout.getChildren().addAll(label, yesButton, noButton,label2,accountInput, addOfferButton);
+		
+		Button logout = new Button("logout");
+		logout.setOnAction(e -> {
+			window.close();
+		});
+		
+		layout.getChildren().addAll(label, yesButton, noButton, label2, accountInput, addOfferButton,logout);
 		layout.setAlignment(Pos.CENTER);
-		Scene scene = new Scene(layout, 300, 300);
+		Scene scene = new Scene(layout, 600, 600);
+		scene.getStylesheets().add("Viper.css");
 		window.setScene(scene);
 		window.showAndWait();
 

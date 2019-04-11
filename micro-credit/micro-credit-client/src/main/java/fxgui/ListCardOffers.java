@@ -1,4 +1,5 @@
 package fxgui;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -31,10 +31,10 @@ public class ListCardOffers {
 	static ListView<String> listView;
 
 	public static boolean display(String title, String message) throws NamingException {
-		//listview
-				listView = new ListView<>();
-
-				listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		// listview
+		listView = new ListView<>();
+		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		listView.setMaxHeight(100);
 		Context context = new InitialContext();
 		CardRequestServiceRemote cardRequestServiceRemote = (CardRequestServiceRemote) context.lookup(
 				"micro-credit-ear/micro-credit-service/CardRequestService!tn.esprit.infini.micro_credit.services.CardRequestServiceRemote");
@@ -51,7 +51,8 @@ public class ListCardOffers {
 		window.setMinWidth(250);
 		Label label = new Label();
 		label.setText("Account number");
-
+		Label label2 = new Label();
+		label2.setText("list Offers");
 
 		// id column
 		TableColumn<CardOffer, String> nameColumn = new TableColumn<>("id");
@@ -68,10 +69,8 @@ public class ListCardOffers {
 		table.setItems(getCardOffers());
 		table.getColumns().addAll(nameColumn, priceColumn);
 
-		// Create two buttons
 		Button yesButton = new Button("add card request");
-		TextField accountInput = new TextField("");
-		
+
 		// Clicking will set answer and close window
 		yesButton.setOnAction(e -> {
 			// get selected element from listview
@@ -84,13 +83,18 @@ public class ListCardOffers {
 			CardRequest cardRequest = new CardRequest(new Date(), new Date(), account, cardOffer);
 			cardRequestServiceRemote.addCardRequest(cardRequest);
 			window.close();
+			CustomerHome.display("", message);
 
 		});
+		Button home = new Button("Home");
 
+		home.setOnAction(e -> {
+			window.close();
+			CustomerHome.display(title, message);
+		});
 		VBox layout = new VBox();
 
-		// Add buttons
-		layout.getChildren().addAll(label, accountInput, listView, yesButton, table);
+		layout.getChildren().addAll(label, listView, label2, table, yesButton, home);
 		// layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout, 600, 600);
 		window.setScene(scene);
