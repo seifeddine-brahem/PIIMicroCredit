@@ -10,14 +10,15 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import tn.esprit.PIIMicroCredit.Interface.IAccount;
 import tn.esprit.PIIMicroCredit.entity.Account;
+import tn.esprit.PIIMicroCredit.entity.AccountType;
 import tn.esprit.PIIMicroCredit.entity.User;
 
 @Stateless
 @Remote
-public class AccountService implements IAccount{
+public class AccountService implements IAccount {
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;
-	
+
 	@Override
 	public int addAccount(Account A) {
 		em.persist(A);
@@ -30,7 +31,7 @@ public class AccountService implements IAccount{
 		System.out.println("In removeAccount: ");
 		em.remove(em.find(Account.class, id));
 		System.out.println("Out of removeAccount: ");
-		
+
 	}
 
 	@Override
@@ -42,8 +43,7 @@ public class AccountService implements IAccount{
 		acc.setOwner(A.getOwner());
 		acc.setRib(A.getRib());
 		acc.setSolde(A.getSolde());
-		
-		
+
 	}
 
 	@Override
@@ -64,11 +64,11 @@ public class AccountService implements IAccount{
 
 	@Override
 	public Account findAccountByUser(int id) {
-		UserService us= new UserService();
-		User u=new User();
-		u=us.FindUserById(id);
+		UserService us = new UserService();
+		User u = new User();
+		u = us.FindUserById(id);
 		Query query = em.createQuery("SELECT u FROM  Account u where u.owner=:ow");
-		query.setParameter("ow",u);
+		query.setParameter("ow", u);
 		try {
 			return (Account) query.getSingleResult();
 		} catch (NoResultException e) {
@@ -76,4 +76,54 @@ public class AccountService implements IAccount{
 		}
 	}
 
+	@Override
+	public long CalculerNombreComptesParType(AccountType type) {
+		Query query = em.createQuery("SELECT count(u.id) FROM  Account u where u.account_type=:type");
+		query.setParameter("type", type);
+		try {
+			return (long) query.getSingleResult();
+		} catch (NoResultException e) {
+			return 0;
+		}
+	}
+	 @Override
+	public Account FindAccoutByOwner(User owner)
+    {
+		Query query = em.createQuery("SELECT u FROM  Account u where u.owner=:owner");
+		query.setParameter("owner", owner);
+		try {
+			return (Account) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+   // @Override
+  /*  public List <Account> getAllAccountsByType(AccountType type)
+    {   
+    
+    	String sql = "select i from Account i where i.account_type=:type";
+    	
+    	
+		List<Account> emp =em.createQuery(sql, Account.class).getResultList();
+		return emp;	
+    	
+    }*/
+    
+    @Override
+    public List <Account> getAllAccountsByRIB(String RIB)
+    {
+    	
+    	
+    	String sql = "select i from Account i where i.rib like '"+RIB+"%'";
+		List<Account> emp = em.createQuery(sql, Account.class).getResultList();
+		return emp;		
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
 }

@@ -91,6 +91,16 @@ public class ContactInformation implements Serializable {
     public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
+
+	public ContactInformation(String phone_number, int zip_code, String state, String contry, User user_id) {
+		super();
+	
+		this.phone_number = phone_number;
+		this.zip_code = zip_code;
+		this.state = state;
+		this.contry = contry;
+		this.user_id = user_id;
+	}
     
     
 

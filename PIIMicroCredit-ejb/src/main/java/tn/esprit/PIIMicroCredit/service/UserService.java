@@ -3,15 +3,23 @@ package tn.esprit.PIIMicroCredit.service;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import tn.esprit.PIIMicroCredit.Interface.IUser;
+import tn.esprit.PIIMicroCredit.entity.Account;
 import tn.esprit.PIIMicroCredit.entity.User;
 @Stateless
 @Remote
@@ -44,6 +52,17 @@ public class UserService implements IUser{
 		}
 	}
 	@Override
+	public User FindUserByLogin(String mail) {
+		// TODO Auto-generated method stub
+		Query query = em.createQuery("SELECT u FROM  User u where u.login=:mail");
+		query.setParameter("mail", mail);
+		try {
+			return (User) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	@Override
 	public User FindUserByEmailAndPsswd(String mail, String password) {
 		// TODO Auto-generated method stub
 		Query query = em.createQuery("SELECT u FROM User u where u.email=:mail AND u.password =:password");
@@ -52,18 +71,33 @@ public class UserService implements IUser{
 		try {
 			return (User) query.getSingleResult();
 		} catch (NoResultException e) {
-			return null;
+			e.printStackTrace();
+			return null ;
 		}
 	}
 	@Override
-	public void AddUser(User user) {
+	public User AddUser(User user) {
 		// TODO Auto-generated method stub
 		em.persist(user);
+		return user ;
 	}
 	@Override
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
-		em.merge(user);
+		System.out.println("In updateAccount: ");
+		User u = em.find(User.class, user.getId());
+		u.setAdress(user.getAdress());
+		u.setDepartement(user.getDepartement());
+		u.setEmail(user.getEmail());
+		u.setFirst_name(user.getFirst_name());
+		u.setGrade(user.getGrade());
+		u.setLast_name(user.getLast_name());
+		u.setState(user.getState());
+		u.setRole(user.getRole());
+		u.setPassword(user.getPassword());
+		
+		
+		
 	}
 	@Override
 	public void removeUser(int id) {
@@ -75,7 +109,7 @@ public class UserService implements IUser{
 }
 	  @Override
 	    public boolean login(String emailAddress, String pwd) {
-	        Query query=em.createQuery("SELECT u FROM User u WHERE u.emailAddress = :email AND u.password = :pwd").setParameter("emailAddress", emailAddress).setParameter("pwd", pwd);
+	        Query query=em.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.password = :pwd").setParameter("email", emailAddress).setParameter("pwd", pwd);
 	        if(query.getResultList().size() == 0)
 	            return false;
 	        return true;
@@ -96,6 +130,16 @@ public class UserService implements IUser{
 		
 	}
 	
+	
+	
+@Override
+	public boolean loginLog(String emailAddress, String pwd) {
+		 Query query=em.createQuery("SELECT u FROM User u WHERE u.login = :email AND u.password = :pwd").setParameter("email", emailAddress).setParameter("pwd", pwd);
+	        if(query.getResultList().size() == 0)
+	            return false;
+	        return true;
+		
+	}
 	
 	
 

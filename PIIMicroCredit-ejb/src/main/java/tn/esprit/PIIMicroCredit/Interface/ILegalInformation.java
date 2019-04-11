@@ -10,4 +10,5 @@ public interface ILegalInformation {
 	public void removeLegalInfo(int id);
 	public void updateLegalInfo(LegalInformation C);
 	public LegalInformation FindLegalInfoById(int id);
+	public LegalInformation FindLegalInfoByUserId(User user);
 }

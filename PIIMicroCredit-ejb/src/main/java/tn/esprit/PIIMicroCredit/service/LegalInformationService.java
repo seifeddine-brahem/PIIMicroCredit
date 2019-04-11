@@ -2,7 +2,10 @@ package tn.esprit.PIIMicroCredit.service;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import tn.esprit.PIIMicroCredit.Interface.ILegalInformation;
 import tn.esprit.PIIMicroCredit.entity.LegalInformation;
 import tn.esprit.PIIMicroCredit.entity.User;
@@ -37,7 +40,10 @@ public class LegalInformationService implements ILegalInformation{
 		legalInfo.setBirthday(C.getBirthday());
 		legalInfo.setCin(C.getCin());
 		legalInfo.setStatus(C.getStatus());
+		legalInfo.setKids(C.getKids());
 		legalInfo.setUser_id(C.getUser_id());
+		legalInfo.setSalary(C.getSalary());
+		legalInfo.setWork(C.getWork());
 	}
 	@Override 
 	public LegalInformation FindLegalInfoById(int id)
@@ -46,6 +52,17 @@ public class LegalInformationService implements ILegalInformation{
 		LegalInformation d = em.find(LegalInformation.class, id);
 		System.out.println("Out of findLegalInfoById: ");
 		return d;
+	}
+
+	@Override
+	public LegalInformation FindLegalInfoByUserId(User user) {
+		Query query = em.createQuery("SELECT u FROM  LegalInformation u where u.user_id=:user");
+		query.setParameter("user", user);
+		try {
+			return (LegalInformation) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	

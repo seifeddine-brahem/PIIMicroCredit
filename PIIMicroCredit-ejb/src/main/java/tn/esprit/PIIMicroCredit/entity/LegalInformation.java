@@ -41,6 +41,10 @@ public class LegalInformation implements Serializable {
     private String status;
     @Column(name = "kids")
     private int kids;
+    @Column(name = "work")
+    private String work;
+    @Column(name = "salary")
+    private double salary;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user_id;
@@ -89,7 +93,21 @@ public class LegalInformation implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+    public String getWork() {
+		return work;
+	}
 
+	public void setWork(String work) {
+		this.work = work;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
     public int getKids() {
         return kids;
     }
@@ -113,6 +131,20 @@ public class LegalInformation implements Serializable {
 		this.birth_place = birth_place;
 		this.status = status;
 		this.kids = kids;
+		this.user_id = user_id;
+	}
+
+	public LegalInformation( String cin, LocalDate birthday, String birth_place, String status, int kids,
+			String work, double salary, User user_id) {
+		super();
+		
+		this.cin = cin;
+		this.birthday = birthday;
+		this.birth_place = birth_place;
+		this.status = status;
+		this.kids = kids;
+		this.work = work;
+		this.salary = salary;
 		this.user_id = user_id;
 	}
 

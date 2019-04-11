@@ -48,6 +48,11 @@ public class Department implements Serializable {
 		super();
 		
 	}
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 	
 
     

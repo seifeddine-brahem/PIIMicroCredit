@@ -21,13 +21,18 @@ public class User implements Serializable {
     private String last_name;
     @Column(name = "email")
     private String email;
+    @Column(name = "login")
+    private String login;
     @Column(name = "password")
     private String password;
     @Column(name = "state")
     private Boolean state;
     @Column(name = "adress")
     private String adress;
-    @Column(name = "grade")
+    @Column(name = "image")
+    private String image;
+   
+	@Column(name = "grade")
     private String grade;
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -36,9 +41,7 @@ public class User implements Serializable {
     Department departement;
     
     
-   
-  
-    //Constructor
+ //Constructor
     public User() {
         this.departement = new Department();
         this.state=true;
@@ -127,9 +130,26 @@ public class User implements Serializable {
     public void setDepartement(Department departement) {
         this.departement = departement;
     }
+    
+
+	public User( String first_name, String last_name, String email, String login, String password, Boolean state,
+			String adress, String grade, Role role, Department departement) {
+		super();
+		
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.login = login;
+		this.password = password;
+		this.state = state;
+		this.adress = adress;
+		this.grade = grade;
+		this.role = role;
+		this.departement = departement;
+	}
 
 	public User(String first_name, String last_name, String email, String password, String adress, String grade,
-			Role role) {
+			Role role,String login,Department department,String image) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -139,17 +159,54 @@ public class User implements Serializable {
 		this.grade = grade;
 		this.role = role;
 		this.state=true;
+		this.login=login;
+		this.departement=department;
+		this.image=image;
 		
 		
 		
+	}
+	
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	@Override
 	public String toString() {
 		return first_name +" "+ last_name ;
 	}
+	public User(String first_name, String last_name, String email, String password, String adress, String grade,
+			Role role,String login,Department department) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.adress = adress;
+		this.grade = grade;
+		this.role = role;
+		this.state=true;
+		this.login=login;
+		this.departement=department;
+		
+		
+		
+	}
 	
-    
+	 public String getImage() {
+			return image;
+		}
+
+		public void setImage(String image) {
+			this.image = image;
+		}
+
+			
 
 	
     
