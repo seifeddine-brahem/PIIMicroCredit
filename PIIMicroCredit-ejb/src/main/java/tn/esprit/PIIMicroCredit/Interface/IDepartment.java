@@ -13,4 +13,5 @@ public interface IDepartment {
 	public void updateDepartment(Department D);
 	public Department findDepartmentById(int id);
 	public List<Department> findAllDepartments();
+	public List <Department> getAllDepartmentsByName(String name);
 }

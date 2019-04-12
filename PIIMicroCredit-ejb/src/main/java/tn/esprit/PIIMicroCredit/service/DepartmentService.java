@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import tn.esprit.PIIMicroCredit.Interface.IDepartment;
+import tn.esprit.PIIMicroCredit.entity.Account;
 import tn.esprit.PIIMicroCredit.entity.Department;
 @Stateless
 @Remote
@@ -53,5 +54,15 @@ public class DepartmentService implements IDepartment {
 		System.out.println("Out of findAllDepartments: ");
 		return deps;
 	}
+	 @Override
+	    public List <Department> getAllDepartmentsByName(String name)
+	    {
+	    	
+	    	
+	    	String sql = "select i from Department i where i.name like '"+name+"%'";
+			List<Department> emp = em.createQuery(sql, Department.class).getResultList();
+			return emp;		
+	    	
+	    }
 
 }

@@ -66,8 +66,7 @@ public class Notification implements Serializable{
 		complaint= new Complaint();
 	}
 
-	public Notification(Integer id, Boolean opened, User ComplaintDepositor, Complaint complaint) {
-		this.id = id;
+	public Notification( Boolean opened, User ComplaintDepositor, Complaint complaint) {
 		this.opened = opened;
 		this.ComplaintDepositor = ComplaintDepositor;
 		this.complaint = complaint;

@@ -137,9 +137,7 @@ public class UserService implements IUser{
 		 Query query=em.createQuery("SELECT u FROM User u WHERE u.login = :email AND u.password = :pwd").setParameter("email", emailAddress).setParameter("pwd", pwd);
 	        if(query.getResultList().size() == 0)
 	            return false;
-	        return true;
-		
-	}
+	        return true;}
 	
 	
 
