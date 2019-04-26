@@ -2,25 +2,28 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/template/template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
 
 	<ui:define name="pageTitle">
-				LOGIN PAGE
+				HOME PAGE
 			</ui:define>
 	<ui:define name="pageContent">
 
 		<div class="centredZone">
 			<br />
-			<h2>LOGIN</h2>
+			<h2>Agent HOME</h2>
+
+
 			<br /> <br />
 			<h:form>
-				<h:panelGrid columns="2">
-					<h:outputText value="e-mail" />
-					<h:inputText value="#{identityBean.user.email}" />
-					<h:outputText value="password" />
-					<h:inputText value="#{identityBean.user.password}" />
-					<h:commandButton action="#{identityBean.doLogin}" value="login" />
-				</h:panelGrid>
+				<p:link outcome="manageCardOffer" value="manage offers"/><br/>
+				<p:link outcome="manageCardOffer" value="proceed card request"/><br/>
+				<p:link outcome="manageCardOffer" value="offer by account"/><br/>
+				
+				
+				
+				<br />
+
 			</h:form>
 		</div>
 
