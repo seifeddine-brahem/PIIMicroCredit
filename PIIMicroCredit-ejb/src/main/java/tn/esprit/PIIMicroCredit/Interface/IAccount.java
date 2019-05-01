@@ -21,4 +21,5 @@ public interface IAccount {
 	public Account FindAccoutByOwner(User owner);
 	//public List <Account> getAllAccountsByType(AccountType type);
 	public List <Account> getAllAccountsByRIB(String RIB);
+	public List <Account> getAllAccountsByuser(int id);
 }

@@ -119,7 +119,16 @@ public class AccountService implements IAccount {
 		return emp;		
     	
     }
-    
+    @Override
+    public List <Account> getAllAccountsByuser(int id)
+    {
+    	
+    	
+    	String sql = "select i from Account i where i.owner = "+id+"";
+		List<Account> emp = em.createQuery(sql, Account.class).getResultList();
+		return emp;		
+    	
+    }
     
     
 	
