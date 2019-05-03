@@ -123,15 +123,7 @@ public class LoanService implements ILoan {
         	
         }
         return x;
-        
-		//float e;
-		//e = 1 + (taux / k);
-		//e = (float) Math.pow(e, nb_mois);
-		//x = (amount * e) / ((e - 1) * 100);
-		//return x;
-		
-	//amount*taux*nb_mois
-	}
+        }
 
 	
 	

@@ -90,6 +90,13 @@ public class LoanType implements Serializable {
 	public void setDuree(Integer duree) {
 		this.duree = duree;
 	}
+
+	@Override
+	public String toString() {
+		return "" + name + "";
+	}
+	
+	
     
     
 }
