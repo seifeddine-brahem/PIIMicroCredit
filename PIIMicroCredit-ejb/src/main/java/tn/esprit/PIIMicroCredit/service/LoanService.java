@@ -2,21 +2,17 @@ package tn.esprit.PIIMicroCredit.service;
 
 import java.util.Date;
 import java.util.List;
-
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import tn.esprit.PIIMicroCredit.Interface.IComplaint;
 import tn.esprit.PIIMicroCredit.Interface.ILoan;
-import tn.esprit.PIIMicroCredit.entity.Complaint;
 import tn.esprit.PIIMicroCredit.entity.Loan;
 import tn.esprit.PIIMicroCredit.entity.LoanStatu;
-import tn.esprit.PIIMicroCredit.entity.LoanType;
-import tn.esprit.PIIMicroCredit.entity.News;
 import tn.esprit.PIIMicroCredit.entity.User;
 
 @Stateless
+@LocalBean
 public class LoanService implements ILoan {
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;
@@ -107,7 +103,7 @@ public class LoanService implements ILoan {
 		System.out.println("================================== In nbrOfLoans(User): ");
 		Integer c = em.createQuery("select COUNT(c) from Account c where c.owner:= u",Integer.class).getSingleResult();
 		System.out.println("================================== Out of nbrOfLoans ==================================");
-		return null;	
+		return c;	
 	}
 	@Override
 	public float CalculerPrix (Date start_date, int nb_mois, float ctn, float taux) {
