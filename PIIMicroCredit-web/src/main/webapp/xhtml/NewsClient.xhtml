@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+	 <!-- blog-area start -->
+    <section class="blog-area">
+        <div class="container">
+            <div class="row">
+             <ui:repeat var="nw" value="#{newsBean.showNewsClient()}">
+	          
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="blog-wrap2">
+                        <div class="blog-images">
+                            <img src="#{nw.photo}" alt=""/>
+                        </div>
+                        <div class="blog-content2">
+                            <ul class="blog-meta">
+                                <li><a href="#"><i class="fa fa-clock-o flex-style"></i><h:outputText value="#{nw.date_creation}" /> </a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i> 25 Comments</a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i> 5 Love</a></li>
+                            </ul>
+                            <h3><a><h:outputText value="#{nw.title}" /></a></h3>
+                           <h:commandButton action="#{newsBean.displayNews(nw.id)}" value="Hellooooooo" />
+                         
+                              <a class="readmore-btn" onclick="#{newsBean.displayNews(nw.id)}">Read More
+                            
+                            </a>
+                            
+                          
+                        </div>
+                    </div>
+                </div>
+              
+          
+	            </ui:repeat>          
+                
+                <div class="col-12">
+                    <ul class="pagination-wrap">
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0);">1</a></li>
+                        <li><a href="javascript:void(0);">2</a></li>
+                        <li><span>3</span></li>
+                        <li><a href="javascript:void(0);">4</a></li>
+                        <li><a href="javascript:void(0);">5</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog-area end -->
+	
+	</ui:define>
+</ui:composition>

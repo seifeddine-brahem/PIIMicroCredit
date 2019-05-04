@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+ <!-- blog-details-area start -->
+    <div class="blog-details-area bg-1">
+        <div class="container">
+            <div class="row">
+              
+                <div class="col-12">
+                    <div class="blog-details-wrap">
+                        <h3>News <span>  details</span></h3>
+                        <div class="blog-details-img">
+                            <img src="#{newsBean.nw.photo}" alt=""/>
+                        </div>
+                        <ul>
+                            <li> <i class="fa fa-folder-open-o"></i> <a href="#"> Design,</a> <a href="#"> HTML5 </a> </li>
+                            <li><a href="#"><i class="fa fa-comment-o"></i> 5</a></li>
+                            <li><a href="#"><i class="fa fa-calendar-o"></i> 12 Aug 2018</a></li>
+                        </ul>
+                         <h4>
+                           <h:outputLabel value="#{newsBean.title}" />
+                        </h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta deleniti repudiandae optio tempore quidem earum, recusandae, libero quae magni debitis nesciunt, rerum! Dicta voluptates inventore nihil suscipit culpa quo provident eaque fugit eos sequi architecto explicabo quisquam enim, assumenda commodi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis fuga ab cupiditate, tempore animi enim numquam asperiores. Laborum aliquam consequatur cum, quo libero dolor, consectetur.</p>
+                        <p>Dicta deleniti repudiandae optio tempore quidem earum, recusandae, libero quae magni debitis nesciunt, rerum! Dicta voluptates inventore nihil suscipit culpa quo provident eaque fugit eos sequi architecto explicabo quisquam enim, assumenda commodi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ullam, deleniti laborum corporis quia a pariatur! Delectus minus ea earum sunt maxime id perferendis in.</p>
+                      
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta deleniti repudiandae optio tempore quidem earum, recusandae, libero quae magni debitis nesciunt, rerum! Dicta voluptates inventore nihil suscipit culpa quo provident eaque fugit eos sequi architecto explicabo quisquam enim, assumenda commodi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis fuga ab cupiditate, tempore animi enim numquam asperiores. Laborum aliquam consequatur cum, quo libero dolor, consectetur.</p>
+                       
+                        
+                        <ul class="share">
+                            <li>Share :</li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="comment-form-area">
+                        <div class="comment-main">
+                            <h3 class="blog-title">Comments: <span>02</span></h3>
+                            <ol class="comments">
+                                <li class="comment even thread-even depth-1">
+                                    <div class="comment-wrap">
+                                        <div class="comment-theme">
+                                            <div class="comment-image">
+                                                <img src="../assets/images/comment/1.jpg" alt="Jhon"/>
+                                            </div>
+                                        </div>
+                                        <div class="comment-main-area">
+                                            <div class="comment-wrapper">
+                                                <div class="sewl-comments-meta">
+                                                    <h4>Edwin Mccormick</h4>
+                                                    <span>02 months ago</span>
+                                                </div>
+                                                <div class="comment-area">
+                                                    <p>However venture pursuit he am mr cordial. Forming musical ame hearing studied be luckily emanr ding how led gentleman sincerity. Valley afford uneasy joy she thrown though bed set. In me forme country carried. Behaved</p>
+                                                    <div class="comments-reply">
+                                                        <a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="children">
+                                        <li class="comment odd alt">
+                                            <div class="comment-wrap comment-wrap1">
+                                                <div class="comment-theme">
+                                                    <div class="comment-image">
+                                                        <img src="../assets/images/comment/2.jpg" alt="Jhon"/>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-main-area">
+                                                    <div class="comment-wrapper">
+                                                        <div class="sewl-comments-meta">
+                                                            <h4>Michele Anderson</h4>
+                                                            <span>01 months ago</span>
+                                                        </div>
+                                                        <div class="comment-area">
+                                                            <p>However venture pursuit he am mr cordial. Forming musical ame hearing studied mo ding how led gentleman sincerity. Valley afford uneasy joy she thrown though bed set country carried. Behaved an or suppose</p>
+                                                            <div class="comments-reply">
+                                                                <a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="children">
+                                        <li class="comment odd alt">
+                                            <div class="comment-wrap comment-wrap2">
+                                                <div class="comment-theme">
+                                                    <div class="comment-image">
+                                                       
+                                                    </div>
+                                                </div>
+                                                <div class="comment-main-area">
+                                                    <div class="comment-wrapper">
+                                                        <div class="sewl-comments-meta">
+                                                            <h4>Michele Anderson</h4>
+                                                            <span>01 months ago</span>
+                                                        </div>
+                                                        <div class="comment-area">
+                                                            <p>However venture pursuit he am mr cordial. Forming musical ame hearing studied mo ding how led gentleman sincerity. Valley afford uneasy joy she thrown though bed set country carried. Behaved an or suppose</p>
+                                                            <div class="comments-reply">
+                                                                <a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="comment even thread-even depth-1">
+                                    <div class="comment-wrap">
+                                        <div class="comment-theme">
+                                            <div class="comment-image">
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="comment-main-area">
+                                            <div class="comment-wrapper">
+                                                <div class="sewl-comments-meta">
+                                                    <h4>Edwin Mccormick</h4>
+                                                    <span>02 months ago</span>
+                                                </div>
+                                                <div class="comment-area">
+                                                    <p>However venture pursuit he am mr cordial. Forming musical ame hearing studied be luckily emanr ding how led gentleman sincerity. Valley afford uneasy joy she thrown though bed set. In me forme country carried. Behaved</p>
+                                                    <div class="comments-reply">
+                                                        <a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="children">
+                                        <li class="comment odd alt">
+                                            <div class="comment-wrap comment-wrap1">
+                                                <div class="comment-theme">
+                                                    <div class="comment-image">
+                                                       
+                                                    </div>
+                                                </div>
+                                                <div class="comment-main-area">
+                                                    <div class="comment-wrapper">
+                                                        <div class="sewl-comments-meta">
+                                                            <h4>Michele Anderson</h4>
+                                                            <span>01 months ago</span>
+                                                        </div>
+                                                        <div class="comment-area">
+                                                            <p>However venture pursuit he am mr cordial. Forming musical ame hearing studied mo ding how led gentleman sincerity. Valley afford uneasy joy she thrown though bed set country carried. Behaved an or suppose</p>
+                                                            <div class="comments-reply">
+                                                                <a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                        <div id="respond" class="sewl-comment-form comment-respond">
+                            <h3 id="reply-title" class="blog-title">Leave a <span>comment</span></h3>
+                            <form novalidate="" method="post" id="commentform" class="comment-form" action="#0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="sewl-form-inputs no-padding-left">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-12">
+                                                    <input id="name" name="name" value="" tabindex="2" placeholder="Name" type="text"/>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <input id="email" name="email" value="" tabindex="3" placeholder="Email" type="email"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="sewl-form-textarea no-padding-right">
+                                            <textarea id="comment" name="comment" tabindex="4" rows="3" cols="30" placeholder="Write Your Comments..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-submit">
+                                            <input name="submit" id="submit" value="Post Comment" type="submit"/>
+                                            <input name="comment_post_ID" value="1" id="comment_post_ID" type="hidden"/>
+                                            <input name="comment_parent" id="comment_parent" value="0" type="hidden"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- blog-details-area end -->
+
+	
+	</ui:define>
+</ui:composition>

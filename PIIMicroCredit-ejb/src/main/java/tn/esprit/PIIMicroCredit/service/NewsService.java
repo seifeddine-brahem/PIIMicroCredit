@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +17,9 @@ import tn.esprit.PIIMicroCredit.entity.LoanStatu;
 import tn.esprit.PIIMicroCredit.entity.LoanType;
 import tn.esprit.PIIMicroCredit.entity.News;
 
+
 @Stateless
+@LocalBean
 public class NewsService implements INewsRemote {
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;
@@ -28,7 +30,11 @@ public class NewsService implements INewsRemote {
 		System.out.println("Out of addUser" + n.getId());
 		return n.getId();
 	}
-
+	@Override
+	public News getNewsById(int id) {
+		News news = em.find(News.class, id);
+		return news;
+	}
 	@Override
 	public void removeNews(int id) {
 		System.out.println("In removeUser: ");

@@ -22,6 +22,7 @@ public interface INewsRemote {
 	public List<News> findAllNews();
 	public List<News> findNewsSorted();
 	public List<News> NewsStat();
+	public News getNewsById(int id);
 	public boolean findIfExist(String title);
 	public List<Loan> findLoansRequests();
 	public Date expirydate(Loan l);
