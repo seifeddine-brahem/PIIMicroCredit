@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+
+	<ui:define name="pageTitle">
+				Request PAGE
+			</ui:define>
+	<ui:define name="pageContent">
+
+		<div class="centredZone">
+			<br />
+			<h2>Agent HOME</h2>
+
+
+
+			<br /> <br />
+			<h:form id="form">
+				<p:dataTable id="singleDT" value="#{cardRequestCtr.cardRequests}"
+					var="c" selectionMode="single"
+					selection="#{cardRequestCtr.selectedRequest}" rowKey="#{c.id}">
+					<p:column headerText="Id">
+						<h:outputText value="#{c.id}" />
+					</p:column>
+					<p:column headerText="owner">
+						<h:outputText value="#{c.account.owner.first_name}" />
+					</p:column>
+					<p:column headerText="creation Date">
+						<h:outputText value="#{c.creationDate}" />
+					</p:column>
+					<p:column headerText="status">
+						<h:outputText value="#{c.status}" />
+					</p:column>
+					<f:facet name="footer">
+						
+						<p:commandButton value="Proceed" type="button" process="singleDT" update=":form"
+							onclick="PF('dlg1').show();" />
+					</f:facet>
+
+				</p:dataTable>
+				
+				<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+					<p:outputPanel id="carDetail2" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<f:facet name="header">
+							</f:facet>
+
+							<h:outputText value="Id:" />
+							<h:inputText value="#{cardRequestCtr.selectedRequest.id}" />
+							<p:commandButton value="Destroy the World"
+								action="#{dialogView.destroyWorld}">
+								<p:confirm header="Confirmation" message="Are you sure?"
+									icon="pi pi-exclamation-triangle" />
+							</p:commandButton>
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Yes" type="button"
+									styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+								<p:commandButton value="No" type="button"
+									styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+							</p:confirmDialog>
+
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>
