@@ -43,9 +43,9 @@ public class DbPopulator {
 		Account account2 = new Account("12346", "1000", AccountType.DepositAccount);
 		Account account3 = new Account("12347", "1000", AccountType.CurrentAccount);
 
-		CardOffer cardOffer = new CardOffer("123456789", new Date(), 123);
-		CardOffer cardOffer2 = new CardOffer("12345678910", new Date(), 124);
-		CardOffer cardOffer3 = new CardOffer("12345678911", new Date(), 125);
+		CardOffer cardOffer = new CardOffer("master-card","master","123456789", new Date(), 123);
+		CardOffer cardOffer2 = new CardOffer("e-dinar","e-dinar","12345678910", new Date(), 124);
+		CardOffer cardOffer3 = new CardOffer("post-card","post","12345678911", new Date(), 125);
 
 		List<Account> accounts = new ArrayList<>();
 		accounts.add(account);

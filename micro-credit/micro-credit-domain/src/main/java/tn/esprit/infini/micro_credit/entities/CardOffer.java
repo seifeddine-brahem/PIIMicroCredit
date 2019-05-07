@@ -25,6 +25,8 @@ public class CardOffer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	private String name;
+	private String description;
 	private String numCard;
 	private Date validityDate;
 	private Integer cryptogramme;
@@ -38,6 +40,15 @@ public class CardOffer implements Serializable {
 
 	public CardOffer(String numCard, Date validityDate, Integer cryptogramme) {
 		super();
+		this.numCard = numCard;
+		this.validityDate = validityDate;
+		this.cryptogramme = cryptogramme;
+	}
+
+	public CardOffer(String name, String description, String numCard, Date validityDate, Integer cryptogramme) {
+		super();
+		this.name = name;
+		this.description = description;
 		this.numCard = numCard;
 		this.validityDate = validityDate;
 		this.cryptogramme = cryptogramme;
@@ -81,6 +92,22 @@ public class CardOffer implements Serializable {
 
 	public void setCardRequests(List<CardRequest> cardRequests) {
 		this.cardRequests = cardRequests;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

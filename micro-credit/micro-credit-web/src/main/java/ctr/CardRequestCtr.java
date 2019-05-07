@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import tn.esprit.infini.micro_credit.entities.Account;
 import tn.esprit.infini.micro_credit.entities.CardRequest;
 import tn.esprit.infini.micro_credit.services.CardRequestServiceLocal;
+import tn.esprit.infini.micro_credit.services.ClaimServiceLocal;
 
 @ManagedBean
 @ViewScoped
@@ -20,23 +21,36 @@ public class CardRequestCtr {
 	private List<CardRequest> cardRequests = new ArrayList<>();
 	private CardRequest selectedRequest = new CardRequest();
 	private List<Account> accounts = new ArrayList<>();
-	private Account selectedAccount=new Account();
+	private Account selectedAccount = new Account();
+	private Integer selectedAccountId;
 	@EJB
 	private CardRequestServiceLocal cardRequestServiceLocal;
+	@EJB
+	private ClaimServiceLocal claimServiceLocal; 
 	@ManagedProperty(value = "#{identityBean}")
 	private IdentityBean identityBean;
+	@ManagedProperty(value = "#{offerCtr}")
+	private OfferCtr offerCtr;
 
 	@PostConstruct
 	private void init() {
 		cardRequests = cardRequestServiceLocal.findAllRequests();
 		accounts = cardRequestServiceLocal.findAllAccountsByCustomer(identityBean.getUser().getId());
 	}
+
 	public void doAddRequest() {
-		selectedRequest.setAccount(selectedAccount);
+		selectedRequest.setAccount(cardRequestServiceLocal.findAccountById(selectedAccountId));
+		selectedRequest.setCardOffer(offerCtr.getSelectedOffer());
+		selectedRequest.setCreationDate(new Date());
+		selectedRequest.setStatus(false);
 		cardRequestServiceLocal.addCardRequest(selectedRequest);
 	}
+	
 	public void doAcceptRequest() {
 		cardRequestServiceLocal.processCardRequest(selectedRequest, true, new Date());
+	}
+	public void doClaimAccount() {
+		claimServiceLocal.unboundCard(selectedAccount.getId());
 	}
 
 	public void doRefuseRequest() {
@@ -83,11 +97,29 @@ public class CardRequestCtr {
 	public void setIdentityBean(IdentityBean identityBean) {
 		this.identityBean = identityBean;
 	}
+
 	public Account getSelectedAccount() {
 		return selectedAccount;
 	}
+
 	public void setSelectedAccount(Account selectedAccount) {
 		this.selectedAccount = selectedAccount;
+	}
+
+	public Integer getSelectedAccountId() {
+		return selectedAccountId;
+	}
+
+	public void setSelectedAccountId(Integer selectedAccountId) {
+		this.selectedAccountId = selectedAccountId;
+	}
+
+	public OfferCtr getOfferCtr() {
+		return offerCtr;
+	}
+
+	public void setOfferCtr(OfferCtr offerCtr) {
+		this.offerCtr = offerCtr;
 	}
 
 }

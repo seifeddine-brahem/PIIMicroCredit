@@ -17,8 +17,14 @@
 				<p:dataTable id="singleDT" value="#{offerCtr.cardOffers}" var="c"
 					selectionMode="single" selection="#{offerCtr.selectedOffer}"
 					rowKey="#{c.id}">
-					<p:column headerText="Id">
-						<h:outputText value="#{c.id}" />
+					<f:facet name="header">
+						<p:outputLabel value="All Offers" />
+					</f:facet>
+					<p:column headerText="name">
+						<h:outputText value="#{c.name}" />
+					</p:column>
+					<p:column headerText="desc">
+						<h:outputText value="#{c.description}" />
 					</p:column>
 					<p:column headerText="numCard">
 						<h:outputText value="#{c.numCard}" />
@@ -32,6 +38,20 @@
 					</f:facet>
 
 				</p:dataTable>
+<br />
+				<p:dataTable id="tab2" value="#{cardRequestCtr.accounts}" var="a"
+					>
+					<f:facet name="header">
+						<p:outputLabel value="Offers By Accounts" />
+					</f:facet>
+					<p:column headerText="Account id">
+						<h:outputText value="#{a.id}" />
+					</p:column>
+					<p:column headerText="Offer">
+						<h:outputText value="#{a.cardOffer.name}" />
+					</p:column>
+
+				</p:dataTable>
 
 				<p:dialog header="Car Info" widgetVar="cd" modal="true"
 					showEffect="fade" hideEffect="fade" resizable="false">
@@ -42,16 +62,20 @@
 							<f:facet name="header">
 							</f:facet>
 
-							<h:outputText value="Id:" />
-							<h:outputText value="#{offerCtr.selectedOffer.id}" />
+							<h:outputText value="Name:" />
+							<h:outputText value="#{offerCtr.selectedOffer.name}" />
+							<h:outputText value="Description:" />
+							<h:outputText value="#{offerCtr.selectedOffer.description}" />
 							<h:outputText value="Num Card:" />
 							<h:outputText value="#{offerCtr.selectedOffer.numCard}" />
 							<h:outputText value="Validity Date:" />
 							<h:outputText value="#{offerCtr.selectedOffer.validityDate}" />
 							<h:outputText value="Accounts :" />
-							<p:selectOneMenu id="si" value="#{cardRequestCtr.selectedAccount}">
+
+							<p:selectOneMenu id="si"
+								value="#{cardRequestCtr.selectedAccountId}">
 								<f:selectItems value="#{cardRequestCtr.accounts}" var="o"
-									itemLabel="#{o.id}" />
+									itemLabel="#{o.id}" itemValue="#{o.id}" />
 							</p:selectOneMenu>
 
 

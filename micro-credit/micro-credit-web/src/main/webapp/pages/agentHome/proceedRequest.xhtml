@@ -20,11 +20,14 @@
 				<p:dataTable id="singleDT" value="#{cardRequestCtr.cardRequests}"
 					var="c" selectionMode="single"
 					selection="#{cardRequestCtr.selectedRequest}" rowKey="#{c.id}">
-					<p:column headerText="Id">
-						<h:outputText value="#{c.id}" />
-					</p:column>
 					<p:column headerText="owner">
 						<h:outputText value="#{c.account.owner.first_name}" />
+					</p:column>
+					<p:column headerText="Offer Name">
+						<h:outputText value="#{c.cardOffer.name}" />
+					</p:column>
+					<p:column headerText="Account id">
+						<h:outputText value="#{c.account.id}" />
 					</p:column>
 					<p:column headerText="creation Date">
 						<h:outputText value="#{c.creationDate}" />
