@@ -13,6 +13,7 @@ import tn.esprit.infini.micro_credit.services.IdentityServiceLocal;
 public class IdentityBean {
 	// Models
 	private User user = new User();
+	private boolean loggedIn = false;
 	// Injection
 	@EJB
 	private IdentityServiceLocal identityServiceLocal;
@@ -22,12 +23,13 @@ public class IdentityBean {
 		userLoggedIn = identityServiceLocal.login(user.getEmail(), user.getPassword());
 		if (userLoggedIn != null) {
 			user = userLoggedIn;
+			loggedIn = true;
 			if (userLoggedIn.getRole().equals(Role.admin)) {
 				System.out.println("admin");
 			} else if (userLoggedIn.getRole().equals(Role.agent)) {
-				return"/pages/agentHome/home";
+				return "/pages/agentHome/home";
 			} else {
-				return"/pages/clientHome/home";
+				return "/pages/clientHome/home";
 			}
 		} else {
 			return "ko";
@@ -41,6 +43,14 @@ public class IdentityBean {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 
 }

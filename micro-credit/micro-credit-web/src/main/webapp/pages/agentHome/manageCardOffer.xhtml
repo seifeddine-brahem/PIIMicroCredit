@@ -2,12 +2,12 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" template="/template/template.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="/include/template.xhtml">
 
 	<ui:define name="pageTitle">
 				Manage Offer
 			</ui:define>
-	<ui:define name="pageContent">
+	<ui:define name="content">
 		<h:form id="form">
 
 
@@ -53,7 +53,7 @@
 							<h:outputText value="#{offerCtr.selectedOffer.validityDate}" />
 							<p:commandButton value="Delete"
 								action="#{offerCtr.doDeleteCardOffer()}"
-								oncomplete="PF('cardDialog').hide()" update=":form" />
+								oncomplete="PF('cardDialog').hide()" update="@(form)" />
 
 						</p:panelGrid>
 					</p:outputPanel>
@@ -74,7 +74,10 @@
 							<p:calendar value="#{offerCtr.cardOffer.validityDate}" />
 							<p:commandButton value="Add"
 								action="#{offerCtr.doAddCardOffer()}"
-								oncomplete="PF('cardDialog').hide()" update=":form:singleDT" />
+								onclick="PF('cardDialog').hide()" ajax="true" process="@all"
+								update="form:singleDT" >
+								
+								</p:commandButton>
 
 						</p:panelGrid>
 					</p:outputPanel>
