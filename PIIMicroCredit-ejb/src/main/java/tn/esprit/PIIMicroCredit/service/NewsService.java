@@ -4,20 +4,24 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import tn.esprit.PIIMicroCredit.Interface.INewsRemote;
+import tn.esprit.PIIMicroCredit.entity.Comments;
 import tn.esprit.PIIMicroCredit.entity.Loan;
 import tn.esprit.PIIMicroCredit.entity.LoanPayment;
 import tn.esprit.PIIMicroCredit.entity.LoanStatu;
 import tn.esprit.PIIMicroCredit.entity.LoanType;
 import tn.esprit.PIIMicroCredit.entity.News;
+import tn.esprit.PIIMicroCredit.entity.User;
+
 
 @Stateless
+@LocalBean
 public class NewsService implements INewsRemote {
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;
@@ -28,7 +32,11 @@ public class NewsService implements INewsRemote {
 		System.out.println("Out of addUser" + n.getId());
 		return n.getId();
 	}
-
+	@Override
+	public News getNewsById(int id) {
+		News news = em.find(News.class, id);
+		return news;
+	}
 	@Override
 	public void removeNews(int id) {
 		System.out.println("In removeUser: ");
@@ -48,6 +56,8 @@ public class NewsService implements INewsRemote {
 		news.setDate_creation(n.getDate_creation());
 		news.setApproved(n.getApproved());
 		news.setScore(n.getScore());
+		news.setNbrLike(n.getNbrLike());
+		news.setNbrClick(n.getNbrClick());
 
 	}
 
@@ -82,7 +92,15 @@ public class NewsService implements INewsRemote {
 		  System.out.println("Out of findAllNews: ");
 		return news;
 	}
+	@Override
+	public List<News> findNewsSortedClient(){
+		
 
+		List<News> news  = em.createQuery("from News where approved=1 order by nbrLike desc, date_creation desc",News.class).getResultList();
+		 
+		  System.out.println("Out of findAllNews: ");
+		return news;
+	}
 	@Override
 	public List<News> findNewsByDate(String date) {
 		List<News> news = em.createQuery("from News where approved =1 and DATE_FORMAT(date_creation,'%Y-%m-%d')=:t", News.class).setParameter( "t",date ) .getResultList();
@@ -99,6 +117,26 @@ public class NewsService implements INewsRemote {
 		  System.out.println("Out of findAllNews: ");
 		return news;
 	}
+	@Override
+	public List<News> favoriteNews(User u){
+		
+
+		List<News> news  = em.createQuery("select n from News n, Comments c where c.news=n.id and c.user=:t order by n.nbrClick desc ", News.class).setParameter( "t",u ).getResultList();
+		 
+		  System.out.println("Out of findAllNews: ");
+		return news;
+	}
+	@Override
+	public List<News> top5News(){
+		
+
+		List<News> news  = em.createQuery("SELECT * from news n where n.id IN (SELECT c.news FROM comments c GROUP BY c.news ORDER BY COUNT(*) DESC ) ORDER BY n.nbrLike desc LIMIT 5 ", News.class).getResultList();
+		 
+		  System.out.println("Out of findAllNews: ");
+		return news;
+	}
+	
+
 	@Override
 	public List<Loan> findLoansRequests() {
 		

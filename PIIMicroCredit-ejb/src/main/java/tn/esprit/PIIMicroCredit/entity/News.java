@@ -7,13 +7,17 @@ package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,7 +53,48 @@ public class News implements Serializable {
     private Date date_approved;
     @Column(name = "score")
     private int score;
-    public News() {
+    @Column(name = "nbrLike")
+    private int nbrLike;
+    @Column(name = "nbrClick")
+    private int nbrClick;
+	@OneToMany(mappedBy = "news", fetch = FetchType.EAGER)
+	private List<Comments> comments = new ArrayList<>();
+  
+	
+	   public List<Comments> getComments() {
+			return comments;
+		}
+
+
+
+		public void setComments(List<Comments> comments) {
+			this.comments = comments;
+		}
+	public int getNbrLike() {
+		return nbrLike;
+	}
+
+
+
+	public void setNbrLike(int nbrLike) {
+		this.nbrLike = nbrLike;
+	}
+
+
+
+	public int getNbrClick() {
+		return nbrClick;
+	}
+
+
+
+	public void setNbrClick(int nbrClick) {
+		this.nbrClick = nbrClick;
+	}
+
+
+
+	public News() {
     }
     
     

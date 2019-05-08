@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+ <!-- blog-details-area start -->
+    <div class="blog-details-area bg-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                <div class="blog-details-wrap">
+                        <h3>News <span>  details</span></h3>
+                        <div class="blog-details-img">
+                            <img src="#{newsBean.nw.photo}" alt="" height="15px" width="7px"/>
+                        </div>
+                        <ul>
+                       <li>   <i class="fa fa-user-o"></i> <a href=""> <h:outputLabel value="Admin, approved on: #{newsBean.nw.date_approved}" /></a> </li>
+                     	 <li> 	<a href=""><i class="fa fa-calendar-o"></i> <h:outputLabel value="Creation Date: #{newsBean.nw.date_creation}" /></a>			  </li>
+                        </ul>
+                       
+                        <ul> <li><a href=""><i class="fa fa-comment-o"></i> <h:outputLabel value="#{commentsBean.showCommentsByNews(newsBean.nw).size()}" /> COMMENTS</a></li>
+                         <li> <a href=""> <i class="fa fa-heart-o"></i><h:outputLabel value="#{newsBean.nw.nbrLike}" /> LIKE</a></li>
+                            <li> <a href=""> <h:outputLabel value="#{newsBean.nw.score}" /><i class="fa fa-star-o"></i>Rating</a>  </li>
+                       
+                        </ul>
+                        
+                         <h4>
+                           <h:outputLabel value="#{newsBean.nw.title}" />
+                        </h4>
+                        <p> <h:outputLabel value="#{newsBean.nw.description}" />  </p>
+                        
+                        
+                        <ul class="Add to favorite">
+                           
+                               <h:form> 
+                        <li>Add to favorite:
+                          <i class="fa fa-heart">  <h:commandLink action="#{newsBean.addToFavorite(newsBean.nw)}" value="LIKE" /> </i> </li></h:form>
+                          
+                        </ul>
+                    </div>
+                    <div class="comment-form-area">
+                        <div class="comment-main">
+                            <h3 class="blog-title">Comments: <span> <h:outputLabel value="#{commentsBean.showCommentsByNews(newsBean.nw).size()}" /> </span></h3>
+                            <ol class="comments">
+                                <li class="comment even thread-even depth-1">
+                                   <ui:repeat var="c" value="#{commentsBean.showCommentsByNews(newsBean.nw)}">  
+                                    <div class="comment-wrap">
+                                        <div class="comment-theme">
+                                            <div class="comment-image">
+                                                <img src="../assets/images/comment/1.jpg" alt="Jhon"/>
+                                            </div>
+                                        </div>
+                                         
+	          
+                                        <div class="comment-main-area">
+                                            <div class="comment-wrapper">
+                                                <div class="sewl-comments-meta">
+                                                    <h4> <h:outputLabel value="#{c.user.first_name} #{c.user.last_name}" /></h4>
+                                                    <span>  <h:outputLabel value="#{c.user.email}" /></span>
+                                                </div>
+                                                <div class="comment-area">
+                                                    <p> <h:outputLabel value="#{c.description}" />   </p>
+                                                    <div class="comments-reply">
+                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    </ui:repeat>
+                                </li>
+                              
+                            </ol>
+                        </div>
+                        <div id="respond" class="sewl-comment-form comment-respond">
+                            <h3 id="reply-title" class="blog-title">Leave a <span>comment</span></h3>
+                            <p>Share you comments with us...</p>
+                            <h:form novalidate="" method="post" id="commentform" class="comment-form" >
+                           
+                                <div class="row">
+                                    
+                                    <div class="col-12">
+                                        <div class="sewl-form-textarea no-padding-right">
+                                        <h:inputTextarea value="#{commentsBean.description}" id="comment" name="comment" tabindex="4" rows="3" cols="30" placeholder="Write Your Comments..."/>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-submit">
+                                            <h:commandButton action="#{commentsBean.addComments(newsBean.nw)}" value="Post Comment" type="submit" /> 
+                                            <input name="comment_post_ID" value="1" id="comment_post_ID" type="hidden"/>
+                                            <input name="comment_parent" id="comment_parent" value="0" type="hidden"/>
+                                        </div>
+                                    </div>
+                                </div>
+                           </h:form>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- blog-details-area end -->
+
+	
+	</ui:define>
+</ui:composition>
