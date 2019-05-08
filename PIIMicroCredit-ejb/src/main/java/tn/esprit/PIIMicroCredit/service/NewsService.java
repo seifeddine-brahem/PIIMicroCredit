@@ -20,6 +20,7 @@ import tn.esprit.PIIMicroCredit.entity.News;
 import tn.esprit.PIIMicroCredit.entity.User;
 
 
+
 @Stateless
 @LocalBean
 public class NewsService implements INewsRemote {

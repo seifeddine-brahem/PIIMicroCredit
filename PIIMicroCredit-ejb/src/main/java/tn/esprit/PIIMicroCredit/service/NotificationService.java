@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import tn.esprit.PIIMicroCredit.Interface.INotification;
+import tn.esprit.PIIMicroCredit.entity.News;
 import tn.esprit.PIIMicroCredit.entity.Notification;
 @Stateless
 @Remote
@@ -20,7 +21,7 @@ public class NotificationService implements INotification{
 	@Override
 	public List<Notification> findUnopenedNotifications() {
 		System.out.println("In findUnopenedNotifications");
-		List<Notification> n = em.createQuery("select c from notification n where n.opened:=false ", Notification.class).getResultList();
+		List<Notification> n = em.createQuery("select n from Notification n where n.opened=false ", Notification.class).getResultList();
 		System.out.println("findUnopenedNotifications ");
 		return n;	
 	}
@@ -35,7 +36,19 @@ public class NotificationService implements INotification{
 	}
 
 
+	@Override
+	public void updateNotification(Notification n) {
+
+		System.out.println("In updateNotif: ");
+		Notification notif = em.find(Notification.class, n.getId());
+		notif.setOpened(true);
+		
+
+	}
+	}
+
+
 	
 
 
-}
+

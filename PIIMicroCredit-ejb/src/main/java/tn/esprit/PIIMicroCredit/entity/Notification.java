@@ -2,6 +2,7 @@ package tn.esprit.PIIMicroCredit.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +23,10 @@ public class Notification implements Serializable{
     private Integer id;
     @Column(name = "opened")
     private Boolean opened;
-    @ManyToOne
-    @JoinColumn(name = "ComplaintDepositor")
-    private User ComplaintDepositor;
+	@OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "complaint")
+    private Complaint complaint;
+
     public Integer getId() {
 		return id;
 	}
@@ -41,13 +43,6 @@ public class Notification implements Serializable{
 		this.opened = opened;
 	}
 
-	public User getComplaintDepositor() {
-		return ComplaintDepositor;
-	}
-
-	public void setComplaintDepositor(User ComplaintDepositor) {
-		this.ComplaintDepositor = ComplaintDepositor;
-	}
 
 	public Complaint getComplaint() {
 		return complaint;
@@ -57,18 +52,14 @@ public class Notification implements Serializable{
 		this.complaint = complaint;
 	}
 
-	@OneToOne
-    @JoinColumn(name = "complaint")
-    private Complaint complaint;
+
     
 	public Notification() {
-		ComplaintDepositor=new User();
 		complaint= new Complaint();
 	}
 
-	public Notification( Boolean opened, User ComplaintDepositor, Complaint complaint) {
+	public Notification( Boolean opened, Complaint complaint) {
 		this.opened = opened;
-		this.ComplaintDepositor = ComplaintDepositor;
 		this.complaint = complaint;
 	}
     

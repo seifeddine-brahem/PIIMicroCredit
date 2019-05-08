@@ -22,6 +22,54 @@
     12. color switcher
     13. light-version
 -----------------------------------------------------------------------------------*/
+.totals{
+	display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 10px 0px 5px 0px;
+}
+.totals > div {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 16px;
+}
+.totals > div .desc {
+  text-transform: uppercase;
+  font-size: 9px;
+}
+.capitalized {
+    text-transform: uppercase;
+}
+.super-line {
+  color: #5b5b5b;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+}
+.super-line:before {
+  content: "";
+  display: inline-block;
+  border-bottom: 1px solid #5b5b5b;
+  margin-bottom: 3px;
+  margin-right: 20px;
+  width: 80px;
+}
+.super-line:after {
+  content: "";
+  display: inline-block;
+  border-bottom: 1px solid #5b5b5b;
+  margin-bottom: 3px;
+  margin-left: 20px;
+  width: 80px;
+}
+.super-line.b {
+  background: #5b5b5b;
+  color: #7E9BA0;
+}
+.super-line.b:before, .super-line.b:after {
+  border-bottom: 1px solid #7E9BA0;
+}
 
 
 /*-------defolt-css here----------*/
@@ -698,9 +746,11 @@ i {
     opacity: 1;
 }
 .about-items:hover h3,
+.about-items:hover h6,
 .about-items:hover p,
 .about-items:hover span:before,
 .about-items.active h3,
+.about-items.active h6,
 .about-items.active p,
 .about-items.active span:before {
     color: #fff;
@@ -807,7 +857,11 @@ span.line:before {
     -moz-transition: all .3s;
 }
 .service-wrap:hover h3,
+.service-wrap:hover h6,
 .service-wrap:hover p,
+.service-wrap:hover .super-line ,
+.service-wrap:hover .super-line:after ,
+.service-wrap:hover .super-line:before,
 .service-wrap:hover a {
     color: #fff;
 }
