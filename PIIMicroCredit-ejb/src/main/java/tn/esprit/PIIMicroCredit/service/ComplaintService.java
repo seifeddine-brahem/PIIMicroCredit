@@ -8,10 +8,12 @@ import javax.persistence.PersistenceContext;
 import tn.esprit.PIIMicroCredit.Interface.IComplaint;
 import tn.esprit.PIIMicroCredit.entity.Complaint;
 import tn.esprit.PIIMicroCredit.entity.User;
+
+import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 @Stateless
-@Remote
+@LocalBean
 public class ComplaintService implements IComplaint {
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;

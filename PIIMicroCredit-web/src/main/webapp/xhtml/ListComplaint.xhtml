@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+		<div class="breadcumb-area flex-style black-opacity">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-12 text-center">
+
+						<h2>Comlaints</h2>
+
+						<ul>
+
+							<li><a href="index.html">Home</a></li>
+
+							<li><span>Contact</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="contact-area pt-120">
+
+		<div class="container">
+			<div class="row">
+				<div class="panel panel-default widget">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-comment"></span>
+						<h3 class="panel-title">Recent Complaints</h3>
+
+					</div>
+					<div class="panel-body">
+						<ul class="list-group">
+						<h:form>
+						<h:dataTable  value="#{complaintBean.complaints}" var="complaint" style="border: none;">
+                               <h:column>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-xs-2 col-md-1">
+											<img src="http://placehold.it/80"
+												class="img-circle img-responsive" alt="" />
+										</div>
+										<div class="col-xs-10 col-md-11">
+											<div>
+												<a
+													href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+													"#{complaint.title}"</a>
+												<div class="mic-info">
+													By: <a href="#">Bhaumik Patel</a>
+													"#{complaint.publishing_date}"
+												</div>
+											</div>
+											<div class="comment-text">"#{complaint.description}"</div>
+											<div class="row">
+												<div class="action">
+													
+												
+													<h:commandButton type="button" action="#{complaintBean.removeComplaint(complaint.id)}"
+														class="btn btn-danger btn-xs" title="delete"
+														value="delete">
+													</h:commandButton>
+													<h:commandButton type="button"
+														class="btn btn-success btn-xs" title="Approved"
+														value="update">
+													</h:commandButton>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								</h:column>
+								</h:dataTable>
+								</h:form>
+					
+
+						</ul>
+						<a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span
+							class="glyphicon glyphicon-refresh"></span> More</a>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+
+
+		</section>
+	</ui:define>
+</ui:composition>
