@@ -68,13 +68,17 @@
 
 							<ul class=" d-flex">
 
-								<li class="current"><a href="javascript:void(0);">Home
+								<li class="current"><a href="javascript:void(0);">Logout
 										<i class="fa fa-angle-down" />
 								</a>
 
 									<ul>
 
-										<li><a href="login.jsf">Home</a></li>
+										<li><h:form>
+												<h:commandButton action="#{identityBean.logout()}"
+													value="logout" />
+											</h:form></li>
+
 									</ul></li>
 
 								<li><a href="javascript:void(0);">About <i
@@ -92,22 +96,27 @@
 										rendered="#{identityBean.loggedInAsAgent}">
 										<ul>
 
-											<li><a href="pages/agentHome/manageCardOffer.jsf">Manage
+											<li><a
+												href="#{request.contextPath}/pages/agentHome/manageCardOffer.jsf">Manage
 													offers</a></li>
 
-											<li><a href="pages/agentHome/proceedRequest.jsf">Proceed
+											<li><a
+												href="#{request.contextPath}/pages/agentHome/proceedRequest.jsf">Proceed
 													card request</a></li>
 
-											<li><a href="pages/agentHome/manageCardOffer.jsf">Offer
+											<li><a
+												href="#{request.contextPath}/pages/agentHome/manageCardOffer.jsf">Offer
 													by account</a></li>
 										</ul>
 									</h:panelGroup> <h:panelGroup rendered="#{identityBean.loggedInAsClient}">
 										<ul>
 
-											<li><a href="/pages/clientHome/myOffers.jsf">Manage
+											<li><a
+												href="#{request.contextPath}/pages/clientHome/myOffers.jsf">Manage
 													My offers </a></li>
 
-											<li><a href="/pages/clientHome/claimOffer.jsf">Claim
+											<li><a
+												href="#{request.contextPath}/pages/clientHome/claimOffer.jsf">Claim
 													Offer</a></li>
 
 
@@ -182,12 +191,14 @@
 
 									<ul aria-expanded="false">
 
-										<li><a href="login.jsf">Home</a></li>
+										<li><a href="#{request.contextPath}/login.jsf">Home</a></li>
 
 									</ul></li>
 
+
+
 								<li class="sidemenu-items"><a class="has-arrow"
-									aria-expanded="false" href="javascript:void(0);">About</a>
+									aria-expanded="false" href="javascript:void(0);">logout</a>
 
 									<ul aria-expanded="false">
 

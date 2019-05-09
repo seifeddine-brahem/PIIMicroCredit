@@ -36,33 +36,23 @@
 						<h:outputText value="#{c.status}" />
 					</p:column>
 					<f:facet name="footer">
-						
-						<p:commandButton value="Proceed" type="button" process="singleDT" update=":form"
-							onclick="PF('dlg1').show();" />
+
+						<p:commandButton value="Proceed" type="button" process="singleDT"
+							update=":form" onclick="PF('dlg1').show();" />
 					</f:facet>
 
 				</p:dataTable>
-				
-				<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+
+				<p:dialog header="Proceed Request" widgetVar="dlg1" minHeight="40">
 					<p:outputPanel id="carDetail2" style="text-align:center;">
 						<p:panelGrid columns="2" columnClasses="label,value">
 							<f:facet name="header">
 							</f:facet>
+							<p:commandButton value="yes"
+								action="#{cardRequestCtr.doAcceptRequest()}"
+								oncomplete="PF('dlg1').hide();" update="@(form)" />
+							<p:commandButton value="no" action="#{cardRequestCtr.doRefuseRequest()}" oncomplete="PF('dlg1').hide();" update="@(form)"/>
 
-							<h:outputText value="Id:" />
-							<h:inputText value="#{cardRequestCtr.selectedRequest.id}" />
-							<p:commandButton value="Destroy the World"
-								action="#{dialogView.destroyWorld}">
-								<p:confirm header="Confirmation" message="Are you sure?"
-									icon="pi pi-exclamation-triangle" />
-							</p:commandButton>
-							<p:confirmDialog global="true" showEffect="fade"
-								hideEffect="fade">
-								<p:commandButton value="Yes" type="button"
-									styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-								<p:commandButton value="No" type="button"
-									styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-							</p:confirmDialog>
 
 						</p:panelGrid>
 					</p:outputPanel>

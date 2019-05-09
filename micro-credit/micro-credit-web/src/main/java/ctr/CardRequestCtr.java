@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import tn.esprit.infini.micro_credit.entities.Account;
 import tn.esprit.infini.micro_credit.entities.CardRequest;
@@ -26,7 +28,7 @@ public class CardRequestCtr {
 	@EJB
 	private CardRequestServiceLocal cardRequestServiceLocal;
 	@EJB
-	private ClaimServiceLocal claimServiceLocal; 
+	private ClaimServiceLocal claimServiceLocal;
 	@ManagedProperty(value = "#{identityBean}")
 	private IdentityBean identityBean;
 	@ManagedProperty(value = "#{offerCtr}")
@@ -39,16 +41,22 @@ public class CardRequestCtr {
 	}
 
 	public void doAddRequest() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		context.addMessage(null, new FacesMessage("Successful", "Your Request has been sent: "));
+		context.addMessage(null, new FacesMessage(" Message", "you will reseve un email soon"));
 		selectedRequest.setAccount(cardRequestServiceLocal.findAccountById(selectedAccountId));
 		selectedRequest.setCardOffer(offerCtr.getSelectedOffer());
 		selectedRequest.setCreationDate(new Date());
 		selectedRequest.setStatus(false);
 		cardRequestServiceLocal.addCardRequest(selectedRequest);
 	}
-	
+
 	public void doAcceptRequest() {
 		cardRequestServiceLocal.processCardRequest(selectedRequest, true, new Date());
 	}
+
 	public void doClaimAccount() {
 		claimServiceLocal.unboundCard(selectedAccount.getId());
 	}
