@@ -17,6 +17,7 @@ public class OfferCtr {
 	private CardOffer cardOffer = new CardOffer();
 	private CardOffer selectedOffer = new CardOffer();
 	private List<CardOffer> cardOffers = new ArrayList<>();
+	private boolean showPanel = false;
 	@EJB
 	private CardOfferServiceLocal cardOfferServiceLocal;
 
@@ -25,8 +26,28 @@ public class OfferCtr {
 		cardOffers = cardOfferServiceLocal.findAllCardOffers();
 	}
 
+	public void show() {
+		selectedOffer = new CardOffer();
+		showPanel = true;
+	}
+	public void doCancel() {
+		cardOffer=new CardOffer();
+		showPanel = false;
+	}
+
+	public void showForUpdate() {
+		cardOffer = selectedOffer;
+		showPanel = true;
+	}
+
 	public void doAddCardOffer() {
 		cardOfferServiceLocal.addCardOffer(cardOffer);
+		showPanel = false;
+	}
+
+	public void doAddOrUpdateCardOffer() {
+		cardOfferServiceLocal.addCardOffer(cardOffer);
+		showPanel = false;
 	}
 
 	public void doDeleteCardOffer() {
@@ -55,6 +76,14 @@ public class OfferCtr {
 
 	public void setSelectedOffer(CardOffer selectedOffer) {
 		this.selectedOffer = selectedOffer;
+	}
+
+	public boolean isShowPanel() {
+		return showPanel;
+	}
+
+	public void setShowPanel(boolean showPanel) {
+		this.showPanel = showPanel;
 	}
 
 }

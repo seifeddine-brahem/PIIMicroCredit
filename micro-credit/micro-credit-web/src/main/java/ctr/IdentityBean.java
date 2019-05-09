@@ -3,6 +3,7 @@ package ctr;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import tn.esprit.infini.micro_credit.entities.Role;
 import tn.esprit.infini.micro_credit.entities.User;
@@ -20,6 +21,14 @@ public class IdentityBean {
 	@EJB
 	private IdentityServiceLocal identityServiceLocal;
 
+	public String logout() {
+		loggedIn = false;
+		loggedInAsAgent = false;
+		loggedInAsClient = false;
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/login?faces-redirect=true";
+	}
+
 	public String doLogin() {
 		User userLoggedIn;
 		userLoggedIn = identityServiceLocal.login(user.getEmail(), user.getPassword());
@@ -29,9 +38,11 @@ public class IdentityBean {
 			if (userLoggedIn.getRole().equals(Role.admin)) {
 				System.out.println("admin");
 			} else if (userLoggedIn.getRole().equals(Role.agent)) {
+				loggedInAsClient = false;
 				loggedInAsAgent = true;
 				return "/pages/agentHome/home";
 			} else {
+				loggedInAsAgent = false;
 				loggedInAsClient = true;
 				return "/pages/clientHome/home";
 			}

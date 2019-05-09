@@ -40,7 +40,8 @@
 					<p:outputPanel id="multiCarDetail" style="text-align:center;">
 						<p:outputLabel value="#{cardRequestCtr.selectedAccount.id}" />
 						<p:commandButton value="claim"
-							action="#{cardRequestCtr.doClaimAccount}" />
+							action="#{cardRequestCtr.doClaimAccount}"
+							oncomplete="PF('dialog12').hide()" update="@(form)" />
 					</p:outputPanel>
 				</p:dialog>
 

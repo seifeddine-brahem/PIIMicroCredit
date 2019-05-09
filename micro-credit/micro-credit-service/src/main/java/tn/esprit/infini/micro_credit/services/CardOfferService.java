@@ -26,7 +26,7 @@ public class CardOfferService implements CardOfferServiceRemote, CardOfferServic
 
 	@Override
 	public void addCardOffer(CardOffer cardOffer) {
-		em.persist(cardOffer);
+		em.merge(cardOffer);
 
 	}
 
