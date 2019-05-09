@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" template="../include/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+		<p:donutChart model="#{chartJsView.donutModel}"
+			style="width: 100%; height: 500px;" />
+
+<h:form>
+    <p:growl id="growl" showDetail="true" />
+     
+    <p:barChart model="#{chartJsView.barModel2}" style="width: 100%; height: 500px;">
+        <p:ajax event="itemSelect" listener="#{chartJsView.itemSelect}" update="growl"/>
+    </p:barChart>
+</h:form>
+
+
+
+	</ui:define>
+</ui:composition>
