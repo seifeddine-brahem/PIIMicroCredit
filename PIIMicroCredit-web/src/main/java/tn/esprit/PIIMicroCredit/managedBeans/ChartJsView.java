@@ -48,6 +48,9 @@ import org.primefaces.model.charts.radar.RadarChartModel;
 import org.primefaces.model.charts.radar.RadarChartOptions;
 
 import tn.esprit.PIIMicroCredit.entity.Account;
+import tn.esprit.PIIMicroCredit.entity.AccountType;
+import tn.esprit.PIIMicroCredit.entity.Loan;
+import tn.esprit.PIIMicroCredit.entity.Transaction;
 import tn.esprit.PIIMicroCredit.entity.User;
 import tn.esprit.PIIMicroCredit.service.AccountService;
 import tn.esprit.PIIMicroCredit.service.BudgetService;
@@ -55,12 +58,23 @@ import tn.esprit.PIIMicroCredit.service.BudgetService;
 
 @ManagedBean
 public class ChartJsView implements Serializable {
-     
+	private Account depositA ;
+	private Account currentA ;
+	private Account savingA ;
     private PieChartModel pieModel;
+    private PieChartModel pieModel2;
      
     private PolarAreaChartModel polarAreaModel;
      
-    private LineChartModel lineModel;
+    public PieChartModel getPieModel2() {
+		return pieModel2;
+	}
+
+	public void setPieModel2(PieChartModel pieModel2) {
+		this.pieModel2 = pieModel2;
+	}
+
+	private LineChartModel lineModel;
      
     private LineChartModel cartesianLinerModel;
      
@@ -83,12 +97,16 @@ public class ChartJsView implements Serializable {
     private BarChartModel mixedModel;
 
 	private DonutChartModel donutModel;
+	double interest=0.1;
+	private double  depense=0;
+	private double  balance=0;
 	@EJB
-	AccountService us;
+	BudgetService bs;
  
     @PostConstruct
     public void init() {
         createPieModel();
+        createPieModel2();
         createPolarAreaModel();
         createLineModel();
         createCartesianLinerModel();
@@ -107,30 +125,95 @@ public class ChartJsView implements Serializable {
     private void createPieModel() {
         pieModel = new PieChartModel();
         ChartData data = new ChartData();
-         
+
+        User u = new User();
+        u.setId(1);
+		List<Account> l = new ArrayList<>();
+		l=bs.getAllAccountsByuser(u.getId());
+
+		List<Transaction> ts= bs.getOutgoingTransaction(u);		
+		double sommeTransactionSortante=0;
+	
+		for (Transaction t1: ts)
+		{
+			sommeTransactionSortante+=t1.getAmount();
+		}
+		List<Loan>ll=new ArrayList<>();
+		for(Account a : l)
+		{
+			ll.add(bs.getAccountLoan(a));
+		}
+		double sommeLoanDu=0;
+		for(Loan loan : ll)
+		{
+			sommeLoanDu+=(loan.getAmount()/12)+(loan.getAmount()/12)*interest;
+		}
         PieChartDataSet dataSet = new PieChartDataSet();
         List<Number> values = new ArrayList<>();
-        values.add(300);
-        values.add(50);
-        values.add(100);
+        values.add(sommeTransactionSortante);
+        values.add(sommeLoanDu);
+        //values.add();
+        depense=sommeLoanDu+sommeTransactionSortante;
         dataSet.setData(values);
          
         List<String> bgColors = new ArrayList<>();
-        bgColors.add("rgb(255, 99, 132)");
-        bgColors.add("rgb(54, 162, 235)");
-        bgColors.add("rgb(255, 205, 86)");
+        bgColors.add("rgb(255,99,132)");
+        bgColors.add("rgb(223,138,20)");
         dataSet.setBackgroundColor(bgColors);
          
         data.addChartDataSet(dataSet);
         List<String> labels = new ArrayList<>();
-        labels.add("Red");
-        labels.add("Blue");
-        labels.add("Yellow");
+        labels.add("outgoing Transaction");
+        labels.add("Loan Payment");
+        //labels.add("Yellow");
         data.setLabels(labels);
          
         pieModel.setData(data);
     }
-     
+    private void createPieModel2() {
+        pieModel2 = new PieChartModel();
+        ChartData data2 = new ChartData();
+
+        User u = new User();
+        u.setId(1);
+		List<Account> l = new ArrayList<>();
+		l=bs.getAllAccountsByuser(u.getId());
+		List<Transaction> ts= bs.getIncomingTransaction(u);		
+		double sommeTransactionEntrante=0;
+	
+		for (Transaction t1: ts)
+		{
+			sommeTransactionEntrante+=t1.getAmount();
+		}
+
+		this.getAllUserAccounts();
+        PieChartDataSet dataSet1 = new PieChartDataSet();
+        List<Number> values1 = new ArrayList<>();
+        values1.add(sommeTransactionEntrante);
+        values1.add(savingA.getSolde());
+        values1.add(currentA.getSolde());
+        values1.add(depositA.getSolde());
+        //values.add(100);
+        dataSet1.setData(values1);
+         balance=sommeTransactionEntrante+savingA.getSolde()+currentA.getSolde()+depositA.getSolde();
+        List<String> bgColors1 = new ArrayList<>();
+        bgColors1.add("rgb(59,35,123)");
+        bgColors1.add("rgb(223,138,20)");
+        bgColors1.add("rgb(255,99,132)");
+        bgColors1.add("rgb(79,192,132)");
+        dataSet1.setBackgroundColor(bgColors1);
+         
+        data2.addChartDataSet(dataSet1);
+        List<String> labels = new ArrayList<>();
+        labels.add("incomming Transaction");
+        labels.add("saving account solde");
+        labels.add("current  account solde");
+        labels.add("deposit account solde");
+        data2.setLabels(labels);
+         
+        pieModel2.setData(data2);
+    }
+
     private void createPolarAreaModel() {
         polarAreaModel = new PolarAreaChartModel();
         ChartData data = new ChartData();
@@ -863,32 +946,51 @@ public class ChartJsView implements Serializable {
     public void createDonutModel() {
         donutModel = new DonutChartModel();
         ChartData data = new ChartData();
+
         User u = new User();
         u.setId(1);
 		List<Account> l = new ArrayList<>();
-		l=us.getAllAccountsByuser(u.getId());
-		System.out.println(l.size());
-		
+		l=bs.getAllAccountsByuser(u.getId());
+		List<Transaction> te= bs.getIncomingTransaction(u);
+		List<Transaction> ts= bs.getOutgoingTransaction(u);		
+		double sommeTransactionEntrante=0;
+		double sommeTransactionSortante=0;
+		for (Transaction t: te)
+		{
+			sommeTransactionEntrante+=t.getAmount();
+		}
+		for (Transaction t1: ts)
+		{
+			sommeTransactionSortante+=t1.getAmount();
+		}
+		List<Loan>ll=new ArrayList<>();
+		for(Account a : l)
+		{
+			ll.add(bs.getAccountLoan(a));
+		}
+		double sommeLoanDu=0;
+		for(Loan loan : ll)
+		{
+			sommeLoanDu+=(loan.getAmount()/12)+(loan.getAmount()/12)*interest;
+		}
+			
         DonutChartDataSet dataSet = new DonutChartDataSet();
         List<Number> values = new ArrayList<>();
-        values.add(l.get(0).getSolde());
-        values.add(50);
-        values.add(100);
+        values.add(balance);
+        values.add(depense);
         dataSet.setData(values);
          
         List<String> bgColors = new ArrayList<>();
-        bgColors.add("rgb(255, 99, 132)");
-        bgColors.add("rgb(54, 162, 235)");
-        bgColors.add("rgb(255, 205, 86)");
+        bgColors.add("rgb(255,99,132)");
+        bgColors.add("rgb(223,138,20)");
         dataSet.setBackgroundColor(bgColors);
          
         data.addChartDataSet(dataSet);
         List<String> labels = new ArrayList<>();
-        labels.add("Red");
-        labels.add("Blue");
-        labels.add("Yellow");
+        labels.add("Balance");
+        labels.add("Depense");
         data.setLabels(labels);
-         
+       
         donutModel.setData(data);
     }
  
@@ -1010,4 +1112,33 @@ public class ChartJsView implements Serializable {
     public void setDonutModel(DonutChartModel donutModel) {
         this.donutModel = donutModel;
     }
+   
+    
+    public List<Account> getAllUserAccounts()
+	{
+    	User u= new User();
+		u.setId(1);
+		
+		List<Account> l = new ArrayList<>();
+		l=bs.getAllAccountsByuser(u.getId());
+		System.out.println(l.size());
+		for(int i=0;i<l.size();i++)
+		{
+			if (l.get(i).getAccount_type()==AccountType.CurrentAccount)
+			{
+				currentA=l.get(i);
+			}
+			if (l.get(i).getAccount_type()==AccountType.DepositAccount)
+			{
+				depositA=l.get(i);
+			}
+			if (l.get(i).getAccount_type()==AccountType.SavingAccount)
+			{
+				savingA=l.get(i);
+				
+			}			
+		}
+		
+		return l;
+	}
 }

@@ -57,7 +57,7 @@ public class ComplaintBean implements Serializable {
 	}
 
 	public String addComplaint() {
-		String navigateTo="/xhtml/index?faces-redirect=true";
+		String navigateTo="/xhtml/complaint?faces-redirect=true";
 		User u = new User();
 		u.setId(1);
 		cs.addComplaint(new Complaint(title,description,new Date(),type,u));
@@ -72,7 +72,7 @@ public class ComplaintBean implements Serializable {
 	}
 	public void removeComplaint(int id)
 	{
-		System.out.println("aaaaa");
+		System.out.println("aaaaakkk");
 		cs.removeComplaint(id);
 	}
 	public static long getSerialversionuid() {

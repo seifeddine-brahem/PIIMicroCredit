@@ -78,45 +78,71 @@
 							</div>
 						</h:form>
 					</div>
-					<h:panelGroup columns="2">
+
+
+		<section class="contact-area pt-120">
+
+		<div class="container">
+			<div class="row">
+				<div class="panel panel-default widget">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-comment"></span>
+						<h3 class="panel-title">Recent Complaints</h3>
+
+					</div>
+					<div class="panel-body">
+						<ul class="list-group">
 						<h:form>
-							<h:dataTable value="#{complaintBean.complaints}" var="complaint"
-								border="1">
-								<h:column>
-									<f:facet name="header">
-										<h:outputText value="Login" />
-									</f:facet>
-									<h:outputText value="#{complaint.title}" />
+						<h:dataTable  value="#{complaintBean.complaints}" var="complaint" style="border: none;">
+                               <h:column>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-xs-2 col-md-1">
+											<img src="http://placehold.it/80"
+												class="img-circle img-responsive" alt="" />
+										</div>
+										<div class="col-xs-10 col-md-11">
+											<div>
+												<a
+													href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+													"#{complaint.title}"</a>
+												<div class="mic-info">
+													By: <a href="#">#{complaint.owner.first_name} #{complaint.owner.last_name} </a>
+													"#{complaint.publishing_date}"
+												</div>
+											</div>
+											<div class="comment-text">"#{complaint.description}"</div>
+											<div class="row">
+												<div class="action">
+													
+												
+													<h:commandButton action="#{complaintBean.removeComplaint(complaint.id)}"
+														class="btn btn-danger btn-xs" title="delete"
+														value="delete"/>
+									
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
 								</h:column>
-								<h:column>
-									<f:facet name="header">
-										<h:outputText value="Prenom" />
-									</f:facet>
-									<h:outputText value="#{complaint.publishing_date}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header">
-										<h:outputText value="Nom" />
-									</f:facet>
-									<h:outputText value="#{complaint.complaint_type}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header">
-										<h:outputText value="Role" />
-									</f:facet>
-									<h:outputText value="#{complaint.description}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header">
-										<h:outputText value="Action" />
-									</f:facet>
-									<h:commandButton
-										action="#{complaintBean.removeComplaint(complaint.id)}"
-										value="Supprimer" /> />
-</h:column>
-							</h:dataTable>
-						</h:form>
-					</h:panelGroup>
+								</h:dataTable>
+								</h:form>
+					
+
+						</ul>
+						<a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span
+							class="glyphicon glyphicon-refresh"></span> More</a>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+
+
+		</section>
 				</div>
 
 				<div class="col-lg-5 col-md-8">
