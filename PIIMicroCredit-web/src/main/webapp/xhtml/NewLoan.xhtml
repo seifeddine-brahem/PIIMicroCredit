@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" lang="en" xml:lang="en"
+	template="../include/template.xhtml">
+	<ui:define name="stylesheet">
+		<link rel="stylesheet" href="../assets/css/sign2.css" />
+	</ui:define>
+	<ui:define name="javascripts">
+
+		<script src="../assets/js/sign2.js"></script>
+		<script src="../assets/js/jj.js"></script>
+		<script src="../assets/js/jq.js"></script>
+	</ui:define>
+
+	<ui:define name="title">
+		<title>Add New Loan</title>
+	</ui:define>
+	<ui:define name="content">
+		<div class="breadcumb-area flex-style black-opacity">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-12:m0 text-center">
+
+						<h2>Add New Loan</h2>
+
+						<ul>
+
+							<li><a href="index.html">Home</a></li>
+
+							<li><span>Add new Loan</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- breadcumb-area end -->
+		<!-- contact-area start -->
+		<section class="contact-area pt-120">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-12">
+
+					<div class="contact-form">
+
+						<div class="cf-msg" />
+						<h:form id="formwrapper">
+							<ul id="progressbar">
+								<li class="active">Loan Type</li>
+								<li>Account</li>
+								<li>Loan Info</li>
+								<li>Loan Papers</li>
+							</ul>
+							<fieldset>
+								<h2 class="login-title">Welcome!</h2>
+								<h3 class="login-subtitle">First select a Loan Type.</h3>
+								<p:selectOneMenu id="loantype" value="#{loanBean.loanType}"
+									class="form-control">
+									<p:ajax listener="#{loanBean.handleKeyEvent()}"
+										update="loanloan" />
+									<f:selectItems value="#{loanTypeBean.showAll()}" var="l"
+										itemLabel="#{l.name}" itemValue="#{l.id}">
+									</f:selectItems>
+								</p:selectOneMenu>
+								<h:inputText type="button" name="next" class="next button"
+									value="Next" />
+							</fieldset>
+							<fieldset>
+								<h2 class="login-title">Account !</h2>
+								<h3 class="login-subtitle">Second select an Acccount .</h3>
+								<h:selectOneMenu value="#{loanBean.account}"
+									class="form-control">
+									<f:selectItems value="#{loanTypeBean.showAllAccounts()}"
+										var="account" itemValue="#{account.id}"
+										itemLabel="#{account.account_type.name()}">
+									</f:selectItems>
+								</h:selectOneMenu>
+								<h:inputText type="button" name="previous"
+									class="previous button" value="Previous" />
+								<h:inputText type="button" name="next" class="next button"
+									value="Next" />
+							</fieldset>
+							<fieldset>
+								<h2 class="login-title">Loan Information !</h2>
+								<h3 class="login-subtitle">Third fill the Form .</h3>
+								<div class="form-group">
+									<h2 class="calculator__heading">
+										Select the amount you wish to borrow: <span id="range-amount"
+											class="range__amount" />
+									</h2>
+									<h:panelGroup id="loanloan">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">Minimum :<h:outputText
+														value="#{loanBean.minValue}" />
+												</span>
+											</div>
+											<p:inputText minValue="#{loanBean.minValue}"
+												maxValue="#{loanBean.maxValue}" id="amount"
+												value="#{loanBean.amount}" class="form-control pull-right">
+
+											</p:inputText>
+											<div class="input-group-append">
+												<span class="input-group-text">DT</span>
+											</div>
+
+										</div>
+
+										<br />
+										<p:slider for="amount" minValue="#{loanBean.minValue}"
+											maxValue="#{loanBean.maxValue}">
+											<p:ajax event="slideEnd" listener="#{loanBean.onSlideEnd}"
+												update="remuniration" />
+										</p:slider>
+									</h:panelGroup>
+								</div>
+								<div class="form-group">
+									<h2 class="calculator__heading">Select your repayment
+										term:</h2>
+									<p:selectOneRadio id="city2" value="#{loanBean.payment_type}"
+										layout="responsive" columns="2">
+										<p:ajax listener="#{loanBean.calculRemuniration()}"
+											event="change" update="remuniration" />
+										<f:selectItem itemValue="monthly" itemLabel="Monthly" />
+										<f:selectItem itemValue="yearly" itemLabel="Yearly" />
+									</p:selectOneRadio>
+								</div>
+								<div class="payment-amount">
+									<h:panelGroup id="remuniration">
+										<h2 class="payment-amount__heading">
+
+											<span id="payment-frequency-text" /> Payment Amount<sup>*</sup>:
+											<h:outputText value="#{loanBean.remuneration}" />
+											DT
+
+										</h2>
+									</h:panelGroup>
+								</div>
+								<h:inputText type="button" name="previous"
+									class="previous button" value="Previous" />
+								<h:inputText type="button" name="next" class="next button"
+									value="Next" />
+							</fieldset>
+							<fieldset>
+								<h2 class="login-title">Loan Papers !</h2>
+								<h3 class="login-subtitle">Finally upload necessary
+									Documents.</h3>
+								<h:inputText type="button" name="previous"
+									class="previous button" value="Previous" />
+								<h:commandButton action="#{loanBean.addloan()}" value="Done" />
+							</fieldset>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+		</section>
+	</ui:define>
+</ui:composition>

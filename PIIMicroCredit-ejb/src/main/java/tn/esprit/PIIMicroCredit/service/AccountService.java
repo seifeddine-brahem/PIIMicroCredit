@@ -2,6 +2,7 @@ package tn.esprit.PIIMicroCredit.service;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,6 +16,7 @@ import tn.esprit.PIIMicroCredit.entity.User;
 
 @Stateless
 @Remote
+@LocalBean
 public class AccountService implements IAccount {
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;
