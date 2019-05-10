@@ -1,0 +1,80 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" 
+	template="/template/template.xhtml">
+	<ui:define name="title">
+			<title>	ahmed Template</title>
+	</ui:define>
+	<ui:define name="content">
+		
+		<div class="breadcumb-area flex-style black-opacity">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Add an Offer</h2>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><span>Addition of an Offer </span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcumb-area end -->
+    <!-- contact-area start -->
+    <section class="contact-area pt-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form">
+                        <div class="cf-msg"></div>
+                        <form action="http://tf.itech-theme.com/finanzas-preview/finanzas/mail.php" method="post" id="cf">
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" placeholder="Name" id="fname" name="fname"/>
+                                </div>
+                                <div class="col-12  col-sm-6">
+                                    <input type="text" placeholder="Email" id="email" name="email"/>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" placeholder="Subject" id="subject" name="subject"/>
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="contact-textarea" placeholder="Message" id="msg" name="msg"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button id="submit" name="submit">SEND MESSAGE</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-8">
+                    <ul class="contact-wrap flex-style">
+                        <li>
+                            <i class="fa fa-mobile flex-style"></i>
+                            <span>+88 012 56 756 879 </span>
+                            <span>+88 013 45 860 457</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope-o flex-style"></i>
+                            <span>info@aborton.com</span>
+                            <span>contact@aborton.com</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-map-marker flex-style"></i> 39 Your address road name, <span>United State.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="googleMap"></div>
+    </section>
+   
+	</ui:define>
+</ui:composition>

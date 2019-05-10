@@ -1,0 +1,145 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" 
+	template="/template/template.xhtml">
+	<ui:define name="title">
+			<title>	ahmed Template</title>
+	</ui:define>
+	<ui:define name="content">
+		 
+		 <!-- breadcumb-area start -->
+    <div class="breadcumb-area flex-style black-opacity">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Topic</h2>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><span>Topics</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcumb-area end -->
+    <!-- service-area start -->
+    <section class="service-area ptb-120-90">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-9">
+                    <div class="service-details">
+                        <img src="assets/images/service/single-service.jpg" alt=""/>
+                        <div class="line"></div>
+                        <img src="#{offerBean.findofferbyid(param['offerId']).path}" alt=""/>
+                        <h1>Title :</h1> 
+                        <div class="line"></div>
+                        
+                        <h3><h:outputText value="#{offerBean.findofferbyid(param['offerId']).title}"></h:outputText></h3>
+                        <div class="line"></div>
+                        <h1>Description :</h1> 
+                        <div class="line"></div>
+                        <p><h:outputText value="#{offerBean.findofferbyid1(param['offerId']).description}"></h:outputText></p>
+                    </div>
+                </div>
+                
+                
+                
+                
+            </div>
+        </div>
+    </section>
+    
+    
+         <div class="wrapper wrapper-content ">
+		<div class="row">
+                <div class="col-lg-9">
+                    
+                        <div class="ibox-content forum-post-container">
+                            <div class="forum-post-info">
+                                <h4><span class="text-navy"><i class="fa fa-globe"></i> General discussion</span> - <span class="text-muted">Free talks</span></h4>
+                            </div>
+
+                           
+     
+      <c:forEach var="comment"  items="#{offerBean.getCommentsByForum(offerBean.f.id)}">
+      
+      
+      
+                            <div class="media">
+                                <a class="forum-avatar" href="#">
+                                    <div class="author-info">
+                                    
+                                        <strong>Posted:</strong><br/> <label jsf:id="label2" value="#{comment.datePost}" /><br/>
+                                    </div>
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">#{comment.comment}</h4>
+                                    #{comment.comment}
+                                    <br/><br/>
+                                    CEO of 
+   <c:forEach var="undercomment"  items="#{offerBean.getunderCommentByComment(comment.id)}">
+                            
+                   <div class="media" >
+                    
+                                        <a class="forum-avatar" href="#">
+                                       <div class="author-info">
+                                    
+                                        <strong>Posted:</strong><br/> <label jsf:id="label6" value="#{undercomment.datePost}" /><br/>
+                                    </div>
+                                        </a>
+                                        <div class="media-body">
+                                          <h4 class="media-heading">#{undercomment.comment}</h4>
+                                           <br/><br/>
+                                         CEO
+                                        </div>
+                                     
+                                      
+                                    </div>
+                                   </c:forEach>
+                                         <form jsf:id="formmmmmm">
+                                             <div class="media-body">
+                                                    <textarea jsf:id="comment3" class="form-control" placeholder="Write comment..." jsf:value="#{offerBean.undercomment}"></textarea>
+                                             </div>
+                                             <div class="media-body">
+                                                   <a value="commenter"   jsf:action="#{offerBean.doUnderComment(comment.id)}"  class="ladda-button ladda-button-demo btn btn-primary" data-style="contract" >
+                                                       <f:setPropertyActionListener target="#{offerBean.commentuc}" value="#{comment}"/>
+                                       
+                                                  </a>
+                                       </div>  
+                                        </form>
+                                </div>
+                            </div>
+                            
+                          </c:forEach>
+                               <form jsf:id="formmm">
+                               <div class="media-body">
+                                            <textarea jsf:id="comment3" class="form-control" placeholder="Write comment..." jsf:value="#{offerBean.comment}"></textarea>
+                                        </div>
+                                        
+                                         <h:commandButton   action="#{offerBean.doComment()}"   value="comment"  class="ladda-button ladda-button-demo btn btn-primary" data-style="contract"/>
+                                       
+                               </form>
+                                       
+                        </div>
+                         
+                   
+                </div>
+                
+                
+               
+              
+                
+            </div>
+            </div>
+    
+    
+    
+   
+	</ui:define>
+</ui:composition>

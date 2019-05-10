@@ -1,0 +1,272 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" 
+	template="/template/template.xhtml">
+	<ui:define name="title">
+			<title>	ahmed Template</title>
+	</ui:define>
+	<ui:define name="content">
+		 <div class="preloade-wrap flex-style">
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- preloader -->
+    <!-- search-area start -->
+    <div class="search-area flex-style">
+        <span class="close-btn">close</span>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="search-wrap">
+                        <form action="#">
+                            <input type="text" placeholder="Search Here...."/>
+                            <button>search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- search-area end -->
+    <!-- header-area start -->
+   
+    <!-- header-area end -->
+    <!-- slider-area start -->
+    <section class="slider-area slider-area2">
+        <div class="slider-active2 owl-carousel">
+            <div class="slider-items">
+                <img src="../../assets/images/slider/4.jpg" alt="" class="slider"/>
+                <div class="slider-content flex-style">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-6 offset-xl-7 offset-lg-6 text-right col-md-9 offset-md-3">
+                                <h2>Courage is grace under <span>pressure</span></h2>
+                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that.</p>
+                                <ul>
+                                    <li><a href="#">Click Here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-items">
+                <img src="../../assets/images/slider/5.jpg" alt="" class="slider"/>
+                <div class="slider-content flex-style">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-6 col-md-9 col-12">
+                                <h2>Courage is grace under <span>pressure</span></h2>
+                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that.</p>
+                                <ul>
+                                    <li><a href="#">Click Here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-items">
+                <img src="../../assets/images/slider/6.jpg" alt="" class="slider"/>
+                <div class="slider-content flex-style">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-6 offset-xl-7 offset-lg-6 text-right col-md-9 offset-md-3">
+                                <h2>Courage is grace under <span>pressure</span></h2>
+                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that.</p>
+                                <ul>
+                                    <li><a href="#">Click Here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- slider-area end -->
+   
+    <!-- service-area start -->
+    <section class="service-area ptb-120-90 bg-1 line-remove">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2 col-12">
+                    <div class="section-title text-center">
+                        <h2><span class="line">Our Offers</span></h2>
+                        <p>But I must explain to you how all this mistaken idea of denouncing born and I will give you.</p>
+                         <div class="pull-right forum-desc">
+                              <samll>Total comments: <label jsf:id="label" value="#{offerBean.totalComment()}" /></samll>
+                              	
+                                </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="row">
+            
+         <c:forEach items="#{offerBean.offers}" var="offer" varStatus="metadata">
+               
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="service-items">
+                        <div class="service-img">
+                            <img src="#{offer.path}" alt=""/>
+                            
+                        </div>
+                        <div class="blog-content2">
+                        <ul class="blog-meta">
+                        		<h:form>
+                                <li><a href="#"><i class="fa fa-eye"></i> Views<p:spacer width="20" height="10" /><h:outputText value="#{offer.views}"></h:outputText></a></li>
+                             
+                                <li><h:commandLink class="fa fa-heart" aria-hidden="true" action="#{offerBean.addRating(offer.id)}"/>Likes<p:spacer width="20" height="10" /><h:outputText value="#{offer.likes}"></h:outputText></li>
+                              <li><a href="#"><i class="fa fa-comments"></i> Comments <label jsf:id="labelllllllllll" value="#{offerBean.nbrComment(offer.id)}" /></a></li>
+                              
+                                               
+                                        
+                                </h:form>
+                        </ul>
+                        
+                            <h3><h:outputText value="#{offer.title}"></h:outputText></h3>
+                            
+                            <p><h:outputText value="#{offer.description}"></h:outputText></p>
+                            
+                            <h:link class="readmore-btn"  outcome="Topic" >Read More
+						<f:param name="offerId" value="#{offer.id}" />
+						</h:link>
+						
+                            
+                        </div>
+                    </div>
+                </div>
+               </c:forEach>
+               
+               <div class="col-12">
+                    <ul class="pagination-wrap">
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-double-left"></i></a></li>
+                        <li><a href="javascript:void(0);">1</a></li>
+                        <li><a href="javascript:void(0);">2</a></li>
+                        <li><a href="javascript:void(0);">3</a></li>
+                        <li><a href="javascript:void(0);">4</a></li>
+                        <li><a href="javascript:void(0);">5</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-double-right"></i></a></li>
+                    </ul>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+    <!-- service-area end -->
+   
+    <!-- blog-area start -->
+    <section class="blog-area line-remove">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2 col-12">
+                    <div class="section-title text-center">
+                        <h2><span class="line">Most Viewed Offer</span></h2>
+                        <p>This is the most viewed offers section</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+        <div class="row">  
+         <c:forEach items="#{offerBean.getMostViewedOffers()}" var="offer" varStatus="metadoata">
+              
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="service-items">
+                        <div class="service-img">
+                            <img src="#{offer.path}" alt=""/>
+                            
+                        </div>
+                        <div class="blog-content2">
+                        <ul class="blog-meta">
+                        		<h:form>
+                                <li><a href="#"><i class="fa fa-eye"></i> Views<p:spacer width="20" height="10" /><h:outputText value="#{offer.views}"></h:outputText></a></li>
+                                
+                                <li><h:commandLink class="fa fa-heart" aria-hidden="true" action="#{offerBean.addRating(offer.id)}"/>Likes<p:spacer width="20" height="10" /><h:outputText value="#{offer.likes}"></h:outputText></li>
+                                </h:form>
+                        </ul>
+                        
+                            <h3><h:outputText value="#{offer.title}"></h:outputText></h3>
+                            
+                            <p><h:outputText value="#{offer.description}"></h:outputText></p>
+                            
+                            <h:link class="readmore-btn"  outcome="Topic" >Read More
+						<f:param name="offerId" value="#{offer.id}" />
+						</h:link>
+						
+                            
+                        </div>
+                    </div>
+                </div>
+               </c:forEach>
+                
+                
+            </div>
+            
+            
+        </div>
+    </section>
+    <!-- blog-area end -->
+    <!-- sponsor-area start -->
+    <div class="sponsor-area bg-1 line-remove">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2><span class="line">Our Sponsors</span></h2>
+                        <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="brand-active owl-carousel">
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/1.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/2.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/3.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/4.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/5.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/6.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/7.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../assets/images/sponsor/8.png" alt=""/></a>
+                        </div>
+                        <div class="sponsor-wrap">
+                            <a href="javascript:void(0);"><img src="../../../../assets/images/sponsor/9.png" 	/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,49 @@
+/*
+  Flaticon icon font: Flaticon
+  Creation date: 23/10/2017 08:34
+  */
+
+@font-face {
+    font-family: "Flaticon";
+    src: url("../fonts/Flaticon.eot");
+    src: url("../fonts/Flaticond41d.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Flaticon.woff") format("woff"),
+    url("../fonts/Flaticon.ttf") format("truetype"),
+    url("../fonts/Flaticon.svg#Flaticon") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @font-face {
+        font-family: "Flaticon";
+        src: url("Flaticon.html#Flaticon") format("svg");
+    }
+}
+
+[class^="flaticon-"]:before,
+[class*=" flaticon-"]:before,
+[class^="flaticon-"]:after,
+[class*=" flaticon-"]:after {
+    font-family: Flaticon;
+    font-size: 20px;
+    font-style: normal;
+    margin-left: 0px;
+}
+.flaticon-lotus:before { content: "\f100"; }
+.flaticon-yoga-1:before { content: "\f101"; }
+.flaticon-meditation-1:before { content: "\f102"; }
+.flaticon-woman-on-lotus-position-front-view:before { content: "\f103"; }
+.flaticon-woman-laying-down-lifting-head:before { content: "\f104"; }
+.flaticon-yoga:before { content: "\f105"; }
+.flaticon-meditation:before { content: "\f106"; }
+.flaticon-woman-stretching-and-flexing-legs-with-arms-up:before { content: "\f107"; }
+.flaticon-woman-stretching-her-body-on-the-floor:before { content: "\f108"; }
+.flaticon-play-button:before { content: "\f109"; }
+.flaticon-tent:before { content: "\f10a"; }
+.flaticon-suitcase:before { content: "\f10b"; }
+.flaticon-plane:before { content: "\f10c"; }
+.flaticon-focus:before { content: "\f10d"; }
+.flaticon-growth:before { content: "\f10e"; }
+.flaticon-connection:before { content: "\f10f"; }
+.flaticon-collaboration:before { content: "\f110"; }
