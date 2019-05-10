@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" template="../include/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+
+
+
+
+
+
+		<style>
+.row .col-md-4 .wrap {
+	color: #fff;
+	padding: 20px 15px;
+}
+
+.row .col-md-4 .wrap h2 {
+	margin: 20px 0px;
+}
+
+.row .col-md-4 .wrap a {
+	background: #fff;
+	padding: 7px 30px;
+	display: inline-block;
+	margin: 20px 0px;
+}
+
+.row .col-md-4:nth-child(1) .wrap {
+	background: #3b237b;
+}
+
+.row .col-md-4:nth-child(2) .wrap {
+	background: #df8a14;
+}
+
+.row .col-md-4:nth-child(3) .wrap {
+	background: #4fc084;
+}
+
+.container {
+	margin-bottom: 50px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+img {
+	max-width: 100%;
+}
+
+/*#######################  gap css ####################*/
+/*col gap 5px */
+.col-gap-5.container div[class*="col"] {
+	padding-left: 2.5px !important;
+	padding-right: 2.5px !important;
+}
+
+.col-gap-5.container>.row {
+	margin-left: -17.px !important;
+	margin-right: -17.5px !important;
+}
+/*col gap 10px */
+.col-gap-10.container div[class*="col"] {
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+}
+
+.col-gap-10.container>.row {
+	margin-left: -20px !important;
+	margin-right: -20px !important;
+}
+/*col gap 15px */
+.col-gap-15.container div[class*="col"] {
+	padding-left: 7.5px !important;
+	padding-right: 7.5px !important;
+}
+
+.col-gap-15.container>.row {
+	margin-left: -22.5px !important;
+	margin-right: -22.5px !important;
+}
+/*col gap 20px */
+.col-gap-20.container div[class*="col"] {
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+
+.col-gap-20.container>.row {
+	margin-left: -25px !important;
+	margin-right: -25px !important;
+}
+/*col gap 25px */
+.col-gap-25.container div[class*="col"] {
+	padding-left: 12.5px !important;
+	padding-right: 12.5px !important;
+}
+
+.col-gap-25.container>.row {
+	margin-left: -27.5px !important;
+	margin-right: -27.5px !important;
+}
+/*col gap 30px */
+.col-gap-30.container div[class*="col"] {
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+}
+
+.col-gap-30.container>.row {
+	margin-left: -30px !important;
+	margin-right: -30px !important;
+}
+/*col gap 35px */
+.col-gap-35.container div[class*="col"] {
+	padding-left: 17.5px !important;
+	padding-right: 17.5px !important;
+}
+
+.col-gap-35.container>.row {
+	margin-left: -32.5px !important;
+	margin-right: -32.5px !important;
+}
+/*col gap 40px */
+.col-gap-40.container div[class*="col"] {
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+}
+
+.col-gap-40.container>.row {
+	margin-left: -35px !important;
+	margin-right: -35px !important;
+}
+/*col gap 45px */
+.col-gap-45.container div[class*="col"] {
+	padding-left: 22.5px !important;
+	padding-right: 22.5px !important;
+}
+
+.col-gap-45.container>.row {
+	margin-left: -37.5px !important;
+	margin-right: -37.5px !important;
+}
+/*col gap 50px */
+.col-gap-50.container div[class*="col"] {
+	padding-left: 25px !important;
+	padding-right: 25px !important;
+}
+
+.col-gap-50.container>.row {
+	margin-left: -40px !important;
+	margin-right: -40px !important;
+}
+/*col gap 60px */
+.col-gap-60.container div[class*="col"] {
+	padding-left: 30px !important;
+	padding-right: 30px !important;
+}
+
+.col-gap-60.container>.row {
+	margin-left: -45px !important;
+	margin-right: -45px !important;
+}
+/*col gap 70px */
+.col-gap-70.container div[class*="col"] {
+	padding-left: 35px !important;
+	padding-right: 35px !important;
+}
+
+.col-gap-70.container>.row {
+	margin-left: -50px !important;
+	margin-right: -50px !important;
+}
+/*col gap 80px */
+.col-gap-80.container div[class*="col"] {
+	padding-left: 40px !important;
+	padding-right: 40px !important;
+}
+
+.col-gap-80.container>.row {
+	margin-left: -55px !important;
+	margin-right: -55px !important;
+}
+/*col gap 90px */
+.col-gap-90.container div[class*="col"] {
+	padding-left: 45px !important;
+	padding-right: 45px !important;
+}
+
+.col-gap-90.container>.row {
+	margin-left: -60px !important;
+	margin-right: -60px !important;
+}
+/*col gap 100px */
+.col-gap-100.container div[class*="col"] {
+	padding-left: 50px !important;
+	padding-right: 50px !important;
+}
+
+.col-gap-100.container>.row {
+	margin-left: -65px !important;
+	margin-right: -65px !important;
+}
+
+.orange-circle-button {
+	box-shadow: 2px 4px 0 2px rgba(0, 0, 0, 0.1);
+	border: .5em solid #df8a14;
+	font-size: 1em;
+	line-height: 1.1em;
+	color: #ffffff;
+	background-color: #df8a14;
+	margin: auto;
+	border-radius: 50%;
+	height: 4em;
+	width: 4em;
+	position: relative;
+}
+
+.orange-circle-button:hover {
+	color: #ffffff;
+	background-color: #df8a14;
+	text-decoration: none;
+	border-color: #df8a14;
+}
+
+.orange-circle-button:visited {
+	color: #ffffff;
+	background-color: #df8a14;
+	text-decoration: none;
+}
+
+.orange-circle-link-greater-than {
+	font-size: 1em;
+}
+</style>
+
+
+		<div class="container col-gap-40">
+
+			<div class="row text-center">
+				<div class="col-md-4">
+					<div class="wrap">
+						<h2>#{budgetBean.currentA.account_type}</h2>
+						<p>#{budgetBean.currentA.solde} DT</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="wrap">
+						<h2>#{budgetBean.depositA.account_type}</h2>
+						<p>#{budgetBean.depositA.solde} DT</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="wrap">
+						<h2>#{budgetBean.savingA.account_type}</h2>
+						<p>#{budgetBean.savingA.solde} DT</p>
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+				<p:pieChart model="#{chartJsView.pieModel2}" style="width: 100%; height: 500px;"/>
+				
+				<h1 style="text-align: center">Balance</h1>
+		
+		<p:pieChart model="#{chartJsView.pieModel}" style="width: 100%; height: 500px;"/>
+		<h1 style="text-align: center">Depense</h1>
+		<p:donutChart model="#{chartJsView.donutModel}"
+			style="width: 100%; height: 500px;" />
+			<h1 style="text-align: center">Balance vs Depense</h1>
+
+	</ui:define>
+</ui:composition>
