@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml"
+                xmlns:p="http://java.sun.com/jsf/html">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+		<div class="container">
+
+			<h3>Tableau d'amortissement par amortissement constant</h3>
+
+
+
+
+
+			<div class="row">
+
+				<div class="panel panel-primary filterable">
+
+					<div class="panel-heading">
+
+
+
+						<div class="pull-right"></div>
+					</div>
+
+					<table class="table ">
+						<thead>
+
+							<tr class="filters">
+
+								<th><input type="text" class="form-control"
+									placeholder="Année" disabled="disabled" /></th>
+
+								<th><input type="text" class="form-control"
+									placeholder="Emprunt restant dû" disabled="disabled" /></th>
+
+								<th><input type="text" class="form-control"
+									placeholder="Amortissement" disabled="disabled" /></th>
+
+								<th><input type="text" class="form-control"
+									placeholder="Annuité" disabled="disabled" /></th>
+									
+							<!--<th><input type="text" class="form-control"
+									placeholder="Valeur nette" disabled="disabled" /></th>  -->	
+							</tr>
+
+
+						</thead>
+
+						<tbody>
+
+							<ui:repeat var="nw" value="#{annuitesBean.AnnuitesDegressives()}" varStatus="status" > 
+								<tr>
+
+									<td><h:outputText value="#{status.index+1}" /></td>
+
+									<td><h:outputText value="#{nw.amount}" /></td>
+
+									<td><h:outputText value="#{nw.loan.amount}" /></td>
+
+									<td><h:outputText value="#{nw.remuneration}" /></td>
+									<!--  <td><h:outputText value="#{nw.loan.remuneration}" /></td>-->
+									<td>
+									 
+                    
+                </td>
+								</tr>
+
+
+
+							</ui:repeat>  
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

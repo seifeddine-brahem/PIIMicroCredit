@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+		<div class="container">
+
+			<h3>Your accounts</h3>
+
+			
+
+			
+
+			<div class="row">
+
+				<div class="panel panel-primary filterable">
+
+					<div class="panel-heading">
+
+							
+
+						<div class="pull-right">
+							
+						</div>
+					</div>
+
+					<table class="table " >
+						<thead>
+
+							<tr class="filters">
+
+								<th><input type="text" class="form-control"
+									placeholder="RIB" disabled="disabled" /></th>
+
+								<th><input type="text" class="form-control"
+									placeholder="Account type" disabled="disabled" /></th>
+
+								<th><input type="text" class="form-control"
+									placeholder="Opening date" disabled="disabled" /></th>
+
+								<th><input type="text" class="form-control"
+									placeholder="State" disabled="disabled" /></th>
+							</tr>
+							
+						</thead>
+ 
+						<tbody>
+						  
+							<ui:repeat var="nw" value="#{accountBean.showAll(loginBean.current.id)}">
+								<tr>
+
+									<td><h:outputText value="#{nw.rib}" /></td>
+
+									<td><h:outputText value="#{nw.account_type.toString()}" /></td>
+
+									<td><h:outputText value="#{nw.openning_date}" /></td>
+
+									<td><h:outputText value="#{nw.state.toString()}" /></td>
+								
+								</tr>
+
+
+							
+							</ui:repeat>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

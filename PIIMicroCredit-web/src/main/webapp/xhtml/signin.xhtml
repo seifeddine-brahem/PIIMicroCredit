@@ -1,0 +1,157 @@
+<!-- <script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/common.js"></script> 
+	<script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/util.js"></script>
+<script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/map.js"></script>
+<script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/marker.js"></script>
+	-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="../include/template.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	
+	
+	>
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+
+		<div class="breadcumb-area flex-style black-opacity">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-12 text-center">
+
+						<h2>Sign In</h2>
+
+						<ul>
+
+							<li><a href="#">Home</a></li>
+
+							<li><span>Sign In</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- breadcumb-area end -->
+		<!-- contact-area start -->
+		<section class="contact-area pt-120">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-12">
+
+					<div class="contact-form">
+
+						<div class="cf-msg" />
+							<h:form>
+	
+								<div class="row">
+	
+									<div class="col-12 col-sm-6">
+	
+	
+										<h:inputText pt:placeholder="First name"
+											value="#{signinBean.first_name}" />
+									</div>
+	
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Last name"
+											value="#{signinBean.last_name}" />
+									</div>
+	
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Country"
+											value="#{signinBean.country}" />
+									</div>
+	
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Phone number"
+											value="#{signinBean.phone}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Zip code"
+											value="#{signinBean.zip_code}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="State" value="#{signinBean.state}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Password" value="#{signinBean.password}" />
+									</div>
+									
+									
+									
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Birth place"
+											value="#{signinBean.birthplace}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="CIN" value="#{signinBean.cin}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Salary"
+											value="#{signinBean.salary}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Legal status"
+											value="#{signinBean.status}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Work" value="#{signinBean.work}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Number of kids"
+											value="#{signinBean.kids}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Address"
+											value="#{signinBean.address}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Email" value="#{signinBean.login}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Grade" value="#{signinBean.grade}" />
+									</div>
+									<div class="col-12  col-sm-6">
+										<h:inputText pt:placeholder="Login" value="#{signinBean.email}" />
+									</div>
+	
+									<!--  <div class="col-12  col-sm-6">
+										
+								   <h:inputFile value="#{signinBean.upload()}"  /> 
+								
+									</div>
+									 --> 
+									<div class="col-12">
+										<h:commandButton id="btn" value="Sign In" class="readmore-btn" action="#{signinBean.addUser()}" />
+									</div>
+	
+								</div>
+							</h:form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+		</section>
+	
+	</ui:define>
+</ui:composition>

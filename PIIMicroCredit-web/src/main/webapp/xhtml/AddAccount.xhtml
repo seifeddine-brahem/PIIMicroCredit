@@ -1,0 +1,104 @@
+<!-- <script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/common.js"></script> 
+	<script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/util.js"></script>
+<script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/map.js"></script>
+<script type="text/javascript" charset="UTF-8"
+	src="https://maps.googleapis.com/maps-api-v3/api/js/36/12/marker.js"></script>
+	-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="../include/template.xhtml" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+
+		<div class="breadcumb-area flex-style black-opacity">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-12 text-center">
+
+						<h2>Add account</h2>
+
+						<ul>
+
+							<li><a href="#">Home</a></li>
+
+							<li><span>Add account</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- breadcumb-area end -->
+		<!-- contact-area start -->
+		<section class="contact-area pt-120">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-12">
+
+					<div class="contact-form">
+
+						<div class="cf-msg" />
+						<h:form>
+
+							<div class="row">
+
+								<div class="col-12 col-sm-6">
+
+
+									
+									<h:outputText value="AccountType"></h:outputText>
+									<h:selectOneMenu value="#{accountBean.accountT}">
+											<f:selectItem itemLabel="Choisir Type" itemValue="" />
+											<f:selectItems value="#{accountBean.types}" />
+										</h:selectOneMenu>
+									
+
+
+								</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<div class="col-12">
+									<h:commandButton id="btn" value="Create" class="readmore-btn"
+										action="#{accountBean.addAccount()}" />
+								</div>
+
+							</div>
+						</h:form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+		</section>
+
+	</ui:define>
+</ui:composition>

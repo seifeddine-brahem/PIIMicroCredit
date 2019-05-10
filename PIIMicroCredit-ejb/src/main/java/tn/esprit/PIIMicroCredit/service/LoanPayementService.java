@@ -70,4 +70,13 @@ public class LoanPayementService implements ILoanPayment {
 		System.err.println("================================== Out of findLoantPaymentByOwner ==================================");
 		return loadpayment;
 	}
+	
+	public List<LoanPayment> Annuites() {
+		System.err.println("================================== In findAllLoansPayment ==================================");
+		List<LoanPayment> loadpayment = em.createQuery("select c from LoanPayment c", LoanPayment.class).getResultList();
+		System.err.println("================================== Out of findAllLoansPayment ==================================");
+		return loadpayment;
+	}
+	
+	
 }

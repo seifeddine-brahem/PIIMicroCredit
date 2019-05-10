@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	>
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+<section class="about-area line-remove bg-1 about-area2">
+        
+<div class="container">
+            
+<div class="row">
+                
+<div class="col-lg-6 col-12">
+                    
+<div class="about-content flex-style">
+                        
+<h2><span class="line">Welcome to </span> <span class="d-block" >Credit Crush </span></h2>
+                        
+<p class="text-justyfy">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes</p>
+      	<div class="container">
+
+			<div class="row">
+
+				<div class="col-12">
+
+					<div class="contact-form">
+
+						<div class="cf-msg" style="display: none;" />
+						 <h:form id="form">
+							
+
+							<div class="row">
+
+								
+
+								<div class="col-12">
+								 <h:outputText  value="Login" /> <h:inputText value="#{loginBean.login}" />
+								
+								</div>
+
+								<div class="col-12">
+									<h:outputText  pt:placeholder="Enter password" /> <h:inputText value="#{loginBean.password}" />
+								</div>
+
+								 
+
+								<div class="col-lg-6 col-12">
+								<h:commandButton id="btn" value="Login" class="readmore-btn" action="#{loginBean.doLogin()}" />
+									
+								</div>
+							</div>
+						</h:form>
+						
+						 <a href="../xhtml/signin.jsf">Haven't got an account yet? Sign in here</a>
+					</div>
+				</div>
+
+			
+			</div>
+		</div>
+               
+
+                    </div>
+                </div>
+                
+<div class="col-lg-6 col-12">
+                    
+<div class="about-img">
+                        <img src="../assets/images/about/grap.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- slider-area end -->
+	</ui:define>
+</ui:composition>

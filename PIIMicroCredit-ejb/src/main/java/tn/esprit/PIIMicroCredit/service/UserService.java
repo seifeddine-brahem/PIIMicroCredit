@@ -23,7 +23,6 @@ import tn.esprit.PIIMicroCredit.Interface.IUser;
 import tn.esprit.PIIMicroCredit.entity.Account;
 import tn.esprit.PIIMicroCredit.entity.User;
 @Stateless
-@Remote
 @LocalBean
 public class UserService implements IUser{
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
