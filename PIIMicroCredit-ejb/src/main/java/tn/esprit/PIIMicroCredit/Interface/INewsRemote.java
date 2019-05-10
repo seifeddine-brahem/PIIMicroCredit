@@ -21,8 +21,11 @@ public interface INewsRemote {
 	public List<News> findNewsByTitle(String title) ;
 	public List<News> findNewsByDate(String date) ;
 	public List<News> findAllNews();
+	public List<News> numberOfNewsperDate();
 	public List<News> findNewsSorted();
 	public List<News> findNewsSortedClient();
+	public List<News> popularNews();
+	public News mostViewNews();
 	public List<News> NewsStat();
 	public List<News> favoriteNews(User u);
 	public List<News> top5News();

@@ -1,7 +1,6 @@
 package tn.esprit.ManagedBean;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,8 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.event.SlideEndEvent;
-
-import tn.esprit.PIIMicroCredit.entity.Account;
 import tn.esprit.PIIMicroCredit.entity.Loan;
 import tn.esprit.PIIMicroCredit.entity.LoanInformation;
 import tn.esprit.PIIMicroCredit.entity.LoanStatu;
@@ -88,6 +85,10 @@ public class LoanBean {
 		int n = duree ;
 		double D = (Math.pow((1 + i), n) - 1) / (i * Math.pow((1 + i), n));
 	    remuneration =(float)(minValue / D);
+	}
+	
+	public String redirectToAddLoan(){
+		return "/xhtml/NewLoan?faces-redirect=true";
 	}
 	
 	public String addloan(){

@@ -11,6 +11,13 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.PieChartModel;
+
 import tn.esprit.PIIMicroCredit.entity.News;
 import tn.esprit.PIIMicroCredit.entity.User;
 import tn.esprit.PIIMicroCredit.service.NewsService;
@@ -36,9 +43,12 @@ public class NewsBean implements Serializable{
 	private int approved;
 	private Integer newsIdToBeUpdated;
 	private List <News> news= new ArrayList<>();
+	private List <News> stats= new ArrayList<>();
 	private String test="jjjjjjjjjjjjjjjj";
 	private News nw;
-	
+	private PieChartModel pieModel1;
+	private LineChartModel animatedModel1;
+	private BarChartModel animatedModel2;
 	@EJB
 	NewsService newservice;
 	@EJB
@@ -48,7 +58,56 @@ public class NewsBean implements Serializable{
 //	@EJB
 //	NewsService ns;
 //	
-	
+	public void listar(){
+		
+		stats=newservice.NewsStat();
+		graphicar();
+	}
+	public void graphicar(){
+		pieModel1= new PieChartModel();
+		animatedModel1= new LineChartModel();
+		animatedModel2= new BarChartModel();
+		for(News n: newservice.NewsStat())
+		{
+			pieModel1.set(n.getTitle(),n.getNbrLike() );
+		}
+		animatedModel1 = initLinearModel();
+        animatedModel1.setTitle("Line Chart");
+        animatedModel1.setAnimate(true);
+        animatedModel1.setLegendPosition("se");
+        animatedModel1.setShowPointLabels(true);
+        Axis yAxis = animatedModel1.getAxis(AxisType.Y);
+        
+        yAxis.setMin(0);
+        yAxis.setMax(40);
+       
+		pieModel1.setTitle("Teeeeeeeeeeeessst");
+		pieModel1.setLegendPosition("e");
+		pieModel1.setFill(true);
+		pieModel1.setShowDataLabels(true);
+		
+		
+	}
+	 private LineChartModel initLinearModel() {
+	        LineChartModel model = new LineChartModel();
+	 
+	        LineChartSeries series1 = new LineChartSeries();
+	        LineChartSeries series2 = new LineChartSeries();
+	        series1.setLabel("Series 1");
+	        series2.setLabel("Series 2");
+	   	 
+	        for(News n : newservice.findNewsSortedClient()){
+	        	series1.set(n.getTitle(), n.getNbrLike());
+	        	series2.set(n.getNbrClick(), n.getComments().size());
+	        }
+	    
+	     
+	 
+	        model.addSeries(series1);
+	        model.addSeries(series2);
+	 
+	        return model;
+	    }
 	public List<News> showNewsClient() {
 		
 		System.out.println("+******///////////////////++"+news.size());
@@ -62,15 +121,22 @@ public class NewsBean implements Serializable{
 		return news;
 		}
 
-	public List<News> yourFavoriteNews() {
+		public List<News> yourFavoriteNews() {
 		
 		User u= userservice.FindUserById(1);
 		
 		return newservice.favoriteNews(u);
 		}
 	
+		public News displayTop1News() {
+			
+		return newservice.mostViewNews();
+			}
+		public List<News> displayPopularNews(){
+			return newservice.popularNews();
+		}
 		public List<News> displayTop5News() {
-		
+		System.out.println("+++----sizeTop5"+newservice.top5News().size());
 		return newservice.top5News();
 		}
 		
@@ -87,8 +153,9 @@ public class NewsBean implements Serializable{
 			
 			System.out.println("+******/difffffffffffff////++"+(LocalDate.now().getMonthValue()-n.getDate_creation().getMonth()) );
 			System.out.println("+******/newsmonth////++"+(n.getDate_creation().getMonth()));
+			System.out.println("+******/newsdaaaay////++"+(n.getDate_creation().getDay()));
 			System.out.println("+******/dnewsyears////++"+(n.getDate_creation().getYear()) );
-			System.out.println("+******/dnewsday////++"+((LocalDate.now().getYear()) == (n.getDate_creation().getYear()+1900) &&(LocalDate.now().getMonthValue())==(n.getDate_creation().getMonth()+1)&&(LocalDate.now().getDayOfMonth())-(n.getDate_creation().getDay())<7 ));
+			System.out.println("+******/dnewsday////++"+((LocalDate.now().getYear()) == (n.getDate_creation().getYear()+1900) &&(LocalDate.now().getMonthValue())==(n.getDate_creation().getMonth()+1)&&(LocalDate.now().getDayOfMonth())-(n.getDate_creation().getDay()+7)<7 ));
 		if((LocalDate.now().getYear()) == (n.getDate_creation().getYear()+1900) &&(LocalDate.now().getMonthValue())==(n.getDate_creation().getMonth()+1)&&(LocalDate.now().getDayOfMonth())-(n.getDate_creation().getDay())<7 )
 		slides.add(n);	
 		}
@@ -136,6 +203,31 @@ public class NewsBean implements Serializable{
 		
 	}
 	
+	
+	public LineChartModel getAnimatedModel1() {
+		return animatedModel1;
+	}
+	public void setAnimatedModel1(LineChartModel animatedModel1) {
+		this.animatedModel1 = animatedModel1;
+	}
+	public BarChartModel getAnimatedModel2() {
+		return animatedModel2;
+	}
+	public void setAnimatedModel2(BarChartModel animatedModel2) {
+		this.animatedModel2 = animatedModel2;
+	}
+	public List<News> getStats() {
+		return stats;
+	}
+	public void setStats(List<News> stats) {
+		this.stats = stats;
+	}
+	public PieChartModel getPieModel1() {
+		return pieModel1;
+	}
+	public void setPieModel1(PieChartModel pieModel1) {
+		this.pieModel1 = pieModel1;
+	}
 	public Date getDateApproved() {
 		return dateApproved;
 	}

@@ -1,13 +1,16 @@
 package tn.esprit.PIIMicroCredit.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import tn.esprit.PIIMicroCredit.Interface.INewsRemote;
 import tn.esprit.PIIMicroCredit.entity.Comments;
 import tn.esprit.PIIMicroCredit.entity.Loan;
@@ -16,8 +19,6 @@ import tn.esprit.PIIMicroCredit.entity.LoanStatu;
 import tn.esprit.PIIMicroCredit.entity.LoanType;
 import tn.esprit.PIIMicroCredit.entity.News;
 import tn.esprit.PIIMicroCredit.entity.User;
-
-
 
 @Stateless
 @LocalBean
@@ -31,11 +32,13 @@ public class NewsService implements INewsRemote {
 		System.out.println("Out of addUser" + n.getId());
 		return n.getId();
 	}
+
 	@Override
 	public News getNewsById(int id) {
 		News news = em.find(News.class, id);
 		return news;
 	}
+
 	@Override
 	public void removeNews(int id) {
 		System.out.println("In removeUser: ");
@@ -63,123 +66,176 @@ public class NewsService implements INewsRemote {
 	@Override
 	public List<News> findNewsByTitle(String title) {
 		System.out.println("In findNewsById: ");
-		List<News> news = em.createQuery("from News where approved =1 and title=:t", News.class).setParameter( "t", title ) .getResultList();
+		List<News> news = em.createQuery("from News where approved =1 and title=:t", News.class)
+				.setParameter("t", title).getResultList();
 		System.out.println("Out of findNewsById: ");
 		return news;
 	}
+
 	@Override
-	public boolean findIfExist(String title){
-		
-		List<News> news = em.createQuery("from News where approved =0 and title=:t", News.class).setParameter( "t", title ) .getResultList();
-		
+	public boolean findIfExist(String title) {
+
+		List<News> news = em.createQuery("from News where approved =0 and title=:t", News.class)
+				.setParameter("t", title).getResultList();
+
 		return news.isEmpty();
 	}
+
 	@Override
 	public List<News> findAllNews() {
 		System.out.println("In findAllNews: ");
 		List<News> news = em.createQuery("from News", News.class).getResultList();
-		
+
 		System.out.println("Out of findAllNews: ");
 		return news;
 	}
-	@Override
-	public List<News> findNewsSorted(){
-		
 
-		List<News> news  = em.createQuery("from News order by date_creation desc, score desc",News.class).getResultList();
-		 
-		  System.out.println("Out of findAllNews: ");
+	@Override
+	public List<News> findNewsSorted() {
+
+		List<News> news = em.createQuery("from News order by date_creation desc, score desc", News.class)
+				.getResultList();
+
+		System.out.println("Out of findAllNews: ");
 		return news;
 	}
-	@Override
-	public List<News> findNewsSortedClient(){
-		
 
-		List<News> news  = em.createQuery("from News where approved=1 order by nbrLike desc, date_creation desc",News.class).getResultList();
-		 
-		  System.out.println("Out of findAllNews: ");
+	@Override
+	public List<News> findNewsSortedClient() {
+
+		List<News> news = em
+				.createQuery("from News where approved=1 order by nbrLike desc, date_creation desc", News.class)
+				.getResultList();
+
+		System.out.println("Out of findAllNews: ");
 		return news;
 	}
+
 	@Override
 	public List<News> findNewsByDate(String date) {
-		List<News> news = em.createQuery("from News where approved =1 and DATE_FORMAT(date_creation,'%Y-%m-%d')=:t", News.class).setParameter( "t",date ) .getResultList();
+		List<News> news = em
+				.createQuery("from News where approved =1 and DATE_FORMAT(date_creation,'%Y-%m-%d')=:t", News.class)
+				.setParameter("t", date).getResultList();
 
 		System.out.println("Out of findNewsById: ");
 		return news;
 	}
-	@Override
-	public List<News> NewsStat(){
-		
 
-		List<News> news  = em.createQuery("from News where approved =1 order by score desc ", News.class).getResultList();
-		 
-		  System.out.println("Out of findAllNews: ");
+	@Override
+	public List<News> NewsStat() {
+
+		List<News> news = em.createQuery("from News where approved =1 order by score desc ", News.class)
+				.getResultList();
+
+		System.out.println("Out of findAllNews: ");
 		return news;
 	}
-	@Override
-	public List<News> favoriteNews(User u){
-		
 
-		List<News> news  = em.createQuery("select n from News n, Comments c where c.news=n.id and c.user=:t order by n.nbrClick desc ", News.class).setParameter( "t",u ).getResultList();
-		 
-		  System.out.println("Out of findAllNews: ");
+	@Override
+	public List<News> numberOfNewsperDate() {
+
+		List<News> news = em.createQuery(
+				"select count(id), date_creation from News where approved =1 GROUP by date_creation ORDER by COUNT(id) DESC ",
+				News.class).getResultList();
 		return news;
 	}
-	@Override
-	public List<News> top5News(){
-		
 
-		List<News> news  = em.createQuery("SELECT * from news n where n.id IN (SELECT c.news FROM comments c GROUP BY c.news ORDER BY COUNT(*) DESC ) ORDER BY n.nbrLike desc LIMIT 5 ", News.class).getResultList();
-		 
-		  System.out.println("Out of findAllNews: ");
+	@Override
+	public List<News> favoriteNews(User u) {
+
+		List<News> news = em.createQuery(
+				"select n from News n, Comments c where c.news=n.id and c.user=:t order by n.nbrClick desc", News.class)
+				.setParameter("t", u).getResultList();
+
+		System.out.println("Out of findAllNews: ");
 		return news;
 	}
-	
+
+	@Override
+	public List<News> top5News() {
+
+		List<News> news1 = new ArrayList<>();
+		List<News> news = em.createQuery(
+				"SELECT n from News n where n.id IN (SELECT c.news FROM Comments c GROUP BY c.news ORDER BY COUNT(c) DESC ) ORDER BY n.nbrLike desc  ",
+				News.class).getResultList();
+		System.out.println("hhhhhhhhhhhhhh");
+		int j = 0;
+		while (news.size() > j && j < 4) {
+			news1.add(news.get(j));
+			j++;
+		}
+
+		System.out.println("Out of findAllNews: ");
+		return news1;
+	}
+
+	@Override
+	public News mostViewNews() {
+		List<News> n = em.createQuery(
+				"SELECT n from News n where n.id IN (SELECT c.news FROM Comments c GROUP BY c.news ORDER BY COUNT(c) DESC ) ORDER BY n.nbrLike desc, n.nbrLike desc  ",
+				News.class).getResultList();
+		return n.get(0);
+	}
+
+	@Override
+	public List<News> popularNews() {
+
+		List<News> news = em.createQuery("from News where approved=1 order by nbrClick desc", News.class)
+				.getResultList();
+
+		System.out.println("Out of findAllNews: ");
+		return news;
+	}
 
 	@Override
 	public List<Loan> findLoansRequests() {
-		
-		String string2="processing";
-		List<Loan> loans = em.createQuery("select l from Loan l where l.statu=:t or l.statu=:t2", Loan.class).setParameter("t",LoanStatu.valueOf("demand")).setParameter("t2",LoanStatu.valueOf("processing")).getResultList();
-		
+
+		String string2 = "processing";
+		List<Loan> loans = em.createQuery("select l from Loan l where l.statu=:t or l.statu=:t2", Loan.class)
+				.setParameter("t", LoanStatu.valueOf("demand")).setParameter("t2", LoanStatu.valueOf("processing"))
+				.getResultList();
+
 		return loans;
 	}
+
 	@Override
 	public List<LoanType> findLoanTypes() {
 		System.out.println("In findAllNews: ");
 		List<LoanType> loans = em.createQuery("from LoanType", LoanType.class).getResultList();
-		
+
 		return loans;
 	}
+
 	@Override
-	public LoanPayment FindAmountPaymentByLoan(Loan l){
-		LoanPayment LP= em.createQuery("from LoanPayment where loan=:t",LoanPayment.class).setParameter("t", l).getSingleResult();
+	public LoanPayment FindAmountPaymentByLoan(Loan l) {
+		LoanPayment LP = em.createQuery("from LoanPayment where loan=:t", LoanPayment.class).setParameter("t", l)
+				.getSingleResult();
 		return LP;
 	}
+
 	@Override
-	public Date expirydate(Loan l){ 
-	 double months=0;
-	 double NYears=0;
-	 Date expiryDate = l.getStart_date();
-	 float Min=l.getLoanType().getMinValue();
-	 float Max=l.getLoanType().getMaxValue();
-	 double monthlyIR=l.getLoanType().getInterest()/12;
-	 LoanPayment LP= FindAmountPaymentByLoan(l);
-	 if(Min<l.getAmount()  && l.getAmount()<Max){
-		 double PMT= LP.getAmount();
-		 double numerator=1-(l.getAmount()*monthlyIR)/PMT;
-		 months= - (Math.log (numerator) ) / Math.log (1 + monthlyIR);
-		 NYears=(int) ((Math.ceil(months))/12);
-		 System.out.println("NYears"+NYears);
-		 l.getLoanType().setDuree((int) NYears);
-		 int NBRYears=(int)(NYears);
-		 expiryDate.setYear(expiryDate.getYear()+NBRYears);
-		
-	 }
-	 else{
-		 System.out.println("Not valid Ammount");
-	 }
-	 return expiryDate;
+	public Date expirydate(Loan l) {
+		double months = 0;
+		double NYears = 0;
+		Date expiryDate = l.getStart_date();
+		float Min = l.getLoanType().getMinValue();
+		float Max = l.getLoanType().getMaxValue();
+		double monthlyIR = l.getLoanType().getInterest() / 12;
+		LoanPayment LP = FindAmountPaymentByLoan(l);
+		if (Min < l.getAmount() && l.getAmount() < Max) {
+			double PMT = LP.getAmount();
+			double numerator = 1 - (l.getAmount() * monthlyIR) / PMT;
+			months = -(Math.log(numerator)) / Math.log(1 + monthlyIR);
+			NYears = (int) ((Math.ceil(months)) / 12);
+			System.out.println("NYears" + NYears);
+			l.getLoanType().setDuree((int) NYears);
+			int NBRYears = (int) (NYears);
+			expiryDate.setYear(expiryDate.getYear() + NBRYears);
+
+		} else {
+			System.out.println("Not valid Ammount");
+		}
+		return expiryDate;
 	}
 
 }

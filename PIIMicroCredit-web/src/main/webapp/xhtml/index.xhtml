@@ -6,6 +6,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="../include/template.xhtml">
+	<ui:define name="stylesheet">
+		<script src="../assets/js/vendor/jquery-2.2.4.min.js"></script>
+	</ui:define>
 	<ui:define name="title">
 		<title>Welcome</title>
 	</ui:define>
@@ -120,7 +123,6 @@
 				</div>
 			</div>
 			<div class="service-active owl-carousel">
-
 				<ui:repeat var="loantype" value="#{loanTypeBean.showAll()}">
 					<h:form>
 						<div class="service-wrap">
@@ -159,8 +161,8 @@
 							<p>
 								<h:outputText value="#{loantype.description}" />
 							</p>
-							<h:commandLink action="#{loanBean.newLoanDemand(loantype.id)}"
-								value="Click Now ">
+							<h:commandLink action="#{loanBean.redirectToAddLoan()}"
+								value="Apply Now ">
 								<i class="fa fa-angle-double-right"></i>
 							</h:commandLink>
 						</div>

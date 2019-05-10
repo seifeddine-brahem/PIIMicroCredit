@@ -11,7 +11,7 @@ import tn.esprit.PIIMicroCredit.entity.LoanType;
 import tn.esprit.PIIMicroCredit.service.AccountService;
 import tn.esprit.PIIMicroCredit.service.LoanTypeService;
 
-@SessionScoped
+
 @ManagedBean
 public class LoanTypeBean {
 
@@ -28,6 +28,7 @@ public class LoanTypeBean {
 
 	@EJB
 	AccountService serviceaccount;
+	
 
 	public List<LoanType> showAll() {
 
