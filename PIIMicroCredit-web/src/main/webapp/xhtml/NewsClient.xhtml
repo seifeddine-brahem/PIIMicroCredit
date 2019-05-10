@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+	 <!-- blog-area start -->
+    <section class="blog-area">
+        <div class="container">
+            <div class="row">
+             <ui:repeat var="nw" value="#{newsBean.showNewsClient()}">
+	          
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="blog-wrap2">
+                        <div class="blog-images">
+                            <img src="#{nw.photo}" alt=""/>
+                        </div>
+                        <div class="blog-content2">
+                            <ul class="blog-meta">
+                                <li><a href=""><i class="fa fa-clock-o flex-style"></i><h:outputText value="#{nw.date_creation}" /> </a></li>
+                                <li><a href=""><i class="fa fa-comments"></i><h:outputText value="#{commentsBean.showCommentsByNews(nw).size()} Comments" /></a></li>
+                                <li><a href=""><i class="fa fa-heart"></i> <h:outputText value="#{nw.nbrLike} LIKE" /></a></li>
+                            </ul>
+                            <h3><a><h:outputText value="#{nw.title}" /></a></h3>
+                          <h:form>  
+                          <h:commandLink action="#{newsBean.displayNews(nw.id)}" value=" Read More"  class="readmore-btn"/>
+                         </h:form>
+                             
+                          
+                        </div>
+                    </div>
+                </div>
+              
+          
+	            </ui:repeat>          
+            
+            </div>
+        </div>
+    </section>
+    <!-- blog-area end -->
+	
+	</ui:define>
+</ui:composition>

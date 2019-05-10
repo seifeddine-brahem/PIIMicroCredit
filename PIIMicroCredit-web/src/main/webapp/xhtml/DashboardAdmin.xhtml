@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" template="../include/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+		<!-- header-area end -->
+		<!-- breadcumb-area start -->
+		<div class="breadcumb-area flex-style black-opacity">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h2>Dashboard Admin</h2>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- breadcumb-area end -->
+		<!-- blog-area start -->
+		<div class="blog-area" id="area">
+			<div class="container">
+			<h2 align="center">A creative dashboard to manage your financial news</h2>
+			<span></span>
+				<div class="row revarce-wrap">
+					<div class="col-lg-4 col-12">
+						<aside class="sidebar-wrap">
+
+						<div class="author-wrap widget">
+							<h3 class="sidebar-title">
+								Top News<span></span>
+							</h3>
+							<img src="#{newsBean.displayTop1News().photo}" alt="" />
+							<p>
+								<h:outputText value="#{newsBean.displayTop1News().title}" />
+							</p>
+
+						</div>
+
+
+						<div class="widget post-wrap">
+							<h3 class="sidebar-title">POPULAR NEWS</h3>
+							<ul>
+								<ui:repeat var="news" value="#{newsBean.displayPopularNews()}">
+									<li>
+										<div class="post-img">
+											<img src="#{news.photo}" alt="" />
+											<p>
+												<h:outputText value="#{news.date_creation}" />
+											</p>
+										</div>
+									</li>
+									<li>
+										<div class="post-content">
+											<h4>
+												<a href="javascript:void(0);"><h:outputText
+														value="#{news.title}" /></a>
+											</h4>
+
+										</div>
+									</li>
+								</ui:repeat>
+
+
+							</ul>
+						</div>
+
+
+						</aside>
+					</div>
+					<div class="col-lg-8 col-12">
+						<div class="row">
+							
+									<p:donutChart model="#{chartJsView.donutModel}"
+										style="width: 600px; height: 600px;" />
+										<span></span>
+									<h:form>
+									<p:growl id="growl" showDetail="true" />
+
+									<p:barChart model="#{chartJsView.barModel2}"
+										style="width: 600px; height: 600px;">
+										<p:ajax event="itemSelect"
+											listener="#{chartJsView.itemSelect}" update="growl" />
+									</p:barChart>
+								</h:form>
+										<h:form>
+									<p:growl id="growl" showDetail="true" />
+
+									 <p:radarChart model="#{chartJsView.radarModel}"
+										style="width: 600px; height: 600px;">
+										<p:ajax event="itemSelect"
+											listener="#{chartJsView.itemSelect}" update="growl" />
+									</p:radarChart>
+								</h:form>
+									<h:form>
+									<p:growl id="growl" showDetail="true" />
+
+									 <p:polarAreaChart model="#{chartJsView.polarAreaModel}"
+										style="width: 600px; height: 600px;">
+										<p:ajax event="itemSelect"
+											listener="#{chartJsView.itemSelect}" update="growl" />
+									</p:polarAreaChart>
+							</h:form>
+							
+							
+						
+						</div>
+					</div>
+					<h:form>
+					<p:media value="#{chartJsView.polarAreaModel}" width="100%" height="300px" player="pdf">
+    Your browser can't display pdf, <h:outputLink value="chartJsView.polarAreaModel">click</h:outputLink> to download pdf instead.
+</p:media>
+						<h:commandLink>
+						<p:graphicImage name="/demo/images/pdf.png" width="24" ></p:graphicImage>
+						<p:dataExporter type="pdf" target="area" fileName="statistiques"></p:dataExporter>
+						
+						</h:commandLink>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<!-- blog-area end -->
+
+
+	</ui:define>
+</ui:composition>

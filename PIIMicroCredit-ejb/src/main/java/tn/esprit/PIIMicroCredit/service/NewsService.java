@@ -3,13 +3,11 @@ package tn.esprit.PIIMicroCredit.service;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import tn.esprit.PIIMicroCredit.Interface.INewsRemote;
 import tn.esprit.PIIMicroCredit.entity.Comments;
 import tn.esprit.PIIMicroCredit.entity.Loan;
