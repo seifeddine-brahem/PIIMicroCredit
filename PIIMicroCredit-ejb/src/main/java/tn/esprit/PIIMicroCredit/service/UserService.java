@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.mail.Message;
@@ -23,6 +24,7 @@ import tn.esprit.PIIMicroCredit.entity.Account;
 import tn.esprit.PIIMicroCredit.entity.User;
 @Stateless
 @Remote
+@LocalBean
 public class UserService implements IUser{
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
 	EntityManager em;

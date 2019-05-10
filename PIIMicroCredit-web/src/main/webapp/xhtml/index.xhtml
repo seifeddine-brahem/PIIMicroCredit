@@ -10,6 +10,7 @@
 		<title>Welcome</title>
 	</ui:define>
 	<ui:define name="content">
+
 		    <!-- slider-area start -->
     <section class="slider-area">
         
@@ -92,5 +93,71 @@
         </div>
     </section>
     <!-- slider-area end -->
+		<!-- slider-area end -->
+		<section class="service-area ptb-120  line-remove">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-8 offset-lg-2 col-12">
+					<div class="section-title text-center">
+						<h2>
+							<span class="line">Our Loan Types</span>
+						</h2>
+						<p>Apply for loans directly from your computer. And if you’re
+							eligible, you can apply to skip a payment for certain loan types
+							up to two times per year.</p>
+					</div>
+				</div>
+			</div>
+			<div class="service-active owl-carousel">
+
+				<ui:repeat var="loantype" value="#{loanTypeBean.showAll()}">
+					<h:form>
+						<div class="service-wrap">
+							<div class="bg-shape"></div>
+							<h3 class="text-center">
+								<h:outputText styleClass="capitalized" value="#{loantype.name}" />
+							</h3>
+							<div class="super-line">LOAN INFO</div>
+							<div class="totals">
+								<div>
+									<h6>
+										<h:outputText value="#{loantype.interest}" />
+									</h6>
+									<div class="desc">
+										<p>Interest</p>
+									</div>
+								</div>
+								<div>
+									<h6>
+										<h:outputText value="#{loantype.maxValue}" />
+									</h6>
+									<div class="desc">
+										<p>Maximum Value</p>
+									</div>
+								</div>
+								<div>
+									<h6>
+										<h:outputText value="#{loantype.minValue}" />
+									</h6>
+									<div class="desc">
+										<p>Minimum Value</p>
+									</div>
+								</div>
+							</div>
+							<div class="super-line">Description</div>
+							<p>
+								<h:outputText value="#{loantype.description}" />
+							</p>
+							<h:commandLink action="#{loanBean.newLoanDemand(loantype.id)}"
+								value="Click Now ">
+								<i class="fa fa-angle-double-right"></i>
+							</h:commandLink>
+						</div>
+					</h:form>
+				</ui:repeat>
+
+			</div>
+		</div>
+		</section>
 	</ui:define>
 </ui:composition>

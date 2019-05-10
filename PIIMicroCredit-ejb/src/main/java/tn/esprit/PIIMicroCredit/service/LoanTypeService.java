@@ -2,21 +2,15 @@ package tn.esprit.PIIMicroCredit.service;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import tn.esprit.PIIMicroCredit.Interface.IComplaint;
-import tn.esprit.PIIMicroCredit.Interface.ILoan;
 import tn.esprit.PIIMicroCredit.Interface.ILoanType;
-import tn.esprit.PIIMicroCredit.entity.Complaint;
-import tn.esprit.PIIMicroCredit.entity.Loan;
-import tn.esprit.PIIMicroCredit.entity.LoanPayment;
 import tn.esprit.PIIMicroCredit.entity.LoanType;
-import tn.esprit.PIIMicroCredit.entity.News;
-import tn.esprit.PIIMicroCredit.entity.User;
 
 @Stateless
+@LocalBean
 public class LoanTypeService implements ILoanType {
 	
 	@PersistenceContext(unitName = "PIIMicroCredit-ejb")
@@ -64,9 +58,9 @@ public class LoanTypeService implements ILoanType {
 
 	@Override
 	public LoanType getLoan(int id) {
-		System.err.println("================================== In findLoanTypeByOwner");
-		LoanType loadpayment = em.createQuery("select c from LoanType c where c.id:= id", LoanType.class).getSingleResult();
-		System.err.println("================================== Out of findLoantTypeByOwner ==================================");
+		System.err.println("================================== In findLoanTypeById");
+		LoanType loadpayment = em.find(LoanType.class, id);
+		System.err.println("================================== Out of findLoanTypeById ==================================");
 		return loadpayment;
 	}
 }

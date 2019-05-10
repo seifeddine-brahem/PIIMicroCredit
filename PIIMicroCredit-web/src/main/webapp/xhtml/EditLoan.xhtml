@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" lang="en" xml:lang="en"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Edit Loan</title>
+	</ui:define>
+	<ui:define name="content">
+		<div class="breadcumb-area flex-style black-opacity">
+
+			<div class="container">
+				<div class="row">
+					<div class="col-12:m0 text-center">
+						<h2>Edit Loan</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+
+							<li><span>Edit Loan</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="contact-area pt-120">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+				<p:growl id="messages" />
+					<div class="contact-form">
+						<div class="cf-msg" style="display: none;"></div>
+						<h:form id="cf">
+							<div class="row">
+								<div class="col-12 col-sm-6">
+									<h4 class="payment-amount__heading">
+										<span id="payment-frequency-text" /> Loan Type<sup>*</sup>:
+									</h4>
+									<p:selectOneMenu id="loantype"
+										value="#{editLoanBean.loanType_id}" class="form-control">
+										<p:ajax listener="#{editLoanBean.handleKeyEvent()}"
+											update="loanloan" />
+										<f:selectItems value="#{loanTypeBean.showAll()}" var="l"
+											itemLabel="#{l.name}" itemValue="#{l.id}">
+										</f:selectItems>
+									</p:selectOneMenu>
+								</div>
+								<div class="col-12  col-sm-6">
+									<h4 class="payment-amount__heading">
+										<span id="payment-frequency-text" /> Your Accounts<sup>*</sup>:
+									</h4>
+									<h:selectOneMenu value="#{editLoanBean.account}"
+										class="form-control">
+										<f:selectItems value="#{loanTypeBean.showAllAccounts()}"
+											var="account" itemValue="#{account.id}"
+											itemLabel="#{account.account_type.name()}">
+										</f:selectItems>
+									</h:selectOneMenu>
+								</div>
+								<div class="col-12">
+									<h4 class="payment-amount__heading">
+										<span id="payment-frequency-text" /> Payment Amount<sup>*</sup>:
+									</h4>
+									<h:panelGroup id="loanloan">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">Minimum :<h:outputText
+														value="#{editLoanBean.minValue}" />
+												</span>
+											</div>
+											<p:inputText minValue="#{editLoanBean.minValue}"
+												maxValue="#{editLoanBean.maxValue}" id="amount"
+												value="#{editLoanBean.amount}"
+												class="form-control pull-right">
+											</p:inputText>
+											<div class="input-group-append">
+												<span class="input-group-text">DT</span>
+											</div>
+										</div>
+										<br />
+										<p:slider for="amount" minValue="#{editLoanBean.minValue}"
+											maxValue="#{editLoanBean.maxValue}">
+											<p:ajax event="slideEnd"
+												listener="#{editLoanBean.onSlideEnd}" update="remuniration" />
+										</p:slider>
+									</h:panelGroup>
+								</div>
+								<div class="col-12">
+									<h4 class="payment-amount__heading">
+										<span id="payment-frequency-text" /> Payment Method	<sup>*</sup>:
+									</h4>
+									<p:selectOneRadio id="city2"
+										value="#{editLoanBean.payment_type}" layout="responsive"
+										columns="2">
+										<p:ajax listener="#{editLoanBean.calculRemuniration}"
+											event="change" update="remuniration" />
+										<f:selectItem itemValue="monthly" itemLabel="Monthly" />
+										<f:selectItem itemValue="yearly" itemLabel="Yearly" />
+									</p:selectOneRadio>
+								</div>
+								<div class="col-12">
+									<h:panelGroup id="remuniration">
+										<h2 class="payment-amount__heading">
+											<span id="payment-frequency-text" /> Payment Amount<sup>*</sup>:
+											<h:outputText value="#{editLoanBean.remuneration}" />
+											DT
+										</h2>
+									</h:panelGroup>
+								</div>
+								<div class="col-12">
+								<h:commandButton action="#{editLoanBean.HandleEdit()}" class="btn btn-block" value="Edit Loan"  />
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		</section>
+	</ui:define>
+</ui:composition>

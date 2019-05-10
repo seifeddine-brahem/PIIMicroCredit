@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../include/template.xhtml">
+	<ui:define name="title">
+		<title>Welcome</title>
+	</ui:define>
+	<ui:define name="content">
+	 <!-- blog-area start -->
+    <section class="blog-area bg-1 line-remove">
+        <div class="container">
+            <div class="row">
+             <ui:repeat var="n" value="#{newsBean.yourFavoriteNews()}">
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="blog-wrap">
+                        <img src="#{n.photo}" alt=""/>
+                        <div class="blog-content">
+                          <h:form>
+                           
+                            <h3><a href=""><h:commandLink action="#{newsBean.displayNews(n.id)}" value="#{n.title}" /></a></h3>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+                
+            </div>
+             </div>
+    </section>
+    
+            <section class="service-area ptb-120-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="service-menu">
+                      <ui:repeat var="t" value="#{newsBean.displayTop5News()}">  
+                      <h:form><li><a href=""><h:commandLink action="#{newsBean.displayTop(t)}" value="#{t.title}" /> </a></li>
+                       </h:form>
+                      </ui:repeat>
+                       
+                    </ul>
+                </div>
+                <div class="col-lg-9">
+                    <div class="service-details">
+                        <img src="#{newsBean.photo}" alt=""/>
+                        <h3><h:outputText value="#{newsBean.title}" /></h3>
+                        <p><h:outputText value="#{newsBean.dateCreation}" /> </p>
+                        <p><h:outputText value="#{newsBean.description}" /></p>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- service-area end -->
+             <section class="service-area ptb-120  line-remove">
+            <div  class="container">
+             <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2 col-12">
+                    <div class="section-title text-center">
+                        <h2><span class="line">Recent News</span></h2>
+                        <p>In case you've missed any news, we provide you with recent financial news. Follow us and stay updated with actualities of this week.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-active owl-carousel">
+                <ui:repeat  var="nw" value="#{newsBean.slideShowClient()}">
+                <div class="service-wrap">
+                    <div class="bg-shape">
+                    <img src="#{nw.photo}" alt="" />
+                    </div>
+                     <h3><a href=""><h:outputText value="#{nw.title}" /> </a></h3>
+                    
+                    <h3> </h3>
+                   
+              <h:form><h:commandLink action="#{newsBean.displayNews(nw.id)}" value=" Click Now" /> <i class="fa fa-angle-double-right"></i></h:form> 
+                </div>
+                </ui:repeat>
+                  </div>    
+              
+            </div>
+        </section>
+       <section class="service-area ptb-120-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="service-menu">
+                        <li><a href="service2.html">All Service</a></li>
+                        <li class="active"><a href="service3.html">Investment Planning</a></li>
+                        <li><a href="service3.html">Business Consulting</a></li>
+                        <li><a href="service3.html"> Financial Investment</a></li>
+                        <li><a href="service3.html"> Market Analaysis</a></li>
+                        <li><a href="service3.html"> Business Growth</a></li>
+                       
+                    </ul>
+                </div>
+                <div class="col-lg-9">
+                    <div class="service-details">
+                        <img src="../assets/images/service/single-service.jpg" alt=""/>
+                        <h3>Full Container Load</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum qui deleniti molestias accusamus vel animi molestiae illum maiores suscipit. Voluptates quisquam quae quasi neque, ipsam ut maiores, dicta aperiam eius officiis ea vel ullam eveniet nisi nostrum quia ipsum repellat dolorem! Asperiores qui voluptatem culpa fugiat doloribus nemo deserunt tempora.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ab necessitatibus cum quisquam perferendis voluptas laudantium incidunt libero commodi distinctio tempora voluptates, omnis, quae consequatur? Tempora eos impedit, reprehenderit quae pariatur cum doloremque minima deleniti, in amet at. Atque, esse.</p>
+                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem quo quidem expedita sunt ea at magnam, ut deleniti similique corrupti. Vel inventore esse accusantium laborum amet in totam, vitae tenetur provident voluptatem doloremque commodi iste!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+        
+    <!-- blog-area end -->
+	
+	
+	
+	</ui:define>
+</ui:composition>

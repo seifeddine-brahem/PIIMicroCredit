@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.persistence.Enumerated;
 
 @Entity
 @Table(name = "User")
@@ -44,12 +43,22 @@ public class User implements Serializable {
 	private List<Transaction> transactionSender = new ArrayList<>();
 	@OneToMany(mappedBy = "receiver", fetch = FetchType.EAGER)
 	private List<Transaction> transactionReceiver = new ArrayList<>();
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private List<Comments> comments = new ArrayList<>();
 
 	// Constructor
 	public User() {
 		this.departement = new Department();
 		this.state = true;
 
+	}
+
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
 	}
 
 	// Getters and Setters
