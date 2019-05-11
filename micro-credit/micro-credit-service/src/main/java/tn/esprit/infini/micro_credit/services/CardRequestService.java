@@ -82,4 +82,14 @@ public class CardRequestService implements CardRequestServiceRemote, CardRequest
 		return em.createQuery("SELECT a FROM CardRequest a ").getResultList();
 	}
 
+	@Override
+	public void updateAccount(Account account) {
+		em.merge(account);
+
+	}
+
+	@Override
+	public List<Account> findAllAccounts() {
+		return em.createQuery("SELECT a FROM Account a ").getResultList();
+	}
 }

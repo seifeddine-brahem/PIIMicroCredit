@@ -19,8 +19,12 @@ public interface CardRequestServiceLocal {
 	void processCardRequest(CardRequest cardRequest, Boolean status, Date dateOfProcess);
 
 	List<CardRequest> findAllRequestsByCustomer(int idCustomer);
-	
+
 	List<Account> findAllAccountsByCustomer(int idCustomer);
-	
+
 	List<CardRequest> findAllRequests();
+
+	void updateAccount(Account account);
+	
+	List<Account> findAllAccounts();
 }

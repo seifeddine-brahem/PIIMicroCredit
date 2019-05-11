@@ -18,7 +18,6 @@ import javax.persistence.Table;
 @Table(name = "Account")
 public class Account implements Serializable {
 
-	
 	/**
 	 * 
 	 */
@@ -33,20 +32,20 @@ public class Account implements Serializable {
 	@Column(name = "rib")
 	private String rib;
 	@Column(name = "solde")
-	private String solde;
+	private Double solde;
 	@Column(name = "openning_date")
 	private LocalDateTime openning_date;
 	@Column(name = "account_type")
 	private AccountType account_type;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "owner")
 	private User owner;
-	
+
 	@ManyToOne
 	private CardOffer cardOffer;
-	
-	@OneToMany(mappedBy="account")
+
+	@OneToMany(mappedBy = "account")
 	private List<CardRequest> cardRequests;
 
 	public Account() {
@@ -54,13 +53,14 @@ public class Account implements Serializable {
 
 	}
 
-	public Account(String rib, String solde, AccountType account_type) {
+	public Account(String rib, Double solde, AccountType account_type) {
 		super();
 		this.rib = rib;
 		this.solde = solde;
 		this.account_type = account_type;
 	}
-	public Account(String rib, String solde) {
+
+	public Account(String rib, Double solde) {
 		super();
 		this.rib = rib;
 		this.solde = solde;
@@ -82,11 +82,11 @@ public class Account implements Serializable {
 		this.rib = rib;
 	}
 
-	public String getSolde() {
+	public Double getSolde() {
 		return solde;
 	}
 
-	public void setSolde(String solde) {
+	public void setSolde(Double solde) {
 		this.solde = solde;
 	}
 
