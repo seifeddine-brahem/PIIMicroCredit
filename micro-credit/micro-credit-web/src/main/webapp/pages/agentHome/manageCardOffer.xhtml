@@ -61,17 +61,17 @@
 						action="#{offerCtr.doAddOrUpdateCardOffer()}" update="form:">
 
 					</p:commandButton>
-					<p:commandButton value="cancel"
-						action="#{offerCtr.doCancel}" update="form:">
+					<p:commandButton value="cancel" action="#{offerCtr.doCancel}"
+						update="form:">
 
 					</p:commandButton>
-					
+
 
 
 				</p:panelGrid>
 
-				<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode"
-					hideEffect="bounce">
+				<p:dialog header="Offer Details" widgetVar="dlg3"
+					showEffect="explode" hideEffect="bounce">
 					<p:outputPanel id="carDetail" style="text-align:center;">
 						<p:panelGrid columns="2"
 							rendered="#{not empty offerCtr.selectedOffer}"
