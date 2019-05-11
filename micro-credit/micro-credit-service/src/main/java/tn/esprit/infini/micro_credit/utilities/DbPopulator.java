@@ -14,6 +14,8 @@ import javax.persistence.PersistenceContext;
 import tn.esprit.infini.micro_credit.entities.Account;
 import tn.esprit.infini.micro_credit.entities.AccountType;
 import tn.esprit.infini.micro_credit.entities.CardOffer;
+import tn.esprit.infini.micro_credit.entities.Currency;
+import tn.esprit.infini.micro_credit.entities.CurrencyAccount;
 import tn.esprit.infini.micro_credit.entities.Role;
 import tn.esprit.infini.micro_credit.entities.User;
 
@@ -41,8 +43,9 @@ public class DbPopulator {
 		User user3 = new User("u3", "u3", "u3@esprit.tn", "u3", "u3", "u1", Role.client);
 
 		Account account = new Account("12345", "1000", AccountType.CurrentAccount);
-		Account account2 = new Account("12346", "1000", AccountType.DepositAccount);
-		Account account3 = new Account("12347", "1000", AccountType.CurrentAccount);
+		Account account2 = new Account("12346", "2000", AccountType.DepositAccount);
+		Account account3 = new Account("12347", "3000", AccountType.CurrentAccount);
+		CurrencyAccount account4 = new CurrencyAccount("112233", "4000", Currency.EUR);
 
 		CardOffer cardOffer = new CardOffer("master-card", "master-card", "123456789", new Date(), 123);
 		CardOffer cardOffer2 = new CardOffer("e-dinar", "e-dinar", "12345678910", new Date(), 124);

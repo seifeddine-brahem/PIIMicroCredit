@@ -60,6 +60,11 @@ public class Account implements Serializable {
 		this.solde = solde;
 		this.account_type = account_type;
 	}
+	public Account(String rib, String solde) {
+		super();
+		this.rib = rib;
+		this.solde = solde;
+	}
 
 	public Integer getId() {
 		return id;
