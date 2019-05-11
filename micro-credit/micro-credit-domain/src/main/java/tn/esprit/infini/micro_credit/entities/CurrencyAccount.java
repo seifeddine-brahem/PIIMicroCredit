@@ -19,7 +19,7 @@ public class CurrencyAccount extends Account implements Serializable {
 		super();
 	}
 
-	public CurrencyAccount(String rib, String solde, Currency currency) {
+	public CurrencyAccount(String rib, Double solde, Currency currency) {
 		super(rib, solde);
 		this.currency = currency;
 	}

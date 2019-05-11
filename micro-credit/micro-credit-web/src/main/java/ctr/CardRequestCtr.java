@@ -23,8 +23,10 @@ public class CardRequestCtr {
 	private List<CardRequest> cardRequests = new ArrayList<>();
 	private CardRequest selectedRequest = new CardRequest();
 	private List<Account> accounts = new ArrayList<>();
+	private List<Account> allAccounts = new ArrayList<>();
 	private Account selectedAccount = new Account();
 	private Integer selectedAccountId;
+	private Integer selectedAccountToId;
 	@EJB
 	private CardRequestServiceLocal cardRequestServiceLocal;
 	@EJB
@@ -36,6 +38,7 @@ public class CardRequestCtr {
 
 	@PostConstruct
 	private void init() {
+		allAccounts = cardRequestServiceLocal.findAllAccounts();
 		cardRequests = cardRequestServiceLocal.findAllRequests();
 		accounts = cardRequestServiceLocal.findAllAccountsByCustomer(identityBean.getUser().getId());
 	}
@@ -128,6 +131,22 @@ public class CardRequestCtr {
 
 	public void setOfferCtr(OfferCtr offerCtr) {
 		this.offerCtr = offerCtr;
+	}
+
+	public List<Account> getAllAccounts() {
+		return allAccounts;
+	}
+
+	public void setAllAccounts(List<Account> allAccounts) {
+		this.allAccounts = allAccounts;
+	}
+
+	public Integer getSelectedAccountToId() {
+		return selectedAccountToId;
+	}
+
+	public void setSelectedAccountToId(Integer selectedAccountToId) {
+		this.selectedAccountToId = selectedAccountToId;
 	}
 
 }

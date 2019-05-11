@@ -16,7 +16,7 @@
 			<h:form>
 				<h:panelGrid columns="2">
 					<h:outputText value="e-mail" />
-					<h:inputText value="#{identityBean.user.email}" />
+					<h:inputText value="#{identityBean.user.email}" id="tt"/>
 					<h:outputText value="password" />
 					<h:inputSecret value="#{identityBean.user.password}" />
 					<h:commandButton action="#{identityBean.doLogin}" value="login" />

@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/include/template.xhtml">
+
+	<ui:define name="pageTitle">
+				transfer PAGE
+			</ui:define>
+	<ui:define name="content">
+
+		<div class="centredZone">
+			<br /> <br /> <br />
+			<h:form>
+				<p:panelGrid columns="2">
+					<p:outputLabel value="from my account" />
+					<p:selectOneMenu value="#{cardRequestCtr.selectedAccountId}">
+						<f:selectItem itemLabel="please select" />
+						<f:selectItems value="#{cardRequestCtr.accounts}" var="c"
+							itemLabel="#{c.rib}" itemValue="#{c.id}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="to this account" />
+					<p:selectOneMenu value="#{cardRequestCtr.selectedAccountToId}">
+						<f:selectItem itemLabel="please select" />
+						<f:selectItems value="#{cardRequestCtr.allAccounts}" var="c"
+							itemLabel="#{c.rib}" itemValue="#{c.id}" />
+					</p:selectOneMenu>
+					<p:inputText value="#{transferCtr.amount}" />
+					<p:commandButton value="proceed"
+						action="#{transferCtr.doTransfer()}" />
+
+				</p:panelGrid>
+
+
+
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>

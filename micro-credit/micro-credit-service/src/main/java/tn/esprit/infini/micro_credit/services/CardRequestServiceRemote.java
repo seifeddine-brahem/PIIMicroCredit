@@ -24,5 +24,7 @@ public interface CardRequestServiceRemote {
 	List<Account> findAllAccountsByCustomer(int idCustomer);
 	
 	List<CardRequest> findAllRequests();
+	
+	void updateAccount(Account account);
 
 }
