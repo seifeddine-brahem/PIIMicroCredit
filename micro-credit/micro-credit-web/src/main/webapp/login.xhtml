@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/include/template.xhtml">
+
+	<ui:define name="pageTitle">
+				LOGIN PAGE
+			</ui:define>
+	<ui:define name="content">
+
+		<div class="centredZone">
+			<br />
+			<h2>LOGIN</h2>
+			<br /> <br />
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="e-mail" />
+					<h:inputText value="#{identityBean.user.email}" id="tt"/>
+					<h:outputText value="password" />
+					<h:inputSecret value="#{identityBean.user.password}" />
+					<h:commandButton action="#{identityBean.doLogin}" value="login" />
+				</h:panelGrid>
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>

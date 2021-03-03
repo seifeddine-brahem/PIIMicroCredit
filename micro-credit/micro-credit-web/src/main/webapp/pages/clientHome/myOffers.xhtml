@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/include/template.xhtml">
+
+	<ui:define name="pageTitle">
+				HOME PAGE
+			</ui:define>
+	<ui:define name="content">
+
+		<div class="centredZone">
+			<br />
+			<h2>Client HOME</h2>
+			<br /> <br />
+			<h:form id="form">
+				<p:dataTable id="singleDT" value="#{offerCtr.cardOffers}" var="c"
+					selectionMode="single" selection="#{offerCtr.selectedOffer}"
+					rowKey="#{c.id}">
+					<f:facet name="header">
+						<p:outputLabel value="All Offers" />
+					</f:facet>
+					<p:column headerText="name">
+						<h:outputText value="#{c.name}" />
+					</p:column>
+					<p:column headerText="desc">
+						<h:outputText value="#{c.description}" />
+					</p:column>
+					<p:column headerText="numCard">
+						<h:outputText value="#{c.numCard}" />
+					</p:column>
+					<p:column headerText="validityDate">
+						<h:outputText value="#{c.validityDate}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton process="singleDT" update=":form"
+							icon="pi pi-search" value="View" oncomplete="PF('cd').show()" />
+					</f:facet>
+
+				</p:dataTable>
+				<br />
+				<p:dataTable id="tab2" value="#{cardRequestCtr.accounts}" var="a">
+					<f:facet name="header">
+						<p:outputLabel value="Offers By Accounts" />
+					</f:facet>
+					<p:column headerText="Account id">
+						<h:outputText value="#{a.id}" />
+					</p:column>
+					<p:column headerText="Account solde">
+						<h:outputText value="#{a.solde}" />
+					</p:column>
+					
+					<p:column headerText="Offer">
+						<h:outputText value="#{a.cardOffer.name}" />
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Car Info" widgetVar="cd" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="carDetail" style="text-align:center;">
+						<p:panelGrid columns="2"
+							rendered="#{not empty offerCtr.selectedOffer}"
+							columnClasses="label,value">
+							<f:facet name="header">
+							</f:facet>
+
+							<h:outputText value="Name:" />
+							<h:outputText value="#{offerCtr.selectedOffer.name}" />
+							<h:outputText value="Description:" />
+							<h:outputText value="#{offerCtr.selectedOffer.description}" />
+							<h:outputText value="Num Card:" />
+							<h:outputText value="#{offerCtr.selectedOffer.numCard}" />
+							<h:outputText value="Validity Date:" />
+							<h:outputText value="#{offerCtr.selectedOffer.validityDate}" />
+							<h:outputText value="Accounts :" />
+
+							<p:selectOneMenu id="si"
+								value="#{cardRequestCtr.selectedAccountId}">
+								<f:selectItems value="#{cardRequestCtr.accounts}" var="o"
+									itemLabel="#{o.id}" itemValue="#{o.id}" />
+							</p:selectOneMenu>
+
+
+							<p:commandButton value="Add Request"
+								action="#{cardRequestCtr.doAddRequest()}"
+								oncomplete="PF('cd').hide()" update=":form" />
+
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+
+
+				<p:growl id="growl" showDetail="true" sticky="true" />
+
+				
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>

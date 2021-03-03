@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/include/template.xhtml">
+
+	<ui:define name="pageTitle">
+				Request PAGE
+			</ui:define>
+	<ui:define name="content">
+
+		<div class="centredZone">
+			<br />
+			<h2>Agent HOME</h2>
+
+
+
+			<br /> <br />
+			<h:form id="form">
+				<p:dataTable id="singleDT" value="#{cardRequestCtr.cardRequests}"
+					var="c" selectionMode="single"
+					selection="#{cardRequestCtr.selectedRequest}" rowKey="#{c.id}">
+					<p:column headerText="owner">
+						<h:outputText value="#{c.account.owner.first_name}" />
+					</p:column>
+					<p:column headerText="Offer Name">
+						<h:outputText value="#{c.cardOffer.name}" />
+					</p:column>
+					<p:column headerText="Account id">
+						<h:outputText value="#{c.account.id}" />
+					</p:column>
+					<p:column headerText="creation Date">
+						<h:outputText value="#{c.creationDate}" />
+					</p:column>
+					<p:column headerText="status">
+						<h:outputText value="#{c.status}" />
+					</p:column>
+					<f:facet name="footer">
+
+						<p:commandButton value="Proceed" type="button" process="singleDT"
+							update=":form" onclick="PF('dlg1').show();" />
+					</f:facet>
+
+				</p:dataTable>
+
+				<p:dialog header="Proceed Request" widgetVar="dlg1" minHeight="40">
+					<p:outputPanel id="carDetail2" style="text-align:center;">
+						<p:panelGrid columns="2" columnClasses="label,value">
+							<f:facet name="header">
+							</f:facet>
+							<p:commandButton value="yes"
+								action="#{cardRequestCtr.doAcceptRequest()}"
+								oncomplete="PF('dlg1').hide();" update="@(form)" />
+							<p:commandButton value="no" action="#{cardRequestCtr.doRefuseRequest()}" oncomplete="PF('dlg1').hide();" update="@(form)"/>
+
+
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>

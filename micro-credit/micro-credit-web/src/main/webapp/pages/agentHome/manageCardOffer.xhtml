@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/include/template.xhtml">
+
+	<ui:define name="pageTitle">
+				Manage Offer
+			</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+
+
+			<div class="centredZone">
+				<p:dataTable id="singleDT" value="#{offerCtr.cardOffers}" var="c"
+					selectionMode="single" selection="#{offerCtr.selectedOffer}"
+					rowKey="#{c.id}">
+					<p:column headerText="Id">
+						<h:outputText value="#{c.id}" />
+					</p:column>
+					<p:column headerText="Name">
+						<h:outputText value="#{c.name}" />
+					</p:column>
+					<p:column headerText="Desc">
+						<h:outputText value="#{c.description}" />
+					</p:column>
+					<p:column headerText="numCard">
+						<h:outputText value="#{c.numCard}" />
+					</p:column>
+					<p:column headerText="validityDate">
+						<h:outputText value="#{c.validityDate}" />
+					</p:column>
+					<f:facet name="footer">
+						<p:commandButton process="singleDT" update=":form"
+							icon="ui-icon-search" value="View" oncomplete="PF('dlg3').show()" />
+					</f:facet>
+					<f:facet name="footer">
+						<p:commandButton process="singleDT" update=":form"
+							icon=" ui-icon-plusthick" value="New" action="#{offerCtr.show()}" />
+					</f:facet>
+				</p:dataTable>
+
+				<p:dialog header="Car Info" widgetVar="ccc" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false">
+
+				</p:dialog>
+
+
+				<br />
+
+				<p:panelGrid columns="2" rendered="#{offerCtr.showPanel}">
+					<h:outputText value="Num Card:" />
+					<h:inputText value="#{offerCtr.cardOffer.numCard}" />
+					<h:outputText value="Name Card:" />
+					<h:inputText value="#{offerCtr.cardOffer.name}" />
+					<h:outputText value="Desc Card:" />
+					<h:inputText value="#{offerCtr.cardOffer.description}" />
+					<h:outputText value="Validity Date:" />
+					<p:calendar value="#{offerCtr.cardOffer.validityDate}" />
+					<p:commandButton value="Save or Update"
+						action="#{offerCtr.doAddOrUpdateCardOffer()}" update="form:">
+
+					</p:commandButton>
+					<p:commandButton value="cancel" action="#{offerCtr.doCancel}"
+						update="form:">
+
+					</p:commandButton>
+
+
+
+				</p:panelGrid>
+
+				<p:dialog header="Offer Details" widgetVar="dlg3"
+					showEffect="explode" hideEffect="bounce">
+					<p:outputPanel id="carDetail" style="text-align:center;">
+						<p:panelGrid columns="2"
+							rendered="#{not empty offerCtr.selectedOffer}"
+							columnClasses="label,value">
+							<f:facet name="header">
+							</f:facet>
+
+							<h:outputText value="Id:" />
+							<h:outputText value="#{offerCtr.selectedOffer.id}" />
+							<h:outputText value="Num Card:" />
+							<h:outputText value="#{offerCtr.selectedOffer.numCard}" />
+							<h:outputText value="Validity Date:" />
+							<h:outputText value="#{offerCtr.selectedOffer.validityDate}" />
+							<p:commandButton value="Delete"
+								action="#{offerCtr.doDeleteCardOffer()}"
+								oncomplete="PF('dlg3').hide()" update="@(form)" />
+
+							<p:commandButton value="Update"
+								action="#{offerCtr.showForUpdate()}"
+								oncomplete="PF('dlg3').hide()" update="@(form)" />
+
+
+						</p:panelGrid>
+					</p:outputPanel>
+				</p:dialog>
+
+
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

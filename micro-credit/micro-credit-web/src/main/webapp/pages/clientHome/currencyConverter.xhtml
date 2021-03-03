@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/include/template.xhtml">
+
+	<ui:define name="pageTitle">
+				HOME PAGE
+			</ui:define>
+	<ui:define name="content">
+
+		<div class="centredZone">
+			<br />
+			<h:form id="form">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="currency From" />
+					<p:selectOneMenu value="#{currencyCtr.currencyFromSelected}">
+						<f:selectItem itemLabel="please select currency" />
+						<f:selectItems value="#{currencyCtr.listCurrencyFrom}" var="c"
+							itemLabel="#{c}" itemValue="#{c}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="currency To" />
+					<p:selectOneMenu value="#{currencyCtr.currencyToSelected}">
+						<f:selectItem itemLabel="please select currency" />
+						<f:selectItems value="#{currencyCtr.listCurrencyTo}" var="c"
+							itemLabel="#{c}" itemValue="#{c}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Amount" />
+					<p:inputText value="#{currencyCtr.amount}" />
+					<p:commandButton value="convert"
+						action="#{currencyCtr.doConvert()}" update="@(form)" />
+					<p:outputLabel value="#{currencyCtr.amountReturns}" />
+				</p:panelGrid>
+
+
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>

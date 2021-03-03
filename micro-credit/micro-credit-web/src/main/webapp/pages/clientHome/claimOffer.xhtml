@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/include/template.xhtml">
+
+	<ui:define name="pageTitle">
+				HOME PAGE
+			</ui:define>
+	<ui:define name="content">
+
+		<div class="centredZone">
+			<br />
+			<h2>Client HOME</h2>
+			<br /> <br />
+			<h:form id="form">
+
+				<br />
+				<p:dataTable id="tab2" value="#{cardRequestCtr.accounts}" var="a">
+					<f:facet name="header">
+						<p:outputLabel value="Offers By Accounts" />
+					</f:facet>
+					<p:column headerText="Account id">
+						<h:outputText value="#{a.id}" />
+					</p:column>
+					<p:column headerText="Offer">
+						<h:outputText value="#{a.cardOffer.name}" />
+					</p:column>
+					<p:column style="width:32px;text-align: center">
+						<p:commandButton update=":form" oncomplete="PF('dialog12').show()"
+							icon="pi pi-search" title="View">
+							<f:setPropertyActionListener value="#{a}"
+								target="#{cardRequestCtr.selectedAccount}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog header="Selected Offer" widgetVar="dialog12" modal="true"
+					showEffect="fade" hideEffect="fade" resizable="false" width="220">
+					<p:outputPanel id="multiCarDetail" style="text-align:center;">
+						<p:outputLabel value="#{cardRequestCtr.selectedAccount.id}" />
+						<p:commandButton value="claim"
+							action="#{cardRequestCtr.doClaimAccount}"
+							oncomplete="PF('dialog12').hide()" update="@(form)" />
+					</p:outputPanel>
+				</p:dialog>
+
+			</h:form>
+		</div>
+
+	</ui:define>
+</ui:composition>
